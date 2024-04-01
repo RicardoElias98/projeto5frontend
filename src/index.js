@@ -1,13 +1,32 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import InitialPage from "./Pages/InitialPage";
+import HtmlDefault from "./Components/HtmlDefault";
+import { Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import LoginPage from "./Pages/LoginPage";
+import RegisterPage from "./Pages/RegisterPage";
+import Users from "./Pages/Users";
+import DeletedTasks from "./Pages/DeletedTasks";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Routes>
+        <Route index element={<App />} />
+        <Route path="/htmlDefault" element={<HtmlDefault />} />
+        <Route path="/loginPage" element={<LoginPage />} />
+        <Route path="/goBackInitialPage" element={<InitialPage />} />
+        <Route path="/registerPage" element={<RegisterPage />} />
+        <Route path="/htmlDefault " element={<HtmlDefault />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/deletedTasks" element={<DeletedTasks />} />
+      </Routes>
+    </Router>
   </React.StrictMode>
 );
 
