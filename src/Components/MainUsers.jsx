@@ -16,7 +16,7 @@ function MainUsers() {
   }, [fullUsers]);
 
   const displayUsers = () => {
-    fetch("http://localhost:8080/project4backend/rest/user/all", {
+    fetch("http://localhost:8080/projecto5backend/rest/user/all", {
       method: "GET",
       headers: {
         Accept: "*/*",
@@ -40,7 +40,7 @@ function MainUsers() {
   };
 
   const updateRole = (userData) => {
-    fetch("http://localhost:8080/project4backend/rest/user/update", {
+    fetch("http://localhost:8080/projecto5backend/rest/user/update", {
       method: "PUT",
       headers: {
         Accept: "*/*",
@@ -68,7 +68,7 @@ function MainUsers() {
   const handleDrop = (event, role) => {
     const username = event.dataTransfer.getData("user_id");
     console.log(username);
-    fetch(`http://localhost:8080/project4backend/rest/user/${username}`, {
+    fetch(`http://localhost:8080/projecto5backend/rest/user/${username}`, {
       method: "GET",
       headers: {
         Accept: "*/*",

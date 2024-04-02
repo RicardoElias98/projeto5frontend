@@ -21,7 +21,7 @@ function MainDeletedTasks() {
   const handleDropRestore = (event) => {
     const taskId = event.dataTransfer.getData("data_id");
     console.log(taskId);
-    fetch(`http://localhost:8080/project4backend/rest/task/restore/${taskId}`, {
+    fetch(`http://localhost:8080/projecto5backend/rest/task/restore/${taskId}`, {
       method: "PUT",
       headers: {
         Accept: "*/*",
@@ -48,7 +48,7 @@ function MainDeletedTasks() {
   const handleDropDelete = (event) => {
     const taskId = event.dataTransfer.getData("data_id");
     console.log(taskId);
-    fetch(`http://localhost:8080/project4backend/rest/task/delete/${taskId}`, {
+    fetch(`http://localhost:8080/projecto5backend/rest/task/delete/${taskId}`, {
       method: "DELETE",
       headers: {
         Accept: "*/*",

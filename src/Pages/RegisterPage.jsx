@@ -67,7 +67,7 @@ function RegisterPage() {
 
     if (Object.values(newWarnings).every((warning) => warning === "")) {
       console.log(formData.password);
-      fetch("http://localhost:8080/project4backend/rest/user/register", {
+      fetch("http://localhost:8080/projecto5backend/rest/user/register", {
         method: "POST",
         headers: {
           Accept: "*/*",

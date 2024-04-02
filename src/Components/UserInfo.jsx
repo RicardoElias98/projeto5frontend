@@ -83,7 +83,7 @@ function UserInfo({
 
     if (Object.values(newWarnings).every((warning) => warning === "")) {
       console.log(formData);
-      fetch("http://localhost:8080/project4backend/rest/user/update", {
+      fetch("http://localhost:8080/projecto5backend/rest/user/update", {
         method: "PUT",
         headers: {
           Accept: "*/*",
@@ -110,7 +110,7 @@ function UserInfo({
     const username = formData.username;
     console.log(username);
     fetch(
-      `http://localhost:8080/project4backend/rest/user/delete/${username}`,
+      `http://localhost:8080/projecto5backend/rest/user/delete/${username}`,
       {
         method: "DELETE",
         headers: {

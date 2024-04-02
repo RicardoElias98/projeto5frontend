@@ -32,7 +32,7 @@ function LoginPage() {
   };
 
   const findUser = (username, token) => {
-    fetch(`http://localhost:8080/project4backend/rest/user/${username}`, {
+    fetch(`http://localhost:8080/projecto5backend/rest/user/${username}`, {
       method: "GET",
       headers: {
         Accept: "*/*",
@@ -59,7 +59,7 @@ function LoginPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch("http://localhost:8080/project4backend/rest/user/login", {
+    fetch("http://localhost:8080/projecto5backend/rest/user/login", {
       method: "GET",
       headers: {
         Accept: "*/*",
@@ -76,7 +76,7 @@ function LoginPage() {
         const token = await response.text();
         updateToken(token);
         findUser(formData.username, token);
-        fetch("http://localhost:8080/project4backend/rest/user/photo", {
+        fetch("http://localhost:8080/projecto5backend/rest/user/photo", {
           method: "GET",
           headers: {
             Accept: "*/*",

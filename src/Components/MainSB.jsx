@@ -84,7 +84,7 @@ function MainSB() {
   }, [filteredTasksCategoryUser]);
 
   const displayTasksByStatus = (status, setTasks) => {
-    fetch(`http://localhost:8080/project4backend/rest/task/status`, {
+    fetch(`http://localhost:8080/projecto5backend/rest/task/status`, {
       method: "GET",
       headers: {
         Accept: "*/*",
@@ -125,7 +125,7 @@ function MainSB() {
     console.log("Username: " + username);
     console.log("Category: " + category);
     fetch(
-      `http://localhost:8080/project4backend/rest/task/byCategoryAndUser/${category}/${username}`,
+      `http://localhost:8080/projecto5backend/rest/task/byCategoryAndUser/${category}/${username}`,
       {
         method: "GET",
         headers: {
@@ -147,7 +147,7 @@ function MainSB() {
 
   const displayFilterCategory = (category) => {
     fetch(
-      `http://localhost:8080/project4backend/rest/task/byCategory/${category}`,
+      `http://localhost:8080/projecto5backend/rest/task/byCategory/${category}`,
       {
         method: "GET",
         headers: {
@@ -169,7 +169,7 @@ function MainSB() {
 
   const displayFilterUser = (username) => {
     fetch(
-      `http://localhost:8080/project4backend/rest/task/byUser/${username}`,
+      `http://localhost:8080/projecto5backend/rest/task/byUser/${username}`,
       {
         method: "GET",
         headers: {
@@ -193,7 +193,7 @@ function MainSB() {
     console.log("newStatus: " + newStatus);
     console.log("idTask: " + idTask);
     fetch(
-      `http://localhost:8080/project4backend/rest/task/changeStatus/${idTask}`,
+      `http://localhost:8080/projecto5backend/rest/task/changeStatus/${idTask}`,
       {
         method: "PUT",
         headers: {

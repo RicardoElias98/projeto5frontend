@@ -102,7 +102,7 @@ function TaskInfo({
       setIsEditable(false);
       onClose();
     } else {
-      fetch("http://localhost:8080/project4backend/rest/task/update", {
+      fetch("http://localhost:8080/projecto5backend/rest/task/update", {
         method: "PUT",
         headers: {
           Accept: "*/*",
@@ -147,7 +147,7 @@ function TaskInfo({
 
   const handleDelete = () => {
     const id = formData.id;
-    fetch(`http://localhost:8080/project4backend/rest/task/block/${id}`, {
+    fetch(`http://localhost:8080/projecto5backend/rest/task/block/${id}`, {
       method: "PUT",
       headers: {
         Accept: "*/*",

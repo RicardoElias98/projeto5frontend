@@ -32,7 +32,7 @@ function EditProfileModal({ onClose, user }) {
 
   const handleConfirm = () => {
     console.log(formData);
-    fetch("http://localhost:8080/project4backend/rest/user/update", {
+    fetch("http://localhost:8080/projecto5backend/rest/user/update", {
       method: "PUT",
       headers: {
         Accept: "*/*",

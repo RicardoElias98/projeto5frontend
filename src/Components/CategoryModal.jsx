@@ -21,7 +21,7 @@ function CategoryModal({ isOpen, onClose }) {
     if (formattedCategoryName === "") {
       alert("Category name cannot be empty");
     } else {
-      fetch("http://localhost:8080/project4backend/rest/task/createCategory", {
+      fetch("http://localhost:8080/projecto5backend/rest/task/createCategory", {
         method: "POST",
         headers: {
           Accept: "*/*",

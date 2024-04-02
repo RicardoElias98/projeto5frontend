@@ -54,7 +54,7 @@ function AllCategoriesModal({ isOpen, onClose, categories }) {
   const onDelete = (oldName) => {
     if (oldName) {
       fetch(
-        `http://localhost:8080/project4backend/rest/task/deleteCategory/${oldName}`,
+        `http://localhost:8080/projecto5backend/rest/task/deleteCategory/${oldName}`,
         {
           method: "DELETE",
           headers: {
@@ -82,7 +82,7 @@ function AllCategoriesModal({ isOpen, onClose, categories }) {
     if (formattedCategoryName === "") {
       alert("Category name cannot be empty");
     } else {
-      fetch("http://localhost:8080/project4backend/rest/task/updateCategory", {
+      fetch("http://localhost:8080/projecto5backend/rest/task/updateCategory", {
         method: "PUT",
         headers: {
           Accept: "*/*",

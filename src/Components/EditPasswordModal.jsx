@@ -22,7 +22,7 @@ function EditPasswordModal({ onClose}) {
 
   const handleConfirm = () => {
     
-    fetch("http://localhost:8080/project4backend/rest/user/updatePassword", {
+    fetch("http://localhost:8080/projecto5backend/rest/user/updatePassword", {
         method: "PUT",
         headers: {
             Accept: "*/*",

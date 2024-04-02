@@ -17,7 +17,7 @@ function LogoutButton() {
 
   const logout = (event) => {
     event.preventDefault();
-    fetch("http://localhost:8080/project4backend/rest/user/logout", {
+    fetch("http://localhost:8080/projecto5backend/rest/user/logout", {
       method: "GET",
       headers: {
         Accept: "*/*",

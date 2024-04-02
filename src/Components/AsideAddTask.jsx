@@ -57,7 +57,7 @@ function AsideAddTask() {
   }, []);
 
   const getAllCategories = () => {
-    fetch("http://localhost:8080/project4backend/rest/task/allCategories", {
+    fetch("http://localhost:8080/projecto5backend/rest/task/allCategories", {
       method: "GET",
       headers: {
         Accept: "*/*",
@@ -112,7 +112,7 @@ function AsideAddTask() {
       alert("All elements are required");
       return;
     } else {
-      fetch("http://localhost:8080/project4backend/rest/task/add", {
+      fetch("http://localhost:8080/projecto5backend/rest/task/add", {
         method: "POST",
         headers: {
           Accept: "*/*",
