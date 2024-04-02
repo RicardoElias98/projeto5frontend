@@ -20,6 +20,9 @@ function Users() {
           <h2 className="tasks-link">
             <Link to="/htmlDefault "> Tasks </Link>
           </h2>
+          <h2 className="usersTable-link">
+              <Link to="/usersTable">Users Table</Link>
+          </h2>
         </div>
         <Photo src={userPhoto} />
         <h2> {firstName} </h2>

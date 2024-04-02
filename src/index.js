@@ -11,6 +11,7 @@ import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
 import Users from "./Pages/Users";
 import DeletedTasks from "./Pages/DeletedTasks";
+import UsersTable from "./Pages/UsersTable";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -25,6 +26,7 @@ root.render(
         <Route path="/htmlDefault " element={<HtmlDefault />} />
         <Route path="/users" element={<Users />} />
         <Route path="/deletedTasks" element={<DeletedTasks />} />
+        <Route path="/usersTable" element={<UsersTable />} />
       </Routes>
     </Router>
   </React.StrictMode>

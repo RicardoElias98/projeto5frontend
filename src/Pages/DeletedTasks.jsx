@@ -20,6 +20,9 @@ function DeletedTasks() {
           <h2 className="users-link">
             <Link to="/users">Users</Link>
           </h2>
+          <h2 className="usersTable-link">
+              <Link to="/usersTable">Users Table</Link>
+          </h2>
           <h2 className="tasks-link">
             <Link to="/htmlDefault "> Tasks </Link>
           </h2>
