@@ -7,6 +7,7 @@ import { userStore } from "../stores/UserStore";
 import MainUsers from "../Components/MainUsers";
 import AsideAddUser from "../Components/AsideAddUser";
 import EditProfileButton from "../Components/EditProfileButton";
+import DataTableUsers from "../Components/DataTableUsers";
 
 function UsersTable() {
   const userPhoto = userStore.getState().userPhoto;
@@ -35,7 +36,9 @@ function UsersTable() {
         <LogoutButton />
       </header>
       <div className="container">
-        <main className="main" id="main-app"></main>
+        <main className="main" id="main-app">
+        <DataTableUsers/> 
+        </main>
       </div>
       <footer className="footer" id="footer-app">
         {/* Conteúdo do footer */}
