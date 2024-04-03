@@ -336,3 +336,8 @@ input {
 .dark-background {
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+.table-users{
+  width: 100%;
+  border-collapse: collapse;
+}

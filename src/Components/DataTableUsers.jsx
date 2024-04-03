@@ -1,6 +1,7 @@
 import React from "react";
 import DataTable from "react-data-table-component";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function DataTableUsers() {
   const columns = [
@@ -86,6 +87,8 @@ function DataTableUsers() {
     },
   ];
 
+  const navigate = useNavigate();
+
   const [records, setRecords] = useState(data);
 
   function handleFilter(event) {
@@ -96,8 +99,12 @@ function DataTableUsers() {
     setRecords(result);
   }
 
+  function handleRowClicked(row) {
+    console.log("Row clicked:", row);
+  }
+
   return (
-    <div>
+    <div className="table-users">
       <div>
         <input
           type="text"
@@ -107,7 +114,13 @@ function DataTableUsers() {
       </div>
 
       <div>
-        <DataTable columns={columns} data={records} fixedHeader pagination />
+        <DataTable
+          columns={columns}
+          data={records}
+          fixedHeader
+          pagination
+          onRowClicked={handleRowClicked}
+        />
       </div>
     </div>
   );
