@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { userStore } from "../stores/UserStore";
 
 function DataTableUsers() {
-
   const allUsers = userStore((state) => state.allUsers);
 
   const columns = [
@@ -22,10 +21,13 @@ function DataTableUsers() {
     { name: "Role", selector: (row) => row.role, sortable: true },
   ];
 
-
   const navigate = useNavigate();
 
   const [records, setRecords] = useState(allUsers);
+
+  const [formData, setFormData] = useState({
+    role: "",
+  });
 
   function handleFilter(event) {
     const value = event.target.value.toLowerCase();
@@ -38,17 +40,34 @@ function DataTableUsers() {
   function handleRowClicked(row) {
     console.log("Row clicked:", row);
     /* Aqui vai carregar e abrir o url do perfil do user clicado */
+    console.log("***", formData.role);
   }
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   return (
     <div className="table-users">
       <div>
         <input
-        className="search-bar"
+          className="search-bar"
           type="text"
           onChange={handleFilter}
           placeholder="Search by name"
         />
+        <select
+          id="role"
+          defaultValue=""
+          name="role"
+          onChange={handleChange}
+        >
+          <option value="">Filter by Role...</option>
+          <option value="developer">Developer</option>
+          <option value="user">Scrum Master </option>
+          <option value="Owner">Product Owner </option>
+        </select>
       </div>
 
       <div>
