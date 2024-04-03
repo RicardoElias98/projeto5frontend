@@ -341,3 +341,13 @@ input {
   width: 100%;
   border-collapse: collapse;
 }
+
+.search-bar {
+  width: 20%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  display: block;
+  border-radius: 8px;
+  border: grey solid;
+}
