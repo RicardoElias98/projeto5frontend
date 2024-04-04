@@ -7,6 +7,7 @@ import { userStore } from "../stores/UserStore";
 function DataTableUsers() {
   const allUsers = userStore((state) => state.allUsers);
   const token = userStore((state) => state.token);
+  const updateProfileInfo = userStore((state) => state.updateProfileInfo);
 
   const columns = [
     {
@@ -57,6 +58,14 @@ function DataTableUsers() {
     console.log("Row clicked:", row);
     const username = row.username;
     console.log("Username:", username);
+    const data = {
+      name: row.name,
+      email: row.email,
+      username: row.username,
+      photo: row.userPhoto,
+    };
+    console.log("data", data);
+    updateProfileInfo(data);
     navigate(`/userProfile/${username}`, { replace: true });
   }
 

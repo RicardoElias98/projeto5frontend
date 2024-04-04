@@ -13,6 +13,7 @@ function UsersTable() {
   const userPhoto = userStore.getState().userPhoto;
   const firstName = userStore.getState().loginUser.name.split(" ")[0];
   const role = userStore.getState().loginUser.role;
+
   return (
     <div className="App" id="outer-container">
       <header className="header" id="header-app">
@@ -31,13 +32,13 @@ function UsersTable() {
           </h2>
         </div>
         <Photo src={userPhoto} />
-        <h2> {firstName} </h2>
+        <h2> {firstName}</h2>
         <EditProfileButton />
         <LogoutButton />
       </header>
       <div className="container">
         <main className="main" id="main-app">
-        <DataTableUsers/> 
+          <DataTableUsers />
         </main>
       </div>
       <footer className="footer" id="footer-app">

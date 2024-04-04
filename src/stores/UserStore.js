@@ -14,7 +14,7 @@ export const userStore = create(
       updateUserSelected: (userSelected) => set({ userSelected }),
       updateCounter: (counter) => set({ counter }),
       updateFirstName: (firstName) => set({ firstName }),
-      
+      updateProfileInfo: (profileInfo) => set({ profileInfo }),
     }),
     {
       name: "mystorage",

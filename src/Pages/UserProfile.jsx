@@ -10,13 +10,15 @@ import { useState } from "react";
 function UserProfile() {
   const { username } = useParams();
   const [modalIsOpen, setModalIsOpen] = useState(true);
+  const profileInfo = userStore((state) => state.profileInfo);
+  console.log("profile Info", profileInfo);
   
 
   const closeModal = () => {
     setModalIsOpen(false);
   };
 
-  // Use o username para carregar os dados do usuário ou renderizar conteúdo específico do usuário
+  
 
   const userPhoto = userStore.getState().userPhoto;
   const firstName = userStore.getState().loginUser.name.split(" ")[0];
@@ -55,11 +57,10 @@ function UserProfile() {
           >
             <div className="modal-content">
               <h2>Perfil do Utilizador</h2>
-              <h3>Username: {username}</h3>
-              <h3>Nome: {firstName}</h3>
-              <h3>Email: {userStore.getState().loginUser.email}</h3>
-              <h3>Contacto: {userStore.getState().loginUser.contactNumber}</h3>
-              <h3>Role: {role}</h3>
+              <h3>Username: {profileInfo.username}</h3>
+              <h3>Name: {profileInfo.name}</h3>
+              <h3>Email: {profileInfo.email}</h3>
+              <h3>Photo: {profileInfo.photo}</h3>
               <button className="buttonModal" onClick={closeModal}>
                 Close Modal
               </button>
