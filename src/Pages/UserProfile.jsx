@@ -6,15 +6,19 @@ import EditProfileButton from "../Components/EditProfileButton";
 import { userStore } from "../stores/UserStore";
 import Modal from "react-modal";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function UserProfile() {
   const { username } = useParams();
   const [modalIsOpen, setModalIsOpen] = useState(true);
   const profileInfo = userStore((state) => state.profileInfo);
   console.log("profile Info", profileInfo);
+  const navigate = useNavigate();
+
 
   const closeModal = () => {
     setModalIsOpen(false);
+    navigate(`/usersTable`, { replace: true });
   };
 
   const userPhoto = userStore.getState().userPhoto;
