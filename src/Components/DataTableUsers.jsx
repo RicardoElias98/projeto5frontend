@@ -64,6 +64,9 @@ function DataTableUsers() {
       username: row.username,
       photo: row.userPhoto,
       tasks: "",
+      tasksTODO: [],
+      tasksDOING: [],
+      tasksDONE: [],
     };
     fetch(
       `http://localhost:8080/projecto5backend/rest/task/byUser/${username}`,
@@ -81,6 +84,15 @@ function DataTableUsers() {
       } else if (response.status === 200) {
         const tasks = await response.json();
         console.log(tasks);
+        tasks.map((task) => {
+          if (task.status === 10) {
+            data.tasksTODO.push(task);
+          } else if (task.status === 20) {
+            data.tasksDOING.push(task);
+          } else if (task.status === 30) {
+            data.tasksDONE.push(task);
+          }
+        });
         data.tasks = tasks;
         console.log("data", data);
         updateProfileInfo(data);
