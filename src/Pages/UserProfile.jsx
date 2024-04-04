@@ -1,14 +1,75 @@
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import LogoutButton from "../Components/LogoutButton";
+import Photo from "../Components/Photo";
+import EditProfileButton from "../Components/EditProfileButton";
+import { userStore } from "../stores/UserStore";
+import Modal from "react-modal";
+import { useState } from "react";
 
 function UserProfile() {
   const { username } = useParams();
+  const [modalIsOpen, setModalIsOpen] = useState(true);
+  
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
   // Use o username para carregar os dados do usuário ou renderizar conteúdo específico do usuário
 
+  const userPhoto = userStore.getState().userPhoto;
+  const firstName = userStore.getState().loginUser.name.split(" ")[0];
+  const role = userStore.getState().loginUser.role;
   return (
-    <div>
-      <h1>Perfil do usuário: {username}</h1>
-      {/* Outro conteúdo do perfil do usuário */}
+    <div className="App" id="outer-container">
+      <header className="header" id="header-app">
+        <h1>Scrum Board</h1>
+        <div className="links">
+          <h2 className="tasks-link">
+            <Link to="/htmlDefault "> Tasks </Link>
+          </h2>
+          <h2 className="Deleted-tasks-link">
+            {(role === "Owner" || role === "user") && (
+              <Link to="/deletedTasks"> Deleted Tasks</Link>
+            )}
+          </h2>
+          <h2 className="users-link">
+            <Link to="/users">Users</Link>
+          </h2>
+        </div>
+        <Photo src={userPhoto} />
+        <h2> {firstName} </h2>
+        <EditProfileButton />
+        <LogoutButton />
+      </header>
+      <div className="container">
+        <main className="main" id="main-app">
+          <div className="modal-button-container">
+          </div>
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            className="custom-modal"
+            overlayClassName="custom-overlay"
+          >
+            <div className="modal-content">
+              <h2>Perfil do Utilizador</h2>
+              <h3>Username: {username}</h3>
+              <h3>Nome: {firstName}</h3>
+              <h3>Email: {userStore.getState().loginUser.email}</h3>
+              <h3>Contacto: {userStore.getState().loginUser.contactNumber}</h3>
+              <h3>Role: {role}</h3>
+              <button className="buttonModal" onClick={closeModal}>
+                Close Modal
+              </button>
+            </div>
+          </Modal>
+        </main>
+      </div>
+      <footer className="footer" id="footer-app">
+        {/* Conteúdo do footer */}
+      </footer>
     </div>
   );
 }
