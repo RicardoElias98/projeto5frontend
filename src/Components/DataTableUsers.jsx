@@ -6,6 +6,7 @@ import { userStore } from "../stores/UserStore";
 
 function DataTableUsers() {
   const allUsers = userStore((state) => state.allUsers);
+  const token =  userStore((state) => state.token);
 
   const columns = [
     {
@@ -30,11 +31,30 @@ function DataTableUsers() {
   });
 
   function handleFilter(event) {
-    const value = event.target.value.toLowerCase();
-    const result = allUsers.filter((record) => {
-      return record.name.toLowerCase().includes(value);
-    });
-    setRecords(result);
+    const user = event.target.value.toLowerCase();
+    fetch(`http://localhost:8080/projecto5backend/rest/user/search/${user}`, {
+      method: "GET",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/json",
+        token: token,
+      },
+    })
+      .then(async function (response) {
+        if (response.status === 403) {
+          alert("User with this token is not found");
+        } else if (response.status === 200) {
+          const result = await response.json();
+          console.log(result);
+          setRecords(result);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching users:", error);
+      });
+      if (user === "") {
+        setRecords(allUsers);
+      }
   }
 
   function handleRowClicked(row) {
