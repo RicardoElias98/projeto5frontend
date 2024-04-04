@@ -6,7 +6,7 @@ import { userStore } from "../stores/UserStore";
 
 function DataTableUsers() {
   const allUsers = userStore((state) => state.allUsers);
-  const token =  userStore((state) => state.token);
+  const token = userStore((state) => state.token);
 
   const columns = [
     {
@@ -25,10 +25,6 @@ function DataTableUsers() {
   const navigate = useNavigate();
 
   const [records, setRecords] = useState(allUsers);
-
-  const [formData, setFormData] = useState({
-    role: "",
-  });
 
   function handleFilter(event) {
     const user = event.target.value.toLowerCase();
@@ -52,21 +48,15 @@ function DataTableUsers() {
       .catch((error) => {
         console.error("Error fetching users:", error);
       });
-      if (user === "") {
-        setRecords(allUsers);
-      }
+    if (user === "") {
+      setRecords(allUsers);
+    }
   }
 
   function handleRowClicked(row) {
     console.log("Row clicked:", row);
     /* Aqui vai carregar e abrir o url do perfil do user clicado */
-    console.log("***", formData.role);
   }
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
 
   return (
     <div className="table-users">
@@ -77,17 +67,6 @@ function DataTableUsers() {
           onChange={handleFilter}
           placeholder="Search by name"
         />
-        <select
-          id="role"
-          defaultValue=""
-          name="role"
-          onChange={handleChange}
-        >
-          <option value="">Filter by Role...</option>
-          <option value="developer">Developer</option>
-          <option value="user">Scrum Master </option>
-          <option value="Owner">Product Owner </option>
-        </select>
       </div>
 
       <div>
