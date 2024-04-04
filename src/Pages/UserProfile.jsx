@@ -12,13 +12,10 @@ function UserProfile() {
   const [modalIsOpen, setModalIsOpen] = useState(true);
   const profileInfo = userStore((state) => state.profileInfo);
   console.log("profile Info", profileInfo);
-  
 
   const closeModal = () => {
     setModalIsOpen(false);
   };
-
-  
 
   const userPhoto = userStore.getState().userPhoto;
   const firstName = userStore.getState().loginUser.name.split(" ")[0];
@@ -47,8 +44,7 @@ function UserProfile() {
       </header>
       <div className="container">
         <main className="main" id="main-app">
-          <div className="modal-button-container">
-          </div>
+          <div className="modal-button-container"></div>
           <Modal
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
@@ -60,7 +56,10 @@ function UserProfile() {
               <h3>Username: {profileInfo.username}</h3>
               <h3>Name: {profileInfo.name}</h3>
               <h3>Email: {profileInfo.email}</h3>
-              <h3>Photo: {profileInfo.photo}</h3>
+              <div className="circle-photo">
+                <h3> Photo: </h3>
+                <Photo src={profileInfo.photo} />
+              </div>
               <button className="buttonModal" onClick={closeModal}>
                 Close Modal
               </button>

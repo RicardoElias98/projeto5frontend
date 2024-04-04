@@ -404,3 +404,16 @@ input {
   border-radius: 8px;
   border: grey solid;
 }
+
+.circle-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+}
+
+.circle-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
