@@ -55,7 +55,9 @@ function DataTableUsers() {
 
   function handleRowClicked(row) {
     console.log("Row clicked:", row);
-    /* Aqui vai carregar e abrir o url do perfil do user clicado */
+    const username = row.username;
+    console.log("Username:", username);
+    navigate(`/userProfile/${username}`, { replace: true });
   }
 
   return (
