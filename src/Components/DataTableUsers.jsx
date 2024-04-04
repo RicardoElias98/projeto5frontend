@@ -63,10 +63,30 @@ function DataTableUsers() {
       email: row.email,
       username: row.username,
       photo: row.userPhoto,
+      tasks: "",
     };
-    console.log("data", data);
-    updateProfileInfo(data);
-    navigate(`/userProfile/${username}`, { replace: true });
+    fetch(
+      `http://localhost:8080/projecto5backend/rest/task/byUser/${username}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "*/*",
+          "Content-Type": "application/json",
+          token: token,
+        },
+      }
+    ).then(async function (response) {
+      if (response.status === 403) {
+        alert("User with this token is not found");
+      } else if (response.status === 200) {
+        const tasks = await response.json();
+        console.log(tasks);
+        data.tasks = tasks;
+        console.log("data", data);
+        updateProfileInfo(data);
+        navigate(`/userProfile/${username}`, { replace: true });
+      }
+    });
   }
 
   return (

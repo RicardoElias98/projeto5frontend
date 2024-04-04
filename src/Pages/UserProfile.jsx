@@ -64,6 +64,10 @@ function UserProfile() {
                 <h3> Photo: </h3>
                 <Photo src={profileInfo.photo} />
               </div>
+              <h3>Total Tasks: {profileInfo.tasks.length}</h3>
+              <h3> Tasks To-do:</h3>
+              <h3> Tasks Doing:</h3>
+              <h3> Tasks Done:</h3>
               <button className="buttonModal" onClick={closeModal}>
                 Close Modal
               </button>
