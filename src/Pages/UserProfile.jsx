@@ -7,19 +7,74 @@ import { userStore } from "../stores/UserStore";
 import Modal from "react-modal";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
 
 function UserProfile() {
   const { username } = useParams();
   const [modalIsOpen, setModalIsOpen] = useState(true);
-  const profileInfo = userStore((state) => state.profileInfo);
-  console.log("profile Info", profileInfo);
+  const token = userStore((state) => state.token);
+  
   const navigate = useNavigate();
+
+  console.log("username", username);
+
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    username: username,
+    photo: "",
+    tasks: [],
+    tasksTODO: [],
+    tasksDOING: [],
+    tasksDONE: [],
+  });
+
+  
 
 
   const closeModal = () => {
     setModalIsOpen(false);
     navigate(`/usersTable`, { replace: true });
   };
+
+ 
+    fetch(
+        `http://localhost:8080/projecto5backend/rest/task/byUser/${username}`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "*/*",
+            "Content-Type": "application/json",
+            token: token,
+          },
+        }
+      ).then(async function (response) {
+        if (response.status === 403) {
+          alert("User with this token is not found");
+        } else if (response.status === 200) {
+          const tasks = await response.json();
+          console.log("****", tasks);
+          const updatedData = {
+            ...data,
+            tasks: tasks,
+            tasksTODO: [],
+            tasksDOING: [],
+            tasksDONE: [],
+          };
+          tasks.map((task) => {
+            if (task.status === 10) {
+                updatedData.tasksTODO.push(task);
+            } else if (task.status === 20) {
+                updatedData.tasksDOING.push(task);
+            } else if (task.status === 30) {
+                updatedData.tasksDONE.push(task);
+            }
+          });
+          setData(updatedData);
+          console.log("****", updatedData);
+        }
+      });
 
   const userPhoto = userStore.getState().userPhoto;
   const firstName = userStore.getState().loginUser.name.split(" ")[0];
@@ -56,18 +111,19 @@ function UserProfile() {
             overlayClassName="custom-overlay"
           >
             <div className="modal-content">
-              <h2>Perfil do Utilizador</h2>
-              <h3>Username: {profileInfo.username}</h3>
-              <h3>Name: {profileInfo.name}</h3>
-              <h3>Email: {profileInfo.email}</h3>
+              <h2>User Profile</h2>
+              <h3>Username: {data.username}</h3>
+              <h3>Name: {data.name}</h3>
+              <h3>Email: {data.email}</h3>
               <div className="circle-photo">
                 <h3> Photo: </h3>
-                <Photo src={profileInfo.photo} />
+                <Photo src={data.photo} />
               </div>
-              <h3>Total Tasks: {profileInfo.tasks.length}</h3>
-              <h3> Tasks To-do: {profileInfo.tasksTODO.length} </h3>
-              <h3> Tasks Doing: {profileInfo.tasksDOING.length} </h3>
-              <h3> Tasks Done: {profileInfo.tasksDONE.length} </h3>
+              <h3>Total Tasks: {data.tasks.length}</h3>
+              {console.log("++++", data.tasks)}
+              <h3> Tasks To-do: {data.tasksTODO.length} </h3>
+              <h3> Tasks Doing: {data.tasksDOING.length} </h3>
+              <h3> Tasks Done: {data.tasksDONE.length} </h3>
               <button className="buttonModal" onClick={closeModal}>
                 Close
               </button>

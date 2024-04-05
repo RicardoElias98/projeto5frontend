@@ -58,7 +58,7 @@ function DataTableUsers() {
     console.log("Row clicked:", row);
     const username = row.username;
     console.log("Username:", username);
-    const data = {
+    /* const data = {
       name: row.name,
       email: row.email,
       username: row.username,
@@ -67,38 +67,9 @@ function DataTableUsers() {
       tasksTODO: [],
       tasksDOING: [],
       tasksDONE: [],
-    };
-    fetch(
-      `http://localhost:8080/projecto5backend/rest/task/byUser/${username}`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "*/*",
-          "Content-Type": "application/json",
-          token: token,
-        },
-      }
-    ).then(async function (response) {
-      if (response.status === 403) {
-        alert("User with this token is not found");
-      } else if (response.status === 200) {
-        const tasks = await response.json();
-        console.log(tasks);
-        tasks.map((task) => {
-          if (task.status === 10) {
-            data.tasksTODO.push(task);
-          } else if (task.status === 20) {
-            data.tasksDOING.push(task);
-          } else if (task.status === 30) {
-            data.tasksDONE.push(task);
-          }
-        });
-        data.tasks = tasks;
-        console.log("data", data);
-        updateProfileInfo(data);
-        navigate(`/userProfile/${username}`, { replace: true });
-      }
-    });
+    }; */
+    navigate(`/userProfile/${username}`, { replace: true });
+    
   }
 
   return (
