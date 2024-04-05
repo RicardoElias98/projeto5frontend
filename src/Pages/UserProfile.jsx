@@ -9,14 +9,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-
 function UserProfile() {
   const { username } = useParams();
   const [modalIsOpen, setModalIsOpen] = useState(true);
   const token = userStore((state) => state.token);
   const allUsers = userStore((state) => state.allUsers);
-  const userPicked = allUsers.find(user => user.username === username);
+  const userPicked = allUsers.find((user) => user.username === username);
   
+
   const navigate = useNavigate();
 
   console.log("username", username);
@@ -38,43 +38,43 @@ function UserProfile() {
     navigate(`/usersTable`, { replace: true });
   };
 
- 
-    fetch(
-        `http://localhost:8080/projecto5backend/rest/task/byUser/${username}`,
-        {
-          method: "GET",
-          headers: {
-            Accept: "*/*",
-            "Content-Type": "application/json",
-            token: token,
-          },
-        }
-      ).then(async function (response) {
-        if (response.status === 403) {
-          alert("User with this token is not found");
-        } else if (response.status === 200) {
-          const tasks = await response.json();
-          console.log("****", tasks);
-          const updatedData = {
-            ...data,
-            tasks: tasks,
-            tasksTODO: [],
-            tasksDOING: [],
-            tasksDONE: [],
-          };
-          tasks.map((task) => {
-            if (task.status === 10) {
-                updatedData.tasksTODO.push(task);
-            } else if (task.status === 20) {
-                updatedData.tasksDOING.push(task);
-            } else if (task.status === 30) {
-                updatedData.tasksDONE.push(task);
-            }
-          });
-          setData(updatedData);
-          console.log("****", updatedData);
+  fetch(`http://localhost:8080/projecto5backend/rest/task/byUser/${username}`, {
+    method: "GET",
+    headers: {
+      Accept: "*/*",
+      "Content-Type": "application/json",
+      token: token,
+    },
+  }).then(async function (response) {
+    if (response.status === 403) {
+      alert("User with this token is not found");
+    } else if (response.status === 200) {
+      const tasks = await response.json();
+      console.log("****", tasks);
+      const updatedData = {
+        ...data,
+        tasks: tasks,
+        tasksTODO: [],
+        tasksDOING: [],
+        tasksDONE: [],
+      };
+      tasks.map((task) => {
+        if (task.status === 10) {
+          updatedData.tasksTODO.push(task);
+        } else if (task.status === 20) {
+          updatedData.tasksDOING.push(task);
+        } else if (task.status === 30) {
+          updatedData.tasksDONE.push(task);
         }
       });
+      setData(updatedData);
+      console.log("****", updatedData);
+    }
+  });
+
+  const handleEdit = () => {
+    console.log("Edit");
+  };
 
   const userPhoto = userStore.getState().userPhoto;
   const firstName = userStore.getState().loginUser.name.split(" ")[0];
@@ -112,9 +112,18 @@ function UserProfile() {
           >
             <div className="modal-content">
               <h2>User Profile</h2>
-              <h3>Username: {data.username}</h3>
-              <h3>Name: {data.name}</h3>
-              <h3>Email: {data.email}</h3>
+              <label>
+                Username: <input type="text" value={data.username} readOnly />
+              </label>
+              <label>
+                Name: <input type="text" value={data.name} readOnly />
+              </label>
+              <label>
+                Email: <input type="email" value={data.email} readOnly />
+              </label>
+              <label>
+                Photo: <input type="text" value={data.photo} readOnly />
+              </label>
               <div className="circle-photo">
                 <h3> Photo: </h3>
                 <Photo src={data.photo} />
@@ -127,10 +136,14 @@ function UserProfile() {
               <button className="buttonModal" onClick={closeModal}>
                 Close
               </button>
+              <button className="buttonModal " onClick={handleEdit}>
+                Edit
+              </button>
             </div>
           </Modal>
         </main>
       </div>
+
       <footer className="footer" id="footer-app">
         {/* Conteúdo do footer */}
       </footer>
