@@ -14,24 +14,24 @@ function UserProfile() {
   const { username } = useParams();
   const [modalIsOpen, setModalIsOpen] = useState(true);
   const token = userStore((state) => state.token);
+  const allUsers = userStore((state) => state.allUsers);
+  const userPicked = allUsers.find(user => user.username === username);
   
   const navigate = useNavigate();
 
   console.log("username", username);
+  console.log("userPicked", userPicked);
 
   const [data, setData] = useState({
-    name: "",
-    email: "",
+    name: userPicked.name,
+    email: userPicked.email,
     username: username,
-    photo: "",
+    photo: userPicked.userPhoto,
     tasks: [],
     tasksTODO: [],
     tasksDOING: [],
     tasksDONE: [],
   });
-
-  
-
 
   const closeModal = () => {
     setModalIsOpen(false);
