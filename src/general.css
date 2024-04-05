@@ -74,7 +74,7 @@
 }
 
 .modal-content {
-  width: 80%; /* Largura do conteúdo do modal */
+  width: 100%; /* Largura do conteúdo do modal */
   max-width: 800px; /* Largura máxima do conteúdo do modal */
   max-height: 80%; /* Altura máxima do conteúdo do modal */
   overflow-y: auto; /* Habilitar rolagem vertical, se necessário */

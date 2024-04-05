@@ -69,7 +69,7 @@ function UserProfile() {
               <h3> Tasks Doing: {profileInfo.tasksDOING.length} </h3>
               <h3> Tasks Done: {profileInfo.tasksDONE.length} </h3>
               <button className="buttonModal" onClick={closeModal}>
-                Close Modal
+                Close
               </button>
             </div>
           </Modal>
