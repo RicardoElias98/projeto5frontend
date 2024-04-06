@@ -133,6 +133,13 @@ function UserProfile() {
               <h3> Tasks To-do: {data.tasksTODO.length} </h3>
               <h3> Tasks Doing: {data.tasksDOING.length} </h3>
               <h3> Tasks Done: {data.tasksDONE.length} </h3>
+              <div className="message-section">
+                <textarea
+                  className="message-input"
+                  placeholder="Type your message here..."
+                ></textarea>
+                <button className="buttonModal">Send</button>
+              </div>
               <button className="buttonModal" onClick={closeModal}>
                 Close
               </button>
