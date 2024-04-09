@@ -8,6 +8,7 @@ import Modal from "react-modal";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import Message from "../Components/Message";
 
 function UserProfile() {
   const { username } = useParams();
@@ -15,7 +16,8 @@ function UserProfile() {
   const token = userStore((state) => state.token);
   const allUsers = userStore((state) => state.allUsers);
   const userPicked = allUsers.find((user) => user.username === username);
-  
+  const sender = userStore((state) => state.loginUser.username);
+  const [messagesTotal, setMessagesTotal] = useState([]);
 
   const navigate = useNavigate();
 
@@ -76,6 +78,26 @@ function UserProfile() {
     console.log("Edit");
   };
 
+  fetch(`http://localhost:8080/projecto5backend/rest/msg/tradedMsgs`, {
+    method: "GET",
+    headers: {
+      Accept: "*/*",
+      "Content-Type": "application/json",
+      token: token,
+      sender: sender,
+      receptor: username,
+    },
+  }).then(async function (response) {
+    if (response.status === 403) {
+      alert("User with this token is not found");
+    } else if (response.status === 200) {
+      const messages = await response.json();
+      console.log("**** messages", messages);
+      setMessagesTotal(messages);
+      console.log("**** messagesTotal", messagesTotal);
+    }
+  });
+
   const userPhoto = userStore.getState().userPhoto;
   const firstName = userStore.getState().loginUser.name.split(" ")[0];
   const role = userStore.getState().loginUser.role;
@@ -133,6 +155,12 @@ function UserProfile() {
               <h3> Tasks To-do: {data.tasksTODO.length} </h3>
               <h3> Tasks Doing: {data.tasksDOING.length} </h3>
               <h3> Tasks Done: {data.tasksDONE.length} </h3>
+              <div>
+                {console.log("---", messagesTotal)}
+                {messagesTotal.map((message) => (
+                  <Message key={message.id} text={message.text} />
+                ))}
+              </div>
               <div className="message-section">
                 <textarea
                   className="message-input"
