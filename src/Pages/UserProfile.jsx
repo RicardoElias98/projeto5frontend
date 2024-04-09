@@ -158,7 +158,7 @@ function UserProfile() {
               <div>
                 {console.log("---", messagesTotal)}
                 {messagesTotal.map((message) => (
-                  <Message key={message.id} text={message.text} checked={message.checked} />
+                  <Message key={message.id} text={message.text} checked={message.checked} sender={message.sender} />
                 ))}
               </div>
               <div className="message-section">

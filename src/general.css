@@ -431,9 +431,15 @@ input {
   object-fit: cover;
 }
 
-.message-container {
+.message-container-right {
   display: flex;
   justify-content: flex-end; /* Alinha a mensagem à direita */
+  margin-bottom: 10px; 
+}
+
+.message.container-left {
+  display: flex;
+  justify-content: flex-start; /* Alinha a mensagem à esquerda */
   margin-bottom: 10px; 
 }
 
