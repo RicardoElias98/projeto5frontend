@@ -21,8 +21,7 @@ function UserProfile() {
 
   const navigate = useNavigate();
 
-  console.log("username", username);
-  console.log("userPicked", userPicked);
+  
 
   const [data, setData] = useState({
     name: userPicked.name,
@@ -52,7 +51,6 @@ function UserProfile() {
       alert("User with this token is not found");
     } else if (response.status === 200) {
       const tasks = await response.json();
-      console.log("****", tasks);
       const updatedData = {
         ...data,
         tasks: tasks,
@@ -70,7 +68,7 @@ function UserProfile() {
         }
       });
       setData(updatedData);
-      console.log("****", updatedData);
+      
     }
   });
 
@@ -92,9 +90,9 @@ function UserProfile() {
       alert("User with this token is not found");
     } else if (response.status === 200) {
       const messages = await response.json();
-      console.log("**** messages", messages);
+      
       setMessagesTotal(messages);
-      console.log("**** messagesTotal", messagesTotal);
+      
     }
   });
 
@@ -151,14 +149,14 @@ function UserProfile() {
                 <Photo src={data.photo} />
               </div>
               <h3>Total Tasks: {data.tasks.length}</h3>
-              {console.log("++++", data.tasks)}
+              
               <h3> Tasks To-do: {data.tasksTODO.length} </h3>
               <h3> Tasks Doing: {data.tasksDOING.length} </h3>
               <h3> Tasks Done: {data.tasksDONE.length} </h3>
               <div>
-                {console.log("---", messagesTotal)}
+                
                 {messagesTotal.map((message) => (
-                  <Message key={message.id} text={message.text} checked={message.checked} sender={message.sender} />
+                  <Message key={message.id} text={message.text} checked={message.checked} sender={message.sender} id={message.id} />
                 ))}
               </div>
               <div className="message-section">

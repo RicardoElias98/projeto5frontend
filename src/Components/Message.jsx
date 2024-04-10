@@ -2,16 +2,33 @@ import React, { useState } from "react";
 import { userStore } from "../stores/UserStore";
 import { FaEye } from "react-icons/fa";
 
-function Message({ text, checked, sender }) {
+function Message({ text, checked, sender, id }) {
   const [isMessageRead, setIsMessageRead] = useState(checked);
   const loginUser = userStore((state) => state.loginUser);
-
+  const token = userStore((state) => state.token);
   const messageClass = isMessageRead ? "message-checked" : "message-unchecked";
 
   const handleEyeClick = () => {
-    // Lógica para marcar a mensagem como lida
-    setIsMessageRead(true);
-  };
+    const checked=true;
+    fetch(`http://localhost:8080/projecto5backend/rest/msg/udpateChecked/${checked}`, {
+      method: "PUT",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/json",
+        token: token,
+        msgId: id,
+      },
+    })
+      .then(async function (response) {
+        if (response.status === 403) {
+          alert("User with this token is not found");
+        } else if (response.status === 200) {
+          console.log("Msg is checked");
+          setIsMessageRead(true);
+        }
+      }
+    )};
+    
 
   if (sender === loginUser.username) {
     return (
@@ -36,6 +53,7 @@ function Message({ text, checked, sender }) {
     );
   }
 }
+
 
 export default Message;
 
