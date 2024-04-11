@@ -21,7 +21,10 @@ function UserProfile() {
 
   const navigate = useNavigate();
 
-  
+  useEffect(() => {
+    getTasksInfo();
+    getTradedMsgs();
+  }, []);
 
   const [data, setData] = useState({
     name: userPicked.name,
@@ -39,43 +42,49 @@ function UserProfile() {
     navigate(`/usersTable`, { replace: true });
   };
 
-  fetch(`http://localhost:8080/projecto5backend/rest/task/byUser/${username}`, {
-    method: "GET",
-    headers: {
-      Accept: "*/*",
-      "Content-Type": "application/json",
-      token: token,
-    },
-  }).then(async function (response) {
-    if (response.status === 403) {
-      alert("User with this token is not found");
-    } else if (response.status === 200) {
-      const tasks = await response.json();
-      const updatedData = {
-        ...data,
-        tasks: tasks,
-        tasksTODO: [],
-        tasksDOING: [],
-        tasksDONE: [],
-      };
-      tasks.map((task) => {
-        if (task.status === 10) {
-          updatedData.tasksTODO.push(task);
-        } else if (task.status === 20) {
-          updatedData.tasksDOING.push(task);
-        } else if (task.status === 30) {
-          updatedData.tasksDONE.push(task);
-        }
-      });
-      setData(updatedData);
-      
-    }
-  });
+  const getTasksInfo = () => {
+    fetch(
+      `http://localhost:8080/projecto5backend/rest/task/byUser/${username}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "*/*",
+          "Content-Type": "application/json",
+          token: token,
+        },
+      }
+    ).then(async function (response) {
+      if (response.status === 403) {
+        alert("User with this token is not found");
+      } else if (response.status === 200) {
+        const tasks = await response.json();
+        const updatedData = {
+          ...data,
+          tasks: tasks,
+          tasksTODO: [],
+          tasksDOING: [],
+          tasksDONE: [],
+        };
+        tasks.map((task) => {
+          if (task.status === 10) {
+            updatedData.tasksTODO.push(task);
+          } else if (task.status === 20) {
+            updatedData.tasksDOING.push(task);
+          } else if (task.status === 30) {
+            updatedData.tasksDONE.push(task);
+          }
+        });
+        setData(updatedData);
+      }
+    });
+  };
 
   const handleEdit = () => {
     console.log("Edit");
   };
 
+
+const getTradedMsgs = () => {
   fetch(`http://localhost:8080/projecto5backend/rest/msg/tradedMsgs`, {
     method: "GET",
     headers: {
@@ -90,11 +99,10 @@ function UserProfile() {
       alert("User with this token is not found");
     } else if (response.status === 200) {
       const messages = await response.json();
-      
+
       setMessagesTotal(messages);
-      
     }
-  });
+  }); };
 
   const userPhoto = userStore.getState().userPhoto;
   const firstName = userStore.getState().loginUser.name.split(" ")[0];
@@ -149,14 +157,19 @@ function UserProfile() {
                 <Photo src={data.photo} />
               </div>
               <h3>Total Tasks: {data.tasks.length}</h3>
-              
+
               <h3> Tasks To-do: {data.tasksTODO.length} </h3>
               <h3> Tasks Doing: {data.tasksDOING.length} </h3>
               <h3> Tasks Done: {data.tasksDONE.length} </h3>
               <div>
-                
                 {messagesTotal.map((message) => (
-                  <Message key={message.id} text={message.text} checked={message.checked} sender={message.sender} id={message.id} />
+                  <Message
+                    key={message.id}
+                    text={message.text}
+                    checked={message.checked}
+                    sender={message.sender}
+                    id={message.id}
+                  />
                 ))}
               </div>
               <div className="message-section">
