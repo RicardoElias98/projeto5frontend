@@ -20,9 +20,16 @@ function UserProfile() {
   const sender = userStore((state) => state.loginUser.username);
   const [messagesTotal, setMessagesTotal] = useState([]);
 
+  const [receivedMessage, setReceivedMessage] = useState("");
+
+  const handleReceivedMessage = (message) => {
+    setReceivedMessage(message);
+    setMessagesTotal((prevMessages) => [...prevMessages, message]);
+  };
+
   const navigate = useNavigate();
 
-  WebSocketChat(token);
+  WebSocketChat(token, handleReceivedMessage);
 
   useEffect(() => {
     getTasksInfo();
@@ -126,8 +133,10 @@ function UserProfile() {
     }).then(async function (response) {
       if (response.status === 403) {
         alert("User with this token is not found");
-      } else if (response.status === 200) {
+      } else if (response.status === 201) {
         console.log("Message sent");
+        console.log(msg);
+       //handleReceivedMessage(msg);
       }
     });
   };

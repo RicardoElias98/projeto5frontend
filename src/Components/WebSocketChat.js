@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-function WebSocketChat(token) {
+function WebSocketChat(token, onMessageReceived) {
   const WS_URL = "ws://localhost:8080/projecto5backend/message/";
   useEffect(() => {
     const websocket = new WebSocket(WS_URL + token);
@@ -10,7 +10,17 @@ function WebSocketChat(token) {
 
     websocket.onmessage = (event) => {
       console.log("Message received from server:", event.data);
+      onMessageReceived(event.data); 
     };
-  }, []);
+
+    websocket.onclose = () => {
+      console.log("The websocket connection is closed");
+    };
+    
+    return () => {
+      websocket.close();
+    };
+  }, [token, onMessageReceived]); 
 }
+
 export default WebSocketChat;
