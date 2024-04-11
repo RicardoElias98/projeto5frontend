@@ -29,7 +29,7 @@ function Message({ text, checked, sender, id }) {
       }
     )};
     
-    console.log("text", text);
+    
 
   if (sender === loginUser.username) {
     return (

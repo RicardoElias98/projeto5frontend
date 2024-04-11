@@ -144,7 +144,6 @@ function UserProfile() {
         alert("User with this token is not found");
       } else if (response.status === 201) {
         console.log("Message sent");
-        console.log(msg);
       }
     });
   };
