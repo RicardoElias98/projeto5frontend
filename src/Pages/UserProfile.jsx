@@ -23,8 +23,17 @@ function UserProfile() {
   const [receivedMessage, setReceivedMessage] = useState("");
 
   const handleReceivedMessage = (message) => {
+    console.log("receive", message);
     setReceivedMessage(message);
-    setMessagesTotal((prevMessages) => [...prevMessages, message]);
+    setMessagesTotal((prevMessages) => [
+      ...prevMessages,
+      (message = {
+        text: message.text,
+        sender: message.sender,
+        messageDateTime: message.messageDateTime,
+        receptor: message.receptor,
+      }),
+    ]);
   };
 
   const navigate = useNavigate();
@@ -136,7 +145,6 @@ function UserProfile() {
       } else if (response.status === 201) {
         console.log("Message sent");
         console.log(msg);
-       //handleReceivedMessage(msg);
       }
     });
   };

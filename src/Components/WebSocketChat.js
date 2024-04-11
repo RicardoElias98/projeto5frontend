@@ -10,7 +10,8 @@ function WebSocketChat(token, onMessageReceived) {
 
     websocket.onmessage = (event) => {
       console.log("Message received from server:", event.data);
-      onMessageReceived(event.data); 
+      const dataaObj = JSON.parse(event.data);
+      onMessageReceived(dataaObj); 
     };
 
     websocket.onclose = () => {
