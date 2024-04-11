@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Message from "../Components/Message";
+import WebSocketChat from "../Components/WebSocketChat";
 
 function UserProfile() {
   const { username } = useParams();
@@ -20,6 +21,8 @@ function UserProfile() {
   const [messagesTotal, setMessagesTotal] = useState([]);
 
   const navigate = useNavigate();
+
+  WebSocketChat(token);
 
   useEffect(() => {
     getTasksInfo();
