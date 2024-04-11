@@ -86,26 +86,51 @@ function UserProfile() {
     console.log("Edit");
   };
 
+  const getTradedMsgs = () => {
+    fetch(`http://localhost:8080/projecto5backend/rest/msg/tradedMsgs`, {
+      method: "GET",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/json",
+        token: token,
+        sender: sender,
+        receptor: username,
+      },
+    }).then(async function (response) {
+      if (response.status === 403) {
+        alert("User with this token is not found");
+      } else if (response.status === 200) {
+        const messages = await response.json();
 
-const getTradedMsgs = () => {
-  fetch(`http://localhost:8080/projecto5backend/rest/msg/tradedMsgs`, {
-    method: "GET",
-    headers: {
-      Accept: "*/*",
-      "Content-Type": "application/json",
-      token: token,
+        setMessagesTotal(messages);
+      }
+    });
+  };
+
+  const handleSend = () => {
+    const message = document.querySelector(".message-input").value;
+    const msg = {
+      text: message,
       sender: sender,
       receptor: username,
-    },
-  }).then(async function (response) {
-    if (response.status === 403) {
-      alert("User with this token is not found");
-    } else if (response.status === 200) {
-      const messages = await response.json();
-
-      setMessagesTotal(messages);
-    }
-  }); };
+      messageDateTime: new Date(),
+    };
+    fetch(`http://localhost:8080/projecto5backend/rest/msg/create`, {
+      method: "POST",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/json",
+        token: token,
+      },
+      body: JSON.stringify(msg),
+    }).then(async function (response) {
+      if (response.status === 403) {
+        alert("User with this token is not found");
+      } else if (response.status === 200) {
+        console.log("Message sent");
+      }
+    });
+  };
 
   const userPhoto = userStore.getState().userPhoto;
   const firstName = userStore.getState().loginUser.name.split(" ")[0];
@@ -180,7 +205,9 @@ const getTradedMsgs = () => {
                   className="message-input"
                   placeholder="Type your message here..."
                 ></textarea>
-                <button className="buttonModal">Send</button>
+                <button className="buttonModal" onClick={handleSend}>
+                  Send
+                </button>
               </div>
               <button className="buttonModal" onClick={closeModal}>
                 Close
