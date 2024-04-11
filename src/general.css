@@ -460,3 +460,8 @@ input {
 .message-unchecked {
   background-color: #ffcccc; 
 }
+
+.message-container-withscroll{
+  max-height: 300px; 
+  overflow-y: auto; 
+}

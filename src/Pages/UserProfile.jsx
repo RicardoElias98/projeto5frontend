@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Message from "../Components/Message";
 import WebSocketChat from "../Components/WebSocketChat";
+import { useRef } from "react";
 
 function UserProfile() {
   const { username } = useParams();
@@ -19,8 +20,15 @@ function UserProfile() {
   const userPicked = allUsers.find((user) => user.username === username);
   const sender = userStore((state) => state.loginUser.username);
   const [messagesTotal, setMessagesTotal] = useState([]);
+  const messageContainerRef = useRef(null);
 
   const [receivedMessage, setReceivedMessage] = useState("");
+
+  useEffect(() => {
+    if (messageContainerRef.current) {
+      messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
+    }
+  }, [messagesTotal]);
 
   const handleReceivedMessage = (message) => {
     console.log("receive", message);
@@ -205,7 +213,7 @@ function UserProfile() {
               <h3> Tasks To-do: {data.tasksTODO.length} </h3>
               <h3> Tasks Doing: {data.tasksDOING.length} </h3>
               <h3> Tasks Done: {data.tasksDONE.length} </h3>
-              <div>
+              <div className="message-container-withscroll" ref={messageContainerRef}>
                 {messagesTotal.map((message) => (
                   <Message
                     key={message.id}
