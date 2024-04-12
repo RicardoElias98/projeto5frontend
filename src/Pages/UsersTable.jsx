@@ -8,6 +8,7 @@ import MainUsers from "../Components/MainUsers";
 import AsideAddUser from "../Components/AsideAddUser";
 import EditProfileButton from "../Components/EditProfileButton";
 import DataTableUsers from "../Components/DataTableUsers";
+import NotificationIcon from "../Components/NotificationIcon";
 
 function UsersTable() {
   const userPhoto = userStore.getState().userPhoto;
@@ -33,6 +34,7 @@ function UsersTable() {
         </div>
         <Photo src={userPhoto} />
         <h2> {firstName}</h2>
+        <NotificationIcon />
         <EditProfileButton />
         <LogoutButton />
       </header>

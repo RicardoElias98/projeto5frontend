@@ -15,6 +15,7 @@ export const userStore = create(
       updateCounter: (counter) => set({ counter }),
       updateFirstName: (firstName) => set({ firstName }),
       updateProfileInfo: (profileInfo) => set({ profileInfo }),
+      updateNotification: (notification) => set({ notification }),
     }),
     {
       name: "mystorage",

@@ -7,6 +7,7 @@ import MainSB from "./MainSB";
 import Photo from "./Photo";
 import { userStore } from "../stores/UserStore";
 import EditProfileButton from "./EditProfileButton";
+import NotificationIcon from "./NotificationIcon";
 
 function HtmlDefault() {
   const userPhoto = userStore.getState().userPhoto;
@@ -36,6 +37,7 @@ function HtmlDefault() {
         </div>
         <Photo src={userPhoto} />
         <h2> {firstName} </h2>
+        <NotificationIcon />
         <EditProfileButton />
         <LogoutButton />
       </header>

@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import Message from "../Components/Message";
 import WebSocketChat from "../Components/WebSocketChat";
 import { useRef } from "react";
+import NotificationIcon from "../Components/NotificationIcon";
 
 function UserProfile() {
   const { username } = useParams();
@@ -178,6 +179,7 @@ function UserProfile() {
         </div>
         <Photo src={userPhoto} />
         <h2> {firstName} </h2>
+        <NotificationIcon />
         <EditProfileButton />
         <LogoutButton />
       </header>

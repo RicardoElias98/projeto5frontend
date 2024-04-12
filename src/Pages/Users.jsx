@@ -7,6 +7,7 @@ import { userStore } from "../stores/UserStore";
 import MainUsers from "../Components/MainUsers";
 import AsideAddUser from "../Components/AsideAddUser";
 import EditProfileButton from "../Components/EditProfileButton";
+import NotificationIcon from "../Components/NotificationIcon";
 
 function Users() {
   const userPhoto = userStore.getState().userPhoto;
@@ -26,6 +27,7 @@ function Users() {
         </div>
         <Photo src={userPhoto} />
         <h2> {firstName} </h2>
+        <NotificationIcon />
         <EditProfileButton />
         <LogoutButton />
       </header>
