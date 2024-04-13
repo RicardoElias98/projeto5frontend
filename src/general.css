@@ -89,7 +89,7 @@
 .message-input {
   width: 100%;
   height: 100px;
-  resize: both; 
+  resize: both;
   margin-bottom: 10px;
 }
 
@@ -434,36 +434,34 @@ input {
 .message-container-right {
   display: flex;
   justify-content: flex-end; /* Alinha a mensagem à direita */
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 
 .message.container-left {
   display: flex;
   justify-content: flex-start; /* Alinha a mensagem à esquerda */
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 
 .message-bubble {
-  background-color: #f0f0f0; 
-  padding: 10px; 
-  border-radius: 10px; 
-  max-width: 70%; 
-  word-wrap: break-word; 
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  word-wrap: break-word;
 }
-
 
 .message-checked {
-  background-color: #c1ffc1; 
+  background-color: #c1ffc1;
 }
-
 
 .message-unchecked {
-  background-color: #ffcccc; 
+  background-color: #ffcccc;
 }
 
-.message-container-withscroll{
-  max-height: 300px; 
-  overflow-y: auto; 
+.message-container-withscroll {
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .notification-count {
@@ -479,4 +477,29 @@ input {
   align-items: center;
   color: white;
   font-size: 12px;
+}
+
+.notification-window {
+  position: relative;
+  top: 40px;
+  right: 0;
+  width: 200px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.notification-window p {
+  padding: 10px;
+  margin: 0;
+}
+
+.notification-window p:first-child {
+  border-bottom: 1px solid #ccc;
+}
+
+.notification-window p:last-child {
+  border-bottom: none;
 }
