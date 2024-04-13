@@ -12,6 +12,7 @@ function LoginPage() {
   const updateFirstName = userStore((state) => state.updateFirstName);
   const loginUser = userStore((state) => state.loginUser);
   const updateNotification = userStore((state) => state.updateNotification);
+  const updateNotificationNumber = userStore((state) => state.updateNotificationNumber);
 
   //Dados do formulário
   const [formData, setFormData] = useState({
@@ -108,7 +109,7 @@ function LoginPage() {
                     alert("User with this token is not found");
                   } else if (response.status === 200) {
                     const notifications = await response.json();
-                    updateNotification(notifications.length);
+                    updateNotification(notifications);
                     loginSucess();
                   }
                 })

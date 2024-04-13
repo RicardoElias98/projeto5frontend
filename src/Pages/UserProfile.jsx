@@ -180,7 +180,7 @@ function UserProfile() {
         </div>
         <Photo src={userPhoto} />
         <h2> {firstName} </h2>
-        <NotificationIcon count={notifications}/>
+        <NotificationIcon count={notifications.length}/>
         <EditProfileButton />
         <LogoutButton />
       </header>
