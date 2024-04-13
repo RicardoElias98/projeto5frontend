@@ -467,7 +467,7 @@ input {
 }
 
 .notification-count {
-  position: absolute;
+  position: static;
   top: -5px;
   right: -5px;
   background: red;

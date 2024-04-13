@@ -34,7 +34,7 @@ function UsersTable() {
         </div>
         <Photo src={userPhoto} />
         <h2> {firstName}</h2>
-        <NotificationIcon />
+        <NotificationIcon /*count={10}*//>
         <EditProfileButton />
         <LogoutButton />
       </header>
