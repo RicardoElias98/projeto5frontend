@@ -48,7 +48,7 @@ function LoginPage() {
           const user = await response.json();
           updateLoginUser(user);
           console.log("user", user);
-          console.log("loginUser", loginUser)
+          console.log("loginUser", loginUser);
           updateFirstName(user.name.split(" ")[0]);
         }
       })
@@ -92,27 +92,29 @@ function LoginPage() {
               const userPhoto = await response.text();
               updateUserPhoto(userPhoto);
               console.log("loginUser", loginUser);
-              fetch("http://localhost:8080/projecto5backend/rest/user/notifications", {
-                method: "GET",
-                headers: {
-                  Accept: "*/*",
-                  "Content-Type": "application/json",
-                  token: token,
-                },
-              })
+              fetch(
+                "http://localhost:8080/projecto5backend/rest/user/notifications",
+                {
+                  method: "GET",
+                  headers: {
+                    Accept: "*/*",
+                    "Content-Type": "application/json",
+                    token: token,
+                  },
+                }
+              )
                 .then(async function (response) {
                   if (response.status === 403) {
                     alert("User with this token is not found");
                   } else if (response.status === 200) {
                     const notifications = await response.json();
-                    updateNotification(notifications);
+                    updateNotification(notifications.length);
                     loginSucess();
                   }
                 })
                 .catch((error) => {
                   console.error("Error fetching user notifications:", error);
                 });
-              
             }
           })
           .catch((error) => {

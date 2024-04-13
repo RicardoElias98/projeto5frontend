@@ -14,6 +14,7 @@ function UsersTable() {
   const userPhoto = userStore.getState().userPhoto;
   const firstName = userStore.getState().loginUser.name.split(" ")[0];
   const role = userStore.getState().loginUser.role;
+  const notifications = userStore((state) => state.notification);
 
   return (
     <div className="App" id="outer-container">
@@ -34,7 +35,7 @@ function UsersTable() {
         </div>
         <Photo src={userPhoto} />
         <h2> {firstName}</h2>
-        <NotificationIcon /*count={10}*//>
+        <NotificationIcon count={notifications}/>
         <EditProfileButton />
         <LogoutButton />
       </header>

@@ -14,6 +14,7 @@ function HtmlDefault() {
   const loginUser = userStore.getState().loginUser;
   const firstName = userStore((state) => state.firstName);
   const role = userStore.getState().loginUser.role;
+  const notifications = userStore((state) => state.notification);
 
   return (
     <div className="App" id="outer-container">
@@ -37,7 +38,7 @@ function HtmlDefault() {
         </div>
         <Photo src={userPhoto} />
         <h2> {firstName} </h2>
-        <NotificationIcon />
+        <NotificationIcon count={notifications}/>
         <EditProfileButton />
         <LogoutButton />
       </header>

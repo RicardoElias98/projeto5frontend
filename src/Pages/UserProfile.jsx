@@ -22,6 +22,7 @@ function UserProfile() {
   const sender = userStore((state) => state.loginUser.username);
   const [messagesTotal, setMessagesTotal] = useState([]);
   const messageContainerRef = useRef(null);
+  const notifications = userStore((state) => state.notification);
 
   const [receivedMessage, setReceivedMessage] = useState("");
 
@@ -179,7 +180,7 @@ function UserProfile() {
         </div>
         <Photo src={userPhoto} />
         <h2> {firstName} </h2>
-        <NotificationIcon />
+        <NotificationIcon count={notifications}/>
         <EditProfileButton />
         <LogoutButton />
       </header>
