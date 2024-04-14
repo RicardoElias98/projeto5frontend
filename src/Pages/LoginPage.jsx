@@ -94,13 +94,14 @@ function LoginPage() {
               updateUserPhoto(userPhoto);
               console.log("loginUser", loginUser);
               fetch(
-                "http://localhost:8080/projecto5backend/rest/user/notifications",
+                "http://localhost:8080/projecto5backend/rest/notif/notifications",
                 {
                   method: "GET",
                   headers: {
                     Accept: "*/*",
                     "Content-Type": "application/json",
                     token: token,
+                    username: formData.username,
                   },
                 }
               )

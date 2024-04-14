@@ -10,7 +10,7 @@ const NotificationIcon = ({ count }) => {
 
   const toggleNotificationWindow = () => {
     setIsOpen(true);
-    fetch("http://localhost:8080/projecto5backend/rest/user/checkNotification", {
+    fetch("http://localhost:8080/projecto5backend/rest/notif/checkNotification", {
       method: "PUT",
       headers: {
         Accept: "*/*",
