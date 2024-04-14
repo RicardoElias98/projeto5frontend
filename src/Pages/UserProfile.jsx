@@ -23,6 +23,7 @@ function UserProfile() {
   const [messagesTotal, setMessagesTotal] = useState([]);
   const messageContainerRef = useRef(null);
   const notifications = userStore((state) => state.notification);
+  const notCheckedNotification = userStore((state) => state.notCheckedNotification);
 
   const [receivedMessage, setReceivedMessage] = useState("");
 
@@ -180,7 +181,7 @@ function UserProfile() {
         </div>
         <Photo src={userPhoto} />
         <h2> {firstName} </h2>
-        <NotificationIcon count={notifications.length}/>
+        <NotificationIcon count={notCheckedNotification.length}/>
         <EditProfileButton />
         <LogoutButton />
       </header>

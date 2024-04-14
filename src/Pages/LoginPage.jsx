@@ -12,7 +12,10 @@ function LoginPage() {
   const updateFirstName = userStore((state) => state.updateFirstName);
   const loginUser = userStore((state) => state.loginUser);
   const updateNotification = userStore((state) => state.updateNotification);
-  const updateNotificationNumber = userStore((state) => state.updateNotificationNumber);
+
+  const updateNotCheckedNotification = userStore(
+    (state) => state.updateNotCheckedNotification
+  );
 
   //Dados do formulário
   const [formData, setFormData] = useState({
@@ -111,7 +114,32 @@ function LoginPage() {
                   } else if (response.status === 200) {
                     const notifications = await response.json();
                     updateNotification(notifications);
-                    loginSucess();
+                    fetch(
+                      "http://localhost:8080/projecto5backend/rest/notif/notificationsNotChecked",
+                      {
+                        method: "GET",
+                        headers: {
+                          Accept: "*/*",
+                          "Content-Type": "application/json",
+                          token: token,
+                        },
+                      }
+                    )
+                      .then(async function (response) {
+                        if (response.status === 403) {
+                          alert("User with this token is not found");
+                        } else if (response.status === 200) {
+                          const notCheckedNotifications = await response.json();
+                          updateNotCheckedNotification(notCheckedNotifications);
+                          loginSucess();
+                        }
+                      })
+                      .catch((error) => {
+                        console.error(
+                          "Error fetching user not checked notifications:",
+                          error
+                        );
+                      });
                   }
                 })
                 .catch((error) => {

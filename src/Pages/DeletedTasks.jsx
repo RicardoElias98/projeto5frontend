@@ -14,6 +14,7 @@ function DeletedTasks() {
   const userPhoto = userStore.getState().userPhoto;
   const firstName = userStore.getState().loginUser.name.split(" ")[0];
   const notifications = userStore((state) => state.notification);
+  const notCheckedNotification = userStore((state) => state.notCheckedNotification);
   return (
     <div className="App" id="outer-container">
       <header className="header" id="header-app">
@@ -31,7 +32,7 @@ function DeletedTasks() {
         </div>
         <Photo src={userPhoto} />
         <h2> {firstName} </h2>
-        <NotificationIcon count={notifications.length} />
+        <NotificationIcon count={notCheckedNotification.length} />
         <EditProfileButton />
         <LogoutButton />
       </header>

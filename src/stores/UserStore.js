@@ -16,6 +16,7 @@ export const userStore = create(
       updateFirstName: (firstName) => set({ firstName }),
       updateProfileInfo: (profileInfo) => set({ profileInfo }),
       updateNotification: (notification) => set({ notification }),
+      updateNotCheckedNotification: (notCheckedNotification) => set({ notCheckedNotification }),
     }),
     {
       name: "mystorage",
