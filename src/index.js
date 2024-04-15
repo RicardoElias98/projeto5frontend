@@ -13,6 +13,7 @@ import Users from "./Pages/Users";
 import DeletedTasks from "./Pages/DeletedTasks";
 import UsersTable from "./Pages/UsersTable";
 import UserProfile from "./Pages/UserProfile";
+import ConfirmationToken from "./Pages/ConfirmationToken";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -29,6 +30,7 @@ root.render(
         <Route path="/deletedTasks" element={<DeletedTasks />} />
         <Route path="/usersTable" element={<UsersTable />} />
         <Route path="/userProfile/:username" element={<UserProfile />} />
+        <Route path="/confirmationToken" element={<ConfirmationToken />} />
       </Routes>
     </Router>
   </React.StrictMode>
