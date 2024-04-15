@@ -30,7 +30,7 @@ root.render(
         <Route path="/deletedTasks" element={<DeletedTasks />} />
         <Route path="/usersTable" element={<UsersTable />} />
         <Route path="/userProfile/:username" element={<UserProfile />} />
-        <Route path="/confirmationToken" element={<ConfirmationToken />} />
+        <Route path="/confirmationToken/:token" element={<ConfirmationToken />} />
       </Routes>
     </Router>
   </React.StrictMode>

@@ -1,6 +1,21 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 function ConfirmationToken() {
+    const { token } = useParams();
+    console.log(token);
+
+    const [formData, setFormData] = useState({
+        password: "",
+        passwordConfirmation: "",
+      });
+    
+      const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevData) => ({ ...prevData, [name]: value }));
+      };
+
   return (
     <div>
       <div className="overlay"></div>
@@ -13,7 +28,7 @@ function ConfirmationToken() {
                 type="password"
                 name="password"
                 defaultValue=""
-                /*onChange={handleChange}*/
+                onChange={handleChange}
                 placeholder="New Password"
               />
 
@@ -24,9 +39,9 @@ function ConfirmationToken() {
                 </label>
                 <input
                   type="password"
-                  name="password"
+                  name="passwordConfirmation"
                   defaultValue=""
-                  /*onChange={handleChange}*/
+                  onChange={handleChange}
                   placeholder="Repeat your password"
                 />
               </label>
