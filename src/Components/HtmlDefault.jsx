@@ -10,6 +10,7 @@ import EditProfileButton from "./EditProfileButton";
 import NotificationIcon from "./NotificationIcon";
 import { useState } from "react";
 import WebSocketNotification from "./WebSocketNotification";
+import WebSocketTasks from "./WebSocketTasks";
 
 function HtmlDefault() {
   const userPhoto = userStore.getState().userPhoto;
@@ -44,7 +45,14 @@ function HtmlDefault() {
     updateNotCheckedNotification(notCheckedMessages);
   };
 
+  const onTasksReceived = (task) => {
+    console.log("receive", task);
+  };
+
+
+
   WebSocketNotification(token, onNotificationReceived);
+  WebSocketTasks(token, onTasksReceived);
 
   return (
     <div className="App" id="outer-container">
