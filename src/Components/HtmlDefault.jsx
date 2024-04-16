@@ -68,7 +68,6 @@ function HtmlDefault() {
         </div>
         <Photo src={userPhoto} />
         <h2> {firstName} </h2>
-        {console.log("notCheckedNotification", notCheckedNotification)}
         <NotificationIcon count={notCheckedNotification.length} />
         <EditProfileButton />
         <LogoutButton />
