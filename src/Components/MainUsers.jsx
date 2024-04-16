@@ -29,7 +29,6 @@ function MainUsers() {
           alert("User with this token is not found");
         } else if (response.status === 200) {
           const usersData = await response.json();
-          console.log(usersData);
           setAllUsers(usersData);
           updateAllUsers(usersData);
         }
