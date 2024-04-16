@@ -74,7 +74,7 @@ function LoginPage() {
       },
     }).then(async function (response) {
       if (response.status === 403) {
-        alert("User is not active");
+        alert("User is not active or not confirmed");
       } else if (response.status === 404) {
         alert("Username or password are incorrect");
       } else if (response.status === 200) {
