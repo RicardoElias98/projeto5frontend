@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 function WebSocketTasks(token, onTaskReceived) {
-    const WS_URL = "ws://localhost:8080/projecto5backend/notification/";
+    const WS_URL = "ws://localhost:8080/projecto5backend/tasks/";
     const websocket = new WebSocket(WS_URL + token);
     useEffect(() => {
       
