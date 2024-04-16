@@ -23,13 +23,16 @@ function UserProfile() {
   const [messagesTotal, setMessagesTotal] = useState([]);
   const messageContainerRef = useRef(null);
   const notifications = userStore((state) => state.notification);
-  const notCheckedNotification = userStore((state) => state.notCheckedNotification);
+  const notCheckedNotification = userStore(
+    (state) => state.notCheckedNotification
+  );
 
   const [receivedMessage, setReceivedMessage] = useState("");
 
   useEffect(() => {
     if (messageContainerRef.current) {
-      messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
+      messageContainerRef.current.scrollTop =
+        messageContainerRef.current.scrollHeight;
     }
   }, [messagesTotal]);
 
@@ -181,7 +184,7 @@ function UserProfile() {
         </div>
         <Photo src={userPhoto} />
         <h2> {firstName} </h2>
-        <NotificationIcon count={notCheckedNotification.length}/>
+        <NotificationIcon count={notCheckedNotification.length} />
         <EditProfileButton />
         <LogoutButton />
       </header>
@@ -217,7 +220,10 @@ function UserProfile() {
               <h3> Tasks To-do: {data.tasksTODO.length} </h3>
               <h3> Tasks Doing: {data.tasksDOING.length} </h3>
               <h3> Tasks Done: {data.tasksDONE.length} </h3>
-              <div className="message-container-withscroll" ref={messageContainerRef}>
+              <div
+                className="message-container-withscroll"
+                ref={messageContainerRef}
+              >
                 {messagesTotal.map((message) => (
                   <Message
                     key={message.id}

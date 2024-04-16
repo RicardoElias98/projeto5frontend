@@ -8,6 +8,8 @@ import Photo from "./Photo";
 import { userStore } from "../stores/UserStore";
 import EditProfileButton from "./EditProfileButton";
 import NotificationIcon from "./NotificationIcon";
+import { useState } from "react";
+import WebSocketNotification from "./WebSocketNotification";
 
 function HtmlDefault() {
   const userPhoto = userStore.getState().userPhoto;
@@ -15,7 +17,34 @@ function HtmlDefault() {
   const firstName = userStore((state) => state.firstName);
   const role = userStore.getState().loginUser.role;
   const notifications = userStore((state) => state.notification);
-  const notCheckedNotification = userStore((state) => state.notCheckedNotification);
+  const notCheckedNotification = userStore(
+    (state) => state.notCheckedNotification
+  );
+  const token = userStore((state) => state.token);
+
+  const updateNotCheckedNotification = userStore(
+    (state) => state.updateNotCheckedNotification
+  );
+
+  const [notCheckedMessages, setNotCheckedMessages] =
+    useState(notCheckedNotification);
+
+  const onNotificationReceived = (notification) => {
+    console.log("receive", notification);
+    setNotCheckedMessages((prevNotifications) => [
+      ...prevNotifications,
+      {
+        text: notification.text,
+        user: notification.user,
+        notificationDateTime: notification.notificationDateTime,
+        checked: notification.checked,
+        id: notification.id,
+      },
+    ]);
+    updateNotCheckedNotification(notCheckedMessages);
+  };
+
+  WebSocketNotification(token, onNotificationReceived);
 
   return (
     <div className="App" id="outer-container">
@@ -28,7 +57,7 @@ function HtmlDefault() {
             )}
           </h2>
           <h2 className="usersTable-link">
-              <Link to="/usersTable">Users Table</Link>
+            <Link to="/usersTable">Users Table</Link>
           </h2>
 
           <h2 className="Deleted-tasks-link">
@@ -39,7 +68,8 @@ function HtmlDefault() {
         </div>
         <Photo src={userPhoto} />
         <h2> {firstName} </h2>
-        <NotificationIcon count={notCheckedNotification.length}/>
+        {console.log("notCheckedNotification", notCheckedNotification)}
+        <NotificationIcon count={notCheckedNotification.length} />
         <EditProfileButton />
         <LogoutButton />
       </header>

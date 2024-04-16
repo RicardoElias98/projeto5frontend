@@ -7,6 +7,7 @@ export const userStore = create(
       token: "",
       userPhoto:
         "https://static.vecteezy.com/system/resources/previews/024/983/914/non_2x/simple-user-default-icon-free-png.png",
+        notCheckedNotification: [],
       updateToken: (token) => set({ token }),
       updateUserPhoto: (userPhoto) => set({ userPhoto }),
       updateAllUsers: (allUsers) => set({ allUsers }),
