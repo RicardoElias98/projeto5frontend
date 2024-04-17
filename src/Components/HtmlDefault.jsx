@@ -11,6 +11,7 @@ import NotificationIcon from "./NotificationIcon";
 import { useState } from "react";
 import WebSocketNotification from "./WebSocketNotification";
 import WebSocketTasks from "./WebSocketTasks";
+import {tasksStore} from "../stores/TasksStore";
 
 function HtmlDefault() {
   const userPhoto = userStore.getState().userPhoto;
@@ -22,10 +23,17 @@ function HtmlDefault() {
     (state) => state.notCheckedNotification
   );
   const token = userStore((state) => state.token);
-
+  const tasks = tasksStore((state) => state.tasks);
+  const updateTasks = tasksStore((state) => state.updateTasks);
+  const tasks2 = tasksStore((state) => JSON.stringify(state.tasks));
+  const counter = userStore((state) => state.counter);
+  const updateCounter = userStore((state) => state.updateCounter);
+  
   const updateNotCheckedNotification = userStore(
     (state) => state.updateNotCheckedNotification
   );
+
+  const [totalTasks, setTotalTasks] = useState(tasks);
 
   const [notCheckedMessages, setNotCheckedMessages] =
     useState(notCheckedNotification);
@@ -47,7 +55,14 @@ function HtmlDefault() {
 
   const onTasksReceived = (task) => {
     console.log("receive", task);
-  };
+    const idTask = task.id;
+    const updatedTasks = tasks.map((t) =>
+      t.id === idTask ? { ...t, status: task.status } : t
+    );
+    updateTasks(updatedTasks);
+    updateCounter(counter +1);
+  }
+
 
 
 
