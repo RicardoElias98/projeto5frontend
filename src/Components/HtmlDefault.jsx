@@ -60,7 +60,7 @@ function HtmlDefault() {
       t.id === idTask ? { ...t, status: task.status } : t
     );
     updateTasks(updatedTasks);
-    updateCounter(counter +1);
+    updateCounter(counter + 1);
   }
 
 

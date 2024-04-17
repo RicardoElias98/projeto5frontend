@@ -4,8 +4,8 @@ import { persist, createJSONStorage } from "zustand/middleware";
 export const tasksStore = create(
   persist(
     (set) => ({
-      tasks: "",
-      updateTasks: (tasks) => set({ tasks }),
+      tasks: [],
+      updateTasks: (updatedTasks) => set({ tasks: [...updatedTasks]  }),
     }),
     {
       name: "mystorageTasks",
