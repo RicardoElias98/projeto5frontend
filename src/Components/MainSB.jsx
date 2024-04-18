@@ -18,18 +18,15 @@ function MainSB() {
   const [filteredTasksCategoryUser, setFilteredTasksCategoryUser] = useState(
     []
   );
-  const tasks = tasksStore.getState().tasks;
   const updateTask = tasksStore((state) => state.updateTask);
-  const tasks2 = tasksStore((state) => JSON.stringify(state.tasks));
   const counter = userStore((state) => state.counter);
+  const tasks = tasksStore((state) => state.tasks);
 
   const updateCounter = userStore((state) => state.updateCounter);
 
-  
-  
   useEffect(() => {
     console.log("Updating from filters");
-   console.log(counter);
+    console.log(counter);
     if (!selectedCategory && !selectedUser) {
       displayTasksByStatus(10, setTodoTasks);
       displayTasksByStatus(20, setDoingTasks);
@@ -101,7 +98,6 @@ function MainSB() {
         } else if (response.status === 200) {
           const tasksData = await response.json();
           setTasks(tasksData);
-         
         }
       })
       .catch((error) => {
@@ -119,8 +115,6 @@ function MainSB() {
     updateStatus(status, taskId);
     updateCounter(counter + 1);
     console.log(counter);
-    
-    
   };
 
   const displayFilterCategoryUser = (category, username) => {
@@ -219,8 +213,6 @@ function MainSB() {
         console.error("Error updating task status:", error);
       });
   };
-
-  
 
   return (
     <div className="board">
