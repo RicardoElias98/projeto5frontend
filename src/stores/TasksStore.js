@@ -5,7 +5,9 @@ export const tasksStore = create(
   persist(
     (set) => ({
       tasks: [],
-      updateTasks: (updatedTasks) => set({ tasks: [...updatedTasks]  }),
+      addTask: (newTask) => set ((state) => ({tasks: [...state.tasks, newTask]})),
+      removeTask: (taskId) => set((state) => ({tasks: state.tasks.filter((task) => task.id !== taskId)})),
+      updateTask: (tasks) => set ({tasks}),
     }),
     {
       name: "mystorageTasks",

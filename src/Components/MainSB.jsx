@@ -19,11 +19,13 @@ function MainSB() {
     []
   );
   const tasks = tasksStore.getState().tasks;
-  const updateTask = tasksStore((state) => state.updateTasks);
+  const updateTask = tasksStore((state) => state.updateTask);
   const tasks2 = tasksStore((state) => JSON.stringify(state.tasks));
   const counter = userStore((state) => state.counter);
 
   const updateCounter = userStore((state) => state.updateCounter);
+
+  
   
   useEffect(() => {
     console.log("Updating from filters");

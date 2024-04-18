@@ -11,7 +11,7 @@ import NotificationIcon from "./NotificationIcon";
 import { useState } from "react";
 import WebSocketNotification from "./WebSocketNotification";
 import WebSocketTasks from "./WebSocketTasks";
-import {tasksStore} from "../stores/TasksStore";
+import { tasksStore } from "../stores/TasksStore";
 
 function HtmlDefault() {
   const userPhoto = userStore.getState().userPhoto;
@@ -24,19 +24,22 @@ function HtmlDefault() {
   );
   const token = userStore((state) => state.token);
   const tasks = tasksStore((state) => state.tasks);
-  const updateTasks = tasksStore((state) => state.updateTasks);
+
   const tasks2 = tasksStore((state) => JSON.stringify(state.tasks));
   const counter = userStore((state) => state.counter);
   const updateCounter = userStore((state) => state.updateCounter);
-  
+  const addTask = tasksStore((state) => state.addTask);
+  const removeTask = tasksStore((state) => state.removeTask);
+
   const updateNotCheckedNotification = userStore(
     (state) => state.updateNotCheckedNotification
   );
 
   const [totalTasks, setTotalTasks] = useState(tasks);
 
-  const [notCheckedMessages, setNotCheckedMessages] =
-    useState(notCheckedNotification);
+  const [notCheckedMessages, setNotCheckedMessages] = useState(
+    notCheckedNotification
+  );
 
   const onNotificationReceived = (notification) => {
     console.log("receive", notification);
@@ -54,17 +57,17 @@ function HtmlDefault() {
   };
 
   const onTasksReceived = (task) => {
+    console.log("tasks", tasks);
     console.log("receive", task);
     const idTask = task.id;
-    const updatedTasks = tasks.map((t) =>
-      t.id === idTask ? { ...t, status: task.status } : t
-    );
-    updateTasks(updatedTasks);
+
+    removeTask(idTask);
+    console.log("tasks romove", tasks);
+
+    addTask(task);
+    console.log("tasks add", tasks);
     updateCounter(counter + 1);
-  }
-
-
-
+  };
 
   WebSocketNotification(token, onNotificationReceived);
   WebSocketTasks(token, onTasksReceived);
