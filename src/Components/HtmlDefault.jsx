@@ -25,7 +25,6 @@ function HtmlDefault() {
   const token = userStore((state) => state.token);
   const tasks = tasksStore((state) => state.tasks);
 
-  const tasks2 = tasksStore((state) => JSON.stringify(state.tasks));
   const counter = userStore((state) => state.counter);
   const updateCounter = userStore((state) => state.updateCounter);
   const addTask = tasksStore((state) => state.addTask);
@@ -35,7 +34,7 @@ function HtmlDefault() {
     (state) => state.updateNotCheckedNotification
   );
 
-  const [totalTasks, setTotalTasks] = useState(tasks);
+  
 
   const [notCheckedMessages, setNotCheckedMessages] = useState(
     notCheckedNotification
