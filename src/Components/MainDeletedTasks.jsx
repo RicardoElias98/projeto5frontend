@@ -8,7 +8,7 @@ function MainDeletedTasks() {
   const token = userStore.getState().token;
   //const tasks = tasksStore.getState().tasks;
   const tasks = tasksStore((state) => state.tasks);
-  const updateTasks = tasksStore((state) => state.updateTasks);
+  const updateTasks = tasksStore((state) => state.updateTask);
   const tasks2 = tasksStore((state) => JSON.stringify(state.tasks));
   //const tasks2 = tasksStore((state) => JSON.stringify(state.tasks));
   const deletedTasks = tasks.filter((task) => task.active === false);
