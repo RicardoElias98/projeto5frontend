@@ -6,6 +6,7 @@ import Photo from "../Components/Photo";
 import { userStore } from "../stores/UserStore";
 import EditProfileButton from "../Components/EditProfileButton";
 import NotificationIcon from "../Components/NotificationIcon";
+import MainDashBoard from "../Components/MainDashBoard";
 
 function Dashboard() {
     const userPhoto = userStore.getState().userPhoto;
@@ -39,7 +40,7 @@ function Dashboard() {
         </header>
         <div className="container">
           <main className="main" id="main-app">
-            
+            <MainDashBoard/>
           </main>
         </div>
         <footer className="footer" id="footer-app">
