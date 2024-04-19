@@ -15,6 +15,7 @@ function DeletedTasks() {
   const firstName = userStore.getState().loginUser.name.split(" ")[0];
   const notifications = userStore((state) => state.notification);
   const notCheckedNotification = userStore((state) => state.notCheckedNotification);
+  const role = userStore.getState().loginUser.role;
   return (
     <div className="App" id="outer-container">
       <header className="header" id="header-app">
@@ -28,6 +29,11 @@ function DeletedTasks() {
           </h2>
           <h2 className="tasks-link">
             <Link to="/htmlDefault "> Tasks </Link>
+          </h2>
+          <h2 className="dashboard-link">
+            {(role === "Owner") && (
+              <Link to="/dashboard">Board</Link>
+            )}
           </h2>
         </div>
         <Photo src={userPhoto} />

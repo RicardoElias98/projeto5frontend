@@ -181,6 +181,11 @@ function UserProfile() {
           <h2 className="users-link">
             <Link to="/users">Users</Link>
           </h2>
+          <h2 className="dashboard-link">
+            {(role === "Owner") && (
+              <Link to="/dashboard">Board</Link>
+            )}
+          </h2>
         </div>
         <Photo src={userPhoto} />
         <h2> {firstName} </h2>

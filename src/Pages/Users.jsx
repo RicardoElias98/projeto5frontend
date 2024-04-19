@@ -26,6 +26,11 @@ function Users() {
           <h2 className="usersTable-link">
               <Link to="/usersTable">Users Table</Link>
           </h2>
+          <h2 className="dashboard-link">
+            {(role === "Owner") && (
+              <Link to="/dashboard">Board</Link>
+            )}
+          </h2>
         </div>
         <Photo src={userPhoto} />
         <h2> {firstName} </h2>

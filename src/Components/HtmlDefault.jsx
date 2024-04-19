@@ -13,6 +13,7 @@ import WebSocketNotification from "./WebSocketNotification";
 import WebSocketTasks from "./WebSocketTasks";
 import { tasksStore } from "../stores/TasksStore";
 
+
 function HtmlDefault() {
   const userPhoto = userStore.getState().userPhoto;
   const loginUser = userStore.getState().loginUser;
@@ -88,6 +89,11 @@ function HtmlDefault() {
           <h2 className="Deleted-tasks-link">
             {(role === "Owner" || role === "user") && (
               <Link to="/deletedTasks"> Deleted Tasks</Link>
+            )}
+          </h2>
+          <h2 className="dashboard-link">
+            {(role === "Owner") && (
+              <Link to="/dashboard">Board</Link>
             )}
           </h2>
         </div>
