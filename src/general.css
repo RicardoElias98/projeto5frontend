@@ -522,7 +522,7 @@ input {
   background-color: #ffcccc;
 }
 
-#users-column h2 {
+#users-column h2, #tasks-column h2 {
   color: black;
   font-size: 20px;
 }

@@ -9,35 +9,64 @@ function MainDashBoard() {
   const token = userStore((state) => state.token);
   const dbinfoMedia = userStore((state) => state.dbinfoMedia);
   const updateDBinfoMedia = userStore((state) => state.updateDBinfoMedia);
+  const categoryDescList = userStore((state) => state.categoryDescList);
+  const updateCategoryDescList = userStore(
+    (state) => state.updateCategoryDescList
+  );
 
   useEffect(() => {
     getTasksUsersInfo();
     getTasksUsersInfoDoubleValues();
+    getCategoryDescList();
   }, []);
 
+  const getCategoryDescList = () => {
+    fetch("http://localhost:8080/projecto5backend/rest/task/listDesCcategory", {
+      method: "GET",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/json",
+        token: token,
+      },
+    })
+      .then(async function (response) {
+        if (response.status === 403) {
+          alert("User with this token is not found");
+        } else if (response.status === 200) {
+          const categoryDescList = await response.json();
+          updateCategoryDescList(categoryDescList);
+          console.log(categoryDescList);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching tasks:", error);
+      });
+  };
+
   const getTasksUsersInfoDoubleValues = () => {
-    fetch("http://localhost:8080/projecto5backend/rest/user/dashBoardInfoMediaTasksByUser", {
+    fetch(
+      "http://localhost:8080/projecto5backend/rest/user/dashBoardInfoMediaTasksByUser",
+      {
         method: "GET",
         headers: {
-            Accept: "*/*",
-            "Content-Type": "application/json",
-            token: token,
+          Accept: "*/*",
+          "Content-Type": "application/json",
+          token: token,
         },
-    })
-        .then(async function (response) {
-            if (response.status === 403) {
-                alert("User with this token is not found");
-            } else if (response.status === 200) {
-                const infoMedia = await response.json();
-                updateDBinfoMedia(infoMedia);
-            }
-        })
-        .catch((error) => {
-            console.error("Error fetching tasks:", error);
+      }
+    )
+      .then(async function (response) {
+        if (response.status === 403) {
+          alert("User with this token is not found");
+        } else if (response.status === 200) {
+          const infoMedia = await response.json();
+          updateDBinfoMedia(infoMedia);
         }
-        );
-    }
-
+      })
+      .catch((error) => {
+        console.error("Error fetching tasks:", error);
+      });
+  };
 
   const getTasksUsersInfo = () => {
     fetch("http://localhost:8080/projecto5backend/rest/user/dashBoardInfo", {
@@ -66,7 +95,7 @@ function MainDashBoard() {
     <div className="board">
       <div className="total-column">
         <div className="column-header" id="users-header">
-          <h2>Users Info</h2>
+          <h2>Users/Tasks Info</h2>
         </div>
         <div className="board-container" id="users-container">
           <section className="board-column" id="users-column">
@@ -82,10 +111,16 @@ function MainDashBoard() {
       </div>
       <div className="total-column">
         <div className="column-header" id="tasks-header">
-          <h2>Tasks Info</h2>
+          <h2>Category Info</h2>
         </div>
         <div className="board-container" id="tasks-container">
-          <section className="board-column" id="tasks-column"></section>
+          <section className="board-column" id="tasks-column">
+            <section className="board-column" id="tasks-column">
+              {categoryDescList.map((item, index) => (
+                <h2 key={index}>{item[0].name} : {item[1]}</h2>
+              ))}
+            </section>
+          </section>
         </div>
       </div>
       <div className="total-column">
@@ -99,6 +134,5 @@ function MainDashBoard() {
     </div>
   );
 }
-
 
 export default MainDashBoard;
