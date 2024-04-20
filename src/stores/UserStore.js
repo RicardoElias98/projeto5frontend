@@ -19,7 +19,9 @@ export const userStore = create(
       updateNotification: (notification) => set({ notification }),
       updateNotCheckedNotification: (newList) =>
         set({ notCheckedNotification: newList }),
+        updateDBinfo: (dbinfo) => set({ dbinfo }),
     }),
+    
     {
       name: "mystorage",
       storage: createJSONStorage(() => sessionStorage),
