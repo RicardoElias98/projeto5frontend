@@ -7,10 +7,37 @@ function MainDashBoard() {
   const dbinfo = userStore((state) => state.dbinfo);
   const updateDBinfo = userStore((state) => state.updateDBinfo);
   const token = userStore((state) => state.token);
+  const dbinfoMedia = userStore((state) => state.dbinfoMedia);
+  const updateDBinfoMedia = userStore((state) => state.updateDBinfoMedia);
 
   useEffect(() => {
     getTasksUsersInfo();
+    getTasksUsersInfoDoubleValues();
   }, []);
+
+  const getTasksUsersInfoDoubleValues = () => {
+    fetch("http://localhost:8080/projecto5backend/rest/user/dashBoardInfoMediaTasksByUser", {
+        method: "GET",
+        headers: {
+            Accept: "*/*",
+            "Content-Type": "application/json",
+            token: token,
+        },
+    })
+        .then(async function (response) {
+            if (response.status === 403) {
+                alert("User with this token is not found");
+            } else if (response.status === 200) {
+                const infoMedia = await response.json();
+                updateDBinfoMedia(infoMedia);
+            }
+        })
+        .catch((error) => {
+            console.error("Error fetching tasks:", error);
+        }
+        );
+    }
+
 
   const getTasksUsersInfo = () => {
     fetch("http://localhost:8080/projecto5backend/rest/user/dashBoardInfo", {
@@ -22,7 +49,7 @@ function MainDashBoard() {
       },
     })
       .then(async function (response) {
-        if (response.status === 400) {
+        if (response.status === 403) {
           alert("User with this token is not found");
         } else if (response.status === 200) {
           const info = await response.json();
@@ -46,6 +73,7 @@ function MainDashBoard() {
             <h2> Total users: {allUsers.length} </h2>
             <h2> Confirmed Users: {dbinfo[0]}</h2>
             <h2> Unconfirmed Users: {dbinfo[1]}</h2>
+            <h2> Average number of tasks per user: {dbinfoMedia}</h2>
             <h2> To-do Tasks: {dbinfo[2]} </h2>
             <h2> Doing Tasks: {dbinfo[3]}</h2>
             <h2> Done Tasks: {dbinfo[4]}</h2>
@@ -71,5 +99,6 @@ function MainDashBoard() {
     </div>
   );
 }
+
 
 export default MainDashBoard;

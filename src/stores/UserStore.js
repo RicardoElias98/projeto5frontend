@@ -20,7 +20,9 @@ export const userStore = create(
       updateNotCheckedNotification: (newList) =>
         set({ notCheckedNotification: newList }),
         updateDBinfo: (dbinfo) => set({ dbinfo }),
+        updateDBinfoMedia: (dbinfoMedia) => set({ dbinfoMedia }),
     }),
+  
     
     {
       name: "mystorage",
