@@ -8,6 +8,9 @@ export const userStore = create(
       userPhoto:
         "https://static.vecteezy.com/system/resources/previews/024/983/914/non_2x/simple-user-default-icon-free-png.png",
       notCheckedNotification: [],
+      dbinfo: [],
+      categoryDescList: [],
+      activeUsers: [],
       updateToken: (token) => set({ token }),
       updateUserPhoto: (userPhoto) => set({ userPhoto }),
       updateAllUsers: (allUsers) => set({ allUsers }),
@@ -19,12 +22,11 @@ export const userStore = create(
       updateNotification: (notification) => set({ notification }),
       updateNotCheckedNotification: (newList) =>
         set({ notCheckedNotification: newList }),
-        updateDBinfo: (dbinfo) => set({ dbinfo }),
-        updateDBinfoMedia: (dbinfoMedia) => set({ dbinfoMedia }),
-        updateCategoryDescList: (categoryDescList) => set({ categoryDescList }),
+      updateDBinfo: (dbinfo) => set({ dbinfo }),
+      updateDBinfoMedia: (dbinfoMedia) => set({ dbinfoMedia }),
+      updateCategoryDescList: (categoryDescList) => set({ categoryDescList }),
     }),
-  
-    
+
     {
       name: "mystorage",
       storage: createJSONStorage(() => sessionStorage),

@@ -16,6 +16,7 @@ import UserProfile from "./Pages/UserProfile";
 import ConfirmationToken from "./Pages/ConfirmationToken";
 import Dashboard from "./Pages/Dashboard";
 
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

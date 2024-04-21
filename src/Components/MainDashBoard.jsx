@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../general.css";
 import { userStore } from "../stores/UserStore";
+import GraphUsersInTime from "./GraphUsersInTime";
 
 function MainDashBoard() {
   const allUsers = userStore((state) => state.allUsers);
@@ -15,9 +16,11 @@ function MainDashBoard() {
   );
 
   useEffect(() => {
+    console.log(dbinfo);
     getTasksUsersInfo();
     getTasksUsersInfoDoubleValues();
     getCategoryDescList();
+    
   }, []);
 
   const getCategoryDescList = () => {
@@ -128,7 +131,9 @@ function MainDashBoard() {
           <h2>Graphs</h2>
         </div>
         <div className="board-container" id="graphs-container">
-          <section className="board-column" id="graphs-column"></section>
+          <section className="board-column" id="graphs-column">
+            <GraphUsersInTime/>
+          </section>
         </div>
       </div>
     </div>
