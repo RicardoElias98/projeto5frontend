@@ -45,7 +45,7 @@ function GraphUsersInTime() {
         labels: labels,
         datasets: [
           {
-            label: "Number of active users",
+            label: "Number of registered users (confirmed or not)",
             data: values,
             borderColor: "rgb(75, 192, 192)",
             tension: 0.1,
