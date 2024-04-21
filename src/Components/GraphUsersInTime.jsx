@@ -35,9 +35,9 @@ function GraphUsersInTime() {
   };
 
   const drawChart = (data) => {
-    const labels = data.map((entry) => Object.keys(entry)[0]); // Array de datas
-    const values = data.map((entry) => Object.values(entry)[0]); // Array de números de usuários ativos
-  
+    const labels = data.map((entry) => Object.keys(entry)[0]);
+    const values = data.map((entry) => Object.values(entry)[0]);
+
     const ctx = document.getElementById("myChart").getContext("2d");
     new Chart(ctx, {
       type: "line",
@@ -45,7 +45,7 @@ function GraphUsersInTime() {
         labels: labels,
         datasets: [
           {
-            label: "Número de Usuários Ativos",
+            label: "Number of active users",
             data: values,
             borderColor: "rgb(75, 192, 192)",
             tension: 0.1,
@@ -57,9 +57,9 @@ function GraphUsersInTime() {
           x: {
             type: "time",
             time: {
-              unit: "day", // Define a unidade de tempo para o eixo x
+              unit: "day",
               displayFormats: {
-                day: "DD/MM/YYYY", // Formato de exibição da data
+                day: "DD/MM/YYYY",
               },
             },
           },
@@ -74,10 +74,12 @@ function GraphUsersInTime() {
       },
     });
   };
-  
-  
 
-  return <div><canvas id="myChart" width="400" height="400"></canvas></div>;
+  return (
+    <div>
+      <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+  );
 }
 
 export default GraphUsersInTime;
