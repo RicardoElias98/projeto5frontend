@@ -12,6 +12,7 @@ function LoginPage() {
   const updateFirstName = userStore((state) => state.updateFirstName);
   const loginUser = userStore((state) => state.loginUser);
   const updateNotification = userStore((state) => state.updateNotification);
+  const updateAllUsers = userStore((state) => state.updateAllUsers);
 
   const updateNotCheckedNotification = userStore(
     (state) => state.updateNotCheckedNotification
@@ -131,7 +132,30 @@ function LoginPage() {
                         } else if (response.status === 200) {
                           const notCheckedNotifications = await response.json();
                           updateNotCheckedNotification(notCheckedNotifications);
-                          loginSucess();
+
+                          fetch(
+                            "http://localhost:8080/projecto5backend/rest/user/all",
+                            {
+                              method: "GET",
+                              headers: {
+                                Accept: "*/*",
+                                "Content-Type": "application/json",
+                                token: token,
+                              },
+                            }
+                          )
+                            .then(async function (response) {
+                              if (response.status === 403) {
+                                alert("User with this token is not found");
+                              } else if (response.status === 200) {
+                                const usersData = await response.json();
+                                updateAllUsers(usersData);
+                                loginSucess();
+                              }
+                            })
+                            .catch((error) => {
+                              console.error("Error fetching users:", error);
+                            });
                         }
                       })
                       .catch((error) => {
