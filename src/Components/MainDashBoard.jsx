@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../general.css";
 import { userStore } from "../stores/UserStore";
 import GraphUsersInTime from "./GraphUsersInTime";
+import WebSocketDB from "./WebSocketDB";
 
 function MainDashBoard() {
   const allUsers = userStore((state) => state.allUsers);
@@ -14,14 +15,47 @@ function MainDashBoard() {
   const updateCategoryDescList = userStore(
     (state) => state.updateCategoryDescList
   );
+  const updateAllUsers = userStore((state) => state.updateAllUsers);
 
   useEffect(() => {
     console.log(dbinfo);
     getTasksUsersInfo();
     getTasksUsersInfoDoubleValues();
     getCategoryDescList();
-    
+    displayUsers();
   }, []);
+
+  const onNewsReceived = (news) => {
+    console.log("news", news);
+    getTasksUsersInfo();
+    getTasksUsersInfoDoubleValues();
+    getCategoryDescList();
+    displayUsers();
+  };
+
+  WebSocketDB(token, onNewsReceived);
+
+  const displayUsers = () => {
+    fetch("http://localhost:8080/projecto5backend/rest/user/all", {
+      method: "GET",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/json",
+        token: token,
+      },
+    })
+      .then(async function (response) {
+        if (response.status === 403) {
+          alert("User with this token is not found");
+        } else if (response.status === 200) {
+          const usersData = await response.json();
+          updateAllUsers(usersData);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching users:", error);
+      });
+  };
 
   const getCategoryDescList = () => {
     fetch("http://localhost:8080/projecto5backend/rest/task/listDesCcategory", {

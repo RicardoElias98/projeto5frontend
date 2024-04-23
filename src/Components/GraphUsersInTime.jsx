@@ -60,6 +60,8 @@ function GraphUsersInTime() {
       });
   };
 
+  
+
   const drawUsersChart = (data) => {
     const labels = data.map((entry) => Object.keys(entry)[0]);
     const values = data.map((entry) => Object.values(entry)[0]);
