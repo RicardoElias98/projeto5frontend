@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { userStore } from "../stores/UserStore";
 import Chart from "chart.js";
+import { useNavigate } from "react-router-dom";
+
 
 function GraphUsersInTime() {
   const token = userStore((state) => state.token);
   const [activeUserByDate, setActiveUserByDate] = useState([]);
   const [doneTasks, setDoneTasks] = useState([]);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     getUsersInfo();
@@ -29,6 +33,10 @@ function GraphUsersInTime() {
           setDoneTasks(tasks);
           console.log("tasks", tasks);
           drawTasksChart(tasks);
+        }
+        else if (response.status === 403) {
+          alert("Token timer expired, please login again.");
+          navigate("/goBackInitialPage", { replace: true });
         }
       })
       .catch((error) => {

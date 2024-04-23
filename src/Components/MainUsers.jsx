@@ -2,12 +2,17 @@ import React, { useState, useEffect } from "react";
 import "../general.css";
 import { userStore } from "../stores/UserStore";
 import User from "./User";
+import { useNavigate } from "react-router-dom";
+
 
 function MainUsers() {
   const token = userStore.getState().token;
   const [allUsers, setAllUsers] = useState([]);
   const updateAllUsers = userStore((state) => state.updateAllUsers);
   const fullUsers = userStore((state) => state.allUsers);
+  
+
+  const navigate = useNavigate();
   
   
 
@@ -26,8 +31,12 @@ function MainUsers() {
     })
       .then(async function (response) {
         if (response.status === 403) {
-          alert("User with this token is not found");
-        } else if (response.status === 200) {
+          console.log("User with this token is not found");
+        } else if (response.status === 401) {
+          alert("Token timer expired, please login again.");
+          navigate("/goBackInitialPage", { replace: true });
+        } 
+        else if (response.status === 200) {
           const usersData = await response.json();
           setAllUsers(usersData);
           updateAllUsers(usersData);
@@ -50,7 +59,7 @@ function MainUsers() {
     })
       .then(async function (response) {
         if (response.status === 400) {
-          alert("User with this token is not found");
+          console.log("User with this token is not found");
         } else if (response.status === 200) {
           console.log("Role updated");
           displayUsers();

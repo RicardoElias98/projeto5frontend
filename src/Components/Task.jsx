@@ -3,12 +3,16 @@ import "../general.css";
 import TaskInfo from "./TaskInfo";
 import { userStore } from "../stores/UserStore";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 function Task({ title, priority, id, description, category, startDate, endDate, status}) {
   let priorityClass = "";
   const rolE = userStore.getState().loginUser.role;
   const token = userStore.getState().token;
   const [creator, setCreator] = useState(""); 
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     creatorTask(id);
@@ -55,6 +59,10 @@ function Task({ title, priority, id, description, category, startDate, endDate, 
         const data = await response.json();
         console.log(data);
         setCreator(data);
+      }
+      else if (response.status === 403) {
+        alert("Token timer expired, please login again.");
+        navigate("/goBackInitialPage", { replace: true });
       }
     })};
 

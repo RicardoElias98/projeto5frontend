@@ -40,7 +40,11 @@ function DataTableUsers() {
       .then(async function (response) {
         if (response.status === 403) {
           alert("User with this token is not found");
-        } else if (response.status === 200) {
+        } else if (response.status === 401) {
+          alert("Token timer expired, please login again.");
+          navigate("/goBackInitialPage", { replace: true });
+        } 
+        else if (response.status === 200) {
           const result = await response.json();
           console.log(result);
           setRecords(result);

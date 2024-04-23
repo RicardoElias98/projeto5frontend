@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "../general.css";
 import { categoriesStore } from "../stores/CategoriesStore";
 import { userStore } from "../stores/UserStore";
+import { useNavigate } from "react-router-dom";
+
 
 function TaskInfo({
   isOpen,
@@ -18,6 +20,9 @@ function TaskInfo({
   const token = userStore.getState().token;
   const categories = categoriesStore.getState().categories;
   const counter = userStore((state) => state.counter);
+  const navigate = useNavigate();
+
+
 
   const updateCounter = userStore((state) => state.updateCounter);
 
@@ -162,6 +167,9 @@ function TaskInfo({
       } else if (response.status === 200) {
         updateCounter(counter - 1);
         onClose();
+      } else if (response.status === 403) {
+        alert("Token timer expired, please login again.");
+        navigate("/goBackInitialPage", { replace: true });
       }
     });
   };

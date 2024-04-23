@@ -3,6 +3,8 @@ import { tasksStore } from "../stores/TasksStore";
 import Task from "./Task";
 import { userStore } from "../stores/UserStore";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 function MainDeletedTasks() {
   const token = userStore.getState().token;
@@ -13,6 +15,7 @@ function MainDeletedTasks() {
   //const tasks2 = tasksStore((state) => JSON.stringify(state.tasks));
   const deletedTasks = tasks.filter((task) => task.active === false);
   const role = userStore.getState().loginUser.role;
+  const navigate = useNavigate();
 
   const handleDragStart = (event, username) => {
     event.dataTransfer.setData("user_id", username);
@@ -39,6 +42,10 @@ function MainDeletedTasks() {
           console.log(task);
           console.log(tasks);
         }
+        else if (response.status === 403) {
+          alert("Token timer expired, please login again.");
+          navigate("/goBackInitialPage", { replace: true });
+        }
       })
       .catch((error) => {
         console.error("Error fetching tasks:", error);
@@ -62,6 +69,10 @@ function MainDeletedTasks() {
         } else if (response.status === 200) {
           const task = (tasks.find((task) => task.id === taskId).active = true);
           updateTasks(tasks);
+        }
+        else if (response.status === 403) {
+          alert("Token timer expired, please login again.");
+          navigate("/goBackInitialPage", { replace: true });
         }
       })
       .catch((error) => {

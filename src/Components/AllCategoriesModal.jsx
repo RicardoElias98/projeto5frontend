@@ -1,11 +1,14 @@
 import React from "react";
 import { userStore } from "../stores/UserStore";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 function AllCategoriesModal({ isOpen, onClose, categories }) {
   const [categoryName, setCategoryName] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [oldName, setOldName] = useState("");
+  const navigate = useNavigate();
 
   const token = userStore.getState().token;
 
@@ -72,6 +75,9 @@ function AllCategoriesModal({ isOpen, onClose, categories }) {
           alert("Category has tasks and cannot be deleted");
         } else if (response.status === 200) {
           console.log("Category deleted successfully");
+        } else if (response.status === 403) {
+          alert("Token timer expired, please login again.");
+          navigate("/goBackInitialPage", { replace: true });
         }
       });
     }
@@ -101,6 +107,10 @@ function AllCategoriesModal({ isOpen, onClose, categories }) {
             alert("Category already exists");
           } else if (response.status === 200) {
             console.log("Category added successfully");
+          }
+          else if (response.status === 403) {
+            alert("Token timer expired, please login again.");
+            navigate("/goBackInitialPage", { replace: true });
           }
         })
         .catch((error) => {

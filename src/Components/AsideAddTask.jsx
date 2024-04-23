@@ -6,6 +6,8 @@ import { userStore } from "../stores/UserStore";
 import CategoryModal from "./CategoryModal";
 import AllCategoriesModal from "./AllCategoriesModal";
 import { categoriesStore } from "../stores/CategoriesStore";
+import { useNavigate } from "react-router-dom";
+
 
 function AsideAddTask() {
   const token = userStore.getState().token;
@@ -22,6 +24,7 @@ function AsideAddTask() {
 
   const updateCounter = userStore((state) => state.updateCounter);
   const role = userStore.getState().loginUser.role;
+  const navigate = useNavigate();
 
   useEffect(() => {
     getAllCategories();
@@ -71,6 +74,10 @@ function AsideAddTask() {
         const categoriesData = await response.json();
         setCategories(categoriesData);
         updateCategories(categoriesData);
+      }
+      else if (response.status === 403) {
+        alert("Token timer expired, please login again.");
+        navigate("/goBackInitialPage", { replace: true });
       }
     });
   };
@@ -123,7 +130,11 @@ function AsideAddTask() {
       }).then(async function (response) {
         if (response.status === 401) {
           alert("Unauthorized");
-        } else if (response.status === 400) {
+        } else if (response.status === 403) {
+          alert("Token timer expired, please login again.");
+          navigate("/goBackInitialPage", { replace: true });
+        }
+        else if (response.status === 400) {
           alert("All elements are required");
         } else if (response.status === 201) {
           setFormData({

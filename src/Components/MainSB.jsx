@@ -4,6 +4,8 @@ import { userStore } from "../stores/UserStore";
 import Task from "./Task";
 import { tasksStore } from "../stores/TasksStore";
 import { categoriesStore } from "../stores/CategoriesStore";
+import { useNavigate } from "react-router-dom";
+
 
 function MainSB() {
   const token = userStore.getState().token;
@@ -21,6 +23,8 @@ function MainSB() {
   const updateTask = tasksStore((state) => state.updateTask);
   const counter = userStore((state) => state.counter);
   const tasks = tasksStore((state) => state.tasks);
+  const navigate = useNavigate();
+
 
   const updateCounter = userStore((state) => state.updateCounter);
 
@@ -138,6 +142,10 @@ function MainSB() {
         setAllTasks(tasksData);
         setFilteredTasksCategoryUser(tasksData);
       }
+      else if (response.status === 403) {
+        alert("Token timer expired, please login again.");
+        navigate("/goBackInitialPage", { replace: true });
+      }
     });
   };
 
@@ -160,6 +168,10 @@ function MainSB() {
         setAllTasks(tasksData);
         setFilteredTasks(tasksData);
       }
+      else if (response.status === 403) {
+        alert("Token timer expired, please login again.");
+        navigate("/goBackInitialPage", { replace: true });
+      }
     });
   };
 
@@ -181,6 +193,10 @@ function MainSB() {
         const tasksData = await response.json();
         setAllTasks(tasksData);
         setFilteredTasksUser(tasksData);
+      }
+      else if (response.status === 403) {
+        alert("Token timer expired, please login again.");
+        navigate("/goBackInitialPage", { replace: true });
       }
     });
   };
@@ -207,6 +223,10 @@ function MainSB() {
           console.log("Failed. Status not changed");
         } else if (response.status === 200) {
           console.log("status changed to" + newStatus);
+        }
+        else if (response.status === 403) {
+          alert("Token timer expired, please login again.");
+          navigate("/goBackInitialPage", { replace: true });
         }
       })
       .catch((error) => {

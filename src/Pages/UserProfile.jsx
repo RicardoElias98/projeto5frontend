@@ -88,8 +88,12 @@ function UserProfile() {
       }
     ).then(async function (response) {
       if (response.status === 403) {
-        alert("User with this token is not found");
-      } else if (response.status === 200) {
+       console.log("User with this token is not found");
+      } else if (response.status === 401) {
+        alert("Token timer expired, please login again.");
+        navigate("/goBackInitialPage", { replace: true });
+      } 
+      else if (response.status === 200) {
         const tasks = await response.json();
         const updatedData = {
           ...data,
@@ -128,7 +132,7 @@ function UserProfile() {
       },
     }).then(async function (response) {
       if (response.status === 403) {
-        alert("User with this token is not found");
+        console.log("User with this token is not found");
       } else if (response.status === 200) {
         const messages = await response.json();
 
@@ -155,8 +159,12 @@ function UserProfile() {
       body: JSON.stringify(msg),
     }).then(async function (response) {
       if (response.status === 403) {
-        alert("User with this token is not found");
-      } else if (response.status === 201) {
+        console.log("User with this token is not found");
+      }  else if (response.status === 401) {
+        alert("Token timer expired, please login again.");
+        navigate("/goBackInitialPage", { replace: true });
+      } 
+      else if (response.status === 201) {
         console.log("Message sent");
       }
     });
