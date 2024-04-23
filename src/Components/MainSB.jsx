@@ -51,6 +51,7 @@ function MainSB() {
     const combinedTasks = [...todoTasks, ...doingTasks, ...doneTasks];
     setAllTasks(combinedTasks);
     updateTask(combinedTasks);
+    console.log("1");
   }, [todoTasks, doingTasks, doneTasks]);
 
   useEffect(() => {
@@ -61,6 +62,7 @@ function MainSB() {
     setTodoTasks(todo);
     setDoingTasks(doing);
     setDoneTasks(done);
+    console.log("2");
   }, [filteredTasks]);
 
   useEffect(() => {
@@ -71,6 +73,7 @@ function MainSB() {
     setTodoTasks(todo);
     setDoingTasks(doing);
     setDoneTasks(done);
+    console.log("3");
   }, [filteredTasksUser]);
 
   useEffect(() => {

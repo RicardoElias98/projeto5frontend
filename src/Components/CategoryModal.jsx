@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import "../general.css";
 import { userStore } from "../stores/UserStore";
 import { useNavigate } from "react-router-dom";
+import { categoriesStore } from "../stores/CategoriesStore";
 
-
-function CategoryModal({ isOpen, onClose }) {
+function CategoryModal({ isOpen, onClose, setCategories }) {
   const [categoryName, setCategoryName] = useState("");
   const token = userStore.getState().token;
   const navigate = useNavigate();
+  const updateCategories = categoriesStore((state) => state.updateCategories);
 
   const handleChange = (event) => {
     setCategoryName(event.target.value);
@@ -38,8 +39,15 @@ function CategoryModal({ isOpen, onClose }) {
             alert("Unauthorized");
           } else if (response.status === 409) {
             alert("Category already exists");
-          } else if (response.status === 200) {
+          } else if (response.status === 201) {
             console.log("Category added successfully");
+            const newCat = await response.json();
+            console.log("newCat", newCat);
+            setCategories((prevCategories) => {
+              const updatedCategories = [...prevCategories, newCat];
+              updateCategories(updatedCategories);
+              return updatedCategories;
+            });
           } else if (response.status === 403) {
             alert("Token timer expired, please login again.");
             navigate("/goBackInitialPage", { replace: true });

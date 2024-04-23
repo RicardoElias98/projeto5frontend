@@ -8,7 +8,6 @@ import AllCategoriesModal from "./AllCategoriesModal";
 import { categoriesStore } from "../stores/CategoriesStore";
 import { useNavigate } from "react-router-dom";
 
-
 function AsideAddTask() {
   const token = userStore.getState().token;
   const [categories, setCategories] = useState([]);
@@ -28,7 +27,8 @@ function AsideAddTask() {
 
   useEffect(() => {
     getAllCategories();
-  }, [categories]);
+    console.log("categorias");
+  }, []);
   const priorityMapping = {
     Low: 100,
     Medium: 200,
@@ -55,9 +55,6 @@ function AsideAddTask() {
     setIsAllCategoriesModalOpen(false);
   };
 
-  useEffect(() => {
-    getAllCategories();
-  }, []);
 
   const getAllCategories = () => {
     fetch("http://localhost:8080/projecto5backend/rest/task/allCategories", {
@@ -72,10 +69,10 @@ function AsideAddTask() {
         alert("Unauthorized");
       } else if (response.status === 200) {
         const categoriesData = await response.json();
+        console.log('as');
         setCategories(categoriesData);
         updateCategories(categoriesData);
-      }
-      else if (response.status === 403) {
+      } else if (response.status === 403) {
         alert("Token timer expired, please login again.");
         navigate("/goBackInitialPage", { replace: true });
       }
@@ -133,8 +130,7 @@ function AsideAddTask() {
         } else if (response.status === 403) {
           alert("Token timer expired, please login again.");
           navigate("/goBackInitialPage", { replace: true });
-        }
-        else if (response.status === 400) {
+        } else if (response.status === 400) {
           alert("All elements are required");
         } else if (response.status === 201) {
           setFormData({
@@ -236,6 +232,7 @@ function AsideAddTask() {
           <CategoryModal
             isOpen={isCategoryModalOpen}
             onClose={handleCloseCategoryModal}
+            setCategories={setCategories}
           />
           <button className="button" onClick={handleOpenAllCategoriesModal}>
             Edit/Delete Categories
@@ -247,40 +244,38 @@ function AsideAddTask() {
           />
         </>
       )}
-      {(role === "Owner" ||
-        role === "user") && (
-          <>
-            <label htmlFor="category">Filter by Category:</label>
-            <select
-              id="categoryFilter"
-              defaultValue={categorySelected}
-              name="categoryFilter"
-              onChange={handleChangeFilter}
-            >
-              <option value="">Choose a category...</option>
-              {categories.map((category) => (
-                <option key={category.id} value={category.name}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
-            <label htmlFor="user">Filter by User:</label>
-            <select
-              id="userFilter"
-              defaultValue={selectedUser}
-              name="userFilter"
-              onChange={handleChangeFilterUser}
-            >
-              <option value="">Choose an user...</option>
-              {fullUsers.map((user) => (
-                <option key={user.username} value={user.username}>
-                  {user.username}
-                </option>
-              ))}
-            </select>
-          </>
-        )}
-        
+      {(role === "Owner" || role === "user") && (
+        <>
+          <label htmlFor="category">Filter by Category:</label>
+          <select
+            id="categoryFilter"
+            defaultValue={categorySelected}
+            name="categoryFilter"
+            onChange={handleChangeFilter}
+          >
+            <option value="">Choose a category...</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.name}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+          <label htmlFor="user">Filter by User:</label>
+          <select
+            id="userFilter"
+            defaultValue={selectedUser}
+            name="userFilter"
+            onChange={handleChangeFilterUser}
+          >
+            <option value="">Choose an user...</option>
+            {fullUsers.map((user) => (
+              <option key={user.username} value={user.username}>
+                {user.username}
+              </option>
+            ))}
+          </select>
+        </>
+      )}
     </div>
   );
 }
