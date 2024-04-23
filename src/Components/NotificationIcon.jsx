@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import { FaBell } from "react-icons/fa";
 import { userStore } from "../stores/UserStore";
 import NotificationMsg from "./NotificationMsg";
+import { useNavigate } from "react-router-dom";
+
 
 const NotificationIcon = ({ count }) => {
   const [isOpen, setIsOpen] = useState(false);
   const notification = userStore((state) => state.notification);
   const token = userStore((state) => state.token);
+  const navigate = useNavigate();
+
 
   const toggleNotificationWindow = () => {
     setIsOpen(true);
@@ -22,7 +26,11 @@ const NotificationIcon = ({ count }) => {
         alert("User with this token is not found");
       } else if (response.status === 200) {
         console.log("Notifications are checked");
-      }
+      } 
+      else if (response.status === 401) {
+        alert("Token timer expired, please login again.");
+        navigate("/goBackInitialPage", { replace: true });
+      } 
     });
   };
 

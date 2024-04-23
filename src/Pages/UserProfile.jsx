@@ -26,6 +26,7 @@ function UserProfile() {
   const notCheckedNotification = userStore(
     (state) => state.notCheckedNotification
   );
+  const navigate = useNavigate();
 
   const [receivedMessage, setReceivedMessage] = useState("");
 
@@ -49,8 +50,6 @@ function UserProfile() {
       }),
     ]);
   };
-
-  const navigate = useNavigate();
 
   WebSocketChat(token, handleReceivedMessage);
 
@@ -88,12 +87,11 @@ function UserProfile() {
       }
     ).then(async function (response) {
       if (response.status === 403) {
-       console.log("User with this token is not found");
+        console.log("User with this token is not found");
       } else if (response.status === 401) {
         alert("Token timer expired, please login again.");
         navigate("/goBackInitialPage", { replace: true });
-      } 
-      else if (response.status === 200) {
+      } else if (response.status === 200) {
         const tasks = await response.json();
         const updatedData = {
           ...data,
@@ -137,6 +135,9 @@ function UserProfile() {
         const messages = await response.json();
 
         setMessagesTotal(messages);
+      } else if (response.status === 401) {
+        alert("Token timer expired, please login again.");
+        navigate("/goBackInitialPage", { replace: true });
       }
     });
   };
@@ -160,11 +161,10 @@ function UserProfile() {
     }).then(async function (response) {
       if (response.status === 403) {
         console.log("User with this token is not found");
-      }  else if (response.status === 401) {
+      } else if (response.status === 401) {
         alert("Token timer expired, please login again.");
         navigate("/goBackInitialPage", { replace: true });
-      } 
-      else if (response.status === 201) {
+      } else if (response.status === 201) {
         console.log("Message sent");
       }
     });
@@ -190,9 +190,7 @@ function UserProfile() {
             <Link to="/users">Users</Link>
           </h2>
           <h2 className="dashboard-link">
-            {(role === "Owner") && (
-              <Link to="/dashboard">Board</Link>
-            )}
+            {role === "Owner" && <Link to="/dashboard">Board</Link>}
           </h2>
         </div>
         <Photo src={userPhoto} />

@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { userStore } from "../stores/UserStore";
 import { FaEye } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+
 
 function Message({ text, checked, sender, id }) {
   const [isMessageRead, setIsMessageRead] = useState(checked);
   const loginUser = userStore((state) => state.loginUser);
   const token = userStore((state) => state.token);
   const messageClass = isMessageRead ? "message-checked" : "message-unchecked";
+  const navigate = useNavigate();
 
   const handleEyeClick = () => {
     const checked=true;
@@ -25,6 +28,9 @@ function Message({ text, checked, sender, id }) {
         } else if (response.status === 200) {
           console.log("Msg is checked");
           setIsMessageRead(true);
+        } else if (response.status === 401) {
+          alert("Token timer expired, please login again.");
+          navigate("/goBackInitialPage", { replace: true });
         }
       }
     )};
