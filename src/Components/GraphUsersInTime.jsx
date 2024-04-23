@@ -23,7 +23,7 @@ function GraphUsersInTime() {
     })
       .then(async function (response) {
         if (response.status === 403) {
-          alert("User with this token is not found");
+          console.log("User with this token is not found");
         } else if (response.status === 200) {
           const tasks = await response.json();
           setDoneTasks(tasks);
@@ -47,7 +47,7 @@ function GraphUsersInTime() {
     })
       .then(async function (response) {
         if (response.status === 403) {
-          alert("User with this token is not found");
+          console.log("User with this token is not found");
         } else if (response.status === 200) {
           const activeUsers = await response.json();
           setActiveUserByDate(activeUsers);

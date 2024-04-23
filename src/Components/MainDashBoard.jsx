@@ -3,6 +3,7 @@ import "../general.css";
 import { userStore } from "../stores/UserStore";
 import GraphUsersInTime from "./GraphUsersInTime";
 import WebSocketDB from "./WebSocketDB";
+import { useNavigate } from "react-router-dom";
 
 function MainDashBoard() {
   const allUsers = userStore((state) => state.allUsers);
@@ -16,6 +17,8 @@ function MainDashBoard() {
     (state) => state.updateCategoryDescList
   );
   const updateAllUsers = userStore((state) => state.updateAllUsers);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log(dbinfo);
@@ -46,7 +49,7 @@ function MainDashBoard() {
     })
       .then(async function (response) {
         if (response.status === 403) {
-          alert("User with this token is not found");
+          console.log("User with this token is not found");
         } else if (response.status === 200) {
           const usersData = await response.json();
           updateAllUsers(usersData);
@@ -68,7 +71,7 @@ function MainDashBoard() {
     })
       .then(async function (response) {
         if (response.status === 403) {
-          alert("User with this token is not found");
+         console.log("User with this token is not found");
         } else if (response.status === 200) {
           const categoryDescList = await response.json();
           updateCategoryDescList(categoryDescList);
@@ -94,7 +97,7 @@ function MainDashBoard() {
     )
       .then(async function (response) {
         if (response.status === 403) {
-          alert("User with this token is not found");
+          console.log("User with this token is not found");
         } else if (response.status === 200) {
           const infoMedia = await response.json();
           updateDBinfoMedia(infoMedia);
@@ -115,9 +118,14 @@ function MainDashBoard() {
       },
     })
       .then(async function (response) {
+
         if (response.status === 403) {
-          alert("User with this token is not found");
-        } else if (response.status === 200) {
+          console.log("User with this token is not found");
+        } else if (response.status === 401) {
+          alert("Token timer expired, please login again.");
+          navigate("/goBackInitialPage", { replace: true });
+        }
+        else if (response.status === 200) {
           const info = await response.json();
           updateDBinfo(info);
           console.log(info);
