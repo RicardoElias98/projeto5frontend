@@ -18,7 +18,7 @@ function MainUsers() {
 
   useEffect(() => {
     displayUsers();
-  }, [fullUsers]);
+  }, []);
 
   const displayUsers = () => {
     fetch("http://localhost:8080/projecto5backend/rest/user/all", {
