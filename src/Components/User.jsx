@@ -35,7 +35,7 @@ function User({ username, name, email, contactNumber, role, photo }) {
         className={`role ${roleClass}`}
         draggable={rolE === "Owner" ? "true" : "false"}
         onDragStart={rolE === "Owner" ? handleDragStart : null}
-        onDoubleClick={handleOpenUserInfoModal}
+        onClick={handleOpenUserInfoModal}
       >
         <div className="photoUser">
           <img src={photo} alt="User" className="photo-user" />
