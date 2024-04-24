@@ -5,7 +5,7 @@ import Task from "./Task";
 import { tasksStore } from "../stores/TasksStore";
 import { categoriesStore } from "../stores/CategoriesStore";
 import { useNavigate } from "react-router-dom";
-
+import translations from "../Translation/translation";
 
 function MainSB() {
   const token = userStore.getState().token;
@@ -24,7 +24,9 @@ function MainSB() {
   const counter = userStore((state) => state.counter);
   const tasks = tasksStore((state) => state.tasks);
   const navigate = useNavigate();
+  const language = userStore((state) => state.language);
 
+  const { todoName, doingName, doneName } = translations[language];
 
   const updateCounter = userStore((state) => state.updateCounter);
 
@@ -144,8 +146,7 @@ function MainSB() {
         const tasksData = await response.json();
         setAllTasks(tasksData);
         setFilteredTasksCategoryUser(tasksData);
-      }
-      else if (response.status === 403) {
+      } else if (response.status === 403) {
         alert("Token timer expired, please login again.");
         navigate("/goBackInitialPage", { replace: true });
       }
@@ -170,8 +171,7 @@ function MainSB() {
         const tasksData = await response.json();
         setAllTasks(tasksData);
         setFilteredTasks(tasksData);
-      }
-      else if (response.status === 403) {
+      } else if (response.status === 403) {
         alert("Token timer expired, please login again.");
         navigate("/goBackInitialPage", { replace: true });
       }
@@ -196,8 +196,7 @@ function MainSB() {
         const tasksData = await response.json();
         setAllTasks(tasksData);
         setFilteredTasksUser(tasksData);
-      }
-      else if (response.status === 403) {
+      } else if (response.status === 403) {
         alert("Token timer expired, please login again.");
         navigate("/goBackInitialPage", { replace: true });
       }
@@ -226,8 +225,7 @@ function MainSB() {
           console.log("Failed. Status not changed");
         } else if (response.status === 200) {
           console.log("status changed to" + newStatus);
-        }
-        else if (response.status === 403) {
+        } else if (response.status === 403) {
           alert("Token timer expired, please login again.");
           navigate("/goBackInitialPage", { replace: true });
         }
@@ -241,7 +239,7 @@ function MainSB() {
     <div className="board">
       <div className="total-column">
         <div className="column-header" id="to-do-header">
-          <h2>To Do</h2>
+          <h2>{todoName}</h2>
         </div>
         <div
           className="board-container"
@@ -271,7 +269,7 @@ function MainSB() {
       </div>
       <div className="total-column">
         <div className="column-header" id="doing-header">
-          <h2>Doing</h2>
+          <h2>{doingName}</h2>
         </div>
         <div
           className="board-container"
@@ -301,7 +299,7 @@ function MainSB() {
       </div>
       <div className="total-column">
         <div className="column-header" id="done-header">
-          <h2>Done</h2>
+          <h2>{doneName}</h2>
         </div>
         <div
           className="board-container"

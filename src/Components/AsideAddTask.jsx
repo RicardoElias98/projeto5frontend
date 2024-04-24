@@ -7,6 +7,8 @@ import CategoryModal from "./CategoryModal";
 import AllCategoriesModal from "./AllCategoriesModal";
 import { categoriesStore } from "../stores/CategoriesStore";
 import { useNavigate } from "react-router-dom";
+import translations from "../Translation/translation";
+
 
 function AsideAddTask() {
   const token = userStore.getState().token;
@@ -24,6 +26,9 @@ function AsideAddTask() {
   const updateCounter = userStore((state) => state.updateCounter);
   const role = userStore.getState().loginUser.role;
   const navigate = useNavigate();
+  const language = userStore((state) => state.language);
+  const {taskName, taskDescription, category, chooseACategory, priority, chooseAPrority, low ,medium ,high ,initialDate ,finalDate ,addTask ,addCategory ,editDelet,Category ,filterByCategory, filterByUser, chooseAnUser
+  } = translations[language];
 
   useEffect(() => {
     getAllCategories();
@@ -146,6 +151,7 @@ function AsideAddTask() {
     }
   };
 
+
   const handleChangeFilter = (event) => {
     const selectedCategory = event.target.value;
     updateSelectedCategory(selectedCategory === "" ? "" : selectedCategory);
@@ -160,7 +166,7 @@ function AsideAddTask() {
     <div>
       {" "}
       <form onSubmit={handleSubmit}>
-        <label htmlFor="taskName">Task Name:</label>
+        <label htmlFor="taskName">{taskName}</label>
         <input
           type="text"
           id="taskName"
@@ -168,7 +174,7 @@ function AsideAddTask() {
           defaultValue=""
           onChange={handleChange}
         />
-        <label htmlFor="taskDescription">Task Description:</label>
+        <label htmlFor="taskDescription">{taskDescription}:</label>
         <input
           type="text"
           id="taskDescription"
@@ -176,33 +182,33 @@ function AsideAddTask() {
           defaultValue=""
           onChange={handleChange}
         />
-        <label htmlFor="category">Category:</label>
+        <label htmlFor="category">{category}</label>
         <select
           id="category"
           defaultValue=""
           name="category"
           onChange={handleChange}
         >
-          <option value="">Choose a category...</option>
+          <option value="">{chooseACategory}</option>
           {categories.map((category) => (
             <option key={category.id} value={category.name}>
               {category.name}
             </option>
           ))}
         </select>
-        <label htmlFor="priority">Priority:</label>
+        <label htmlFor="priority">{priority}</label>
         <select
           id="priority"
           defaultValue=""
           name="priority"
           onChange={handleChange}
         >
-          <option value="">Choose a Priority...</option>
-          <option value="Low">Low &#x1F7E2;</option>
-          <option value="Medium">Medium &#x1F7E1; </option>
-          <option value="High">High &#x1F534; </option>
+          <option value="">{chooseAPrority}</option>
+          <option value="Low">{low} &#x1F7E2;</option>
+          <option value="Medium">{medium} &#x1F7E1; </option>
+          <option value="High">{high} &#x1F534; </option>
         </select>
-        <label htmlFor="startDate">Initial Date:</label>
+        <label htmlFor="startDate">{initialDate}</label>
         <input
           type="date"
           id="startDate"
@@ -210,7 +216,7 @@ function AsideAddTask() {
           defaultValue=""
           onChange={handleChange}
         />
-        <label htmlFor="endDate">Final Date:</label>
+        <label htmlFor="endDate">{finalDate}</label>
         <input
           type="date"
           id="endDate"
@@ -221,13 +227,13 @@ function AsideAddTask() {
 
         <button className="button" type="submit">
           {" "}
-          Add task
+          {addTask}
         </button>
       </form>
       {role === "Owner" && (
         <>
           <button className="button" onClick={handleOpenCategoryModal}>
-            Add Category
+            {addCategory}
           </button>
           <CategoryModal
             isOpen={isCategoryModalOpen}
@@ -235,7 +241,7 @@ function AsideAddTask() {
             setCategories={setCategories}
           />
           <button className="button" onClick={handleOpenAllCategoriesModal}>
-            Edit/Delete Categories
+            {editDelet}
           </button>
           <AllCategoriesModal
             isOpen={isAllCategoriesModalOpen}
@@ -246,28 +252,28 @@ function AsideAddTask() {
       )}
       {(role === "Owner" || role === "user") && (
         <>
-          <label htmlFor="category">Filter by Category:</label>
+          <label htmlFor="category">{filterByCategory}</label>
           <select
             id="categoryFilter"
             defaultValue={categorySelected}
             name="categoryFilter"
             onChange={handleChangeFilter}
           >
-            <option value="">Choose a category...</option>
+            <option value="">{chooseACategory}</option>
             {categories.map((category) => (
               <option key={category.id} value={category.name}>
                 {category.name}
               </option>
             ))}
           </select>
-          <label htmlFor="user">Filter by User:</label>
+          <label htmlFor="user">{filterByUser}</label>
           <select
             id="userFilter"
             defaultValue={selectedUser}
             name="userFilter"
             onChange={handleChangeFilterUser}
           >
-            <option value="">Choose an user...</option>
+            <option value="">{chooseAnUser}</option>
             {fullUsers.map((user) => (
               <option key={user.username} value={user.username}>
                 {user.username}
