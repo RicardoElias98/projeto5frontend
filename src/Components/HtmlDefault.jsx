@@ -43,18 +43,24 @@ function HtmlDefault() {
 
   const onNotificationReceived = (notification) => {
     console.log("receive", notification);
-    setNotCheckedMessages((prevNotifications) => [
-      ...prevNotifications,
-      {
-        text: notification.text,
-        user: notification.user,
-        notificationDateTime: notification.notificationDateTime,
-        checked: notification.checked,
-        id: notification.id,
-      },
-    ]);
-    updateNotCheckedNotification(notCheckedMessages);
+    
+    setNotCheckedMessages((prevNotifications) => {
+      const updatedNotifications = [
+        ...prevNotifications,
+        {
+          text: notification.text,
+          user: notification.user,
+          notificationDateTime: notification.notificationDateTime,
+          checked: notification.checked,
+          id: notification.id,
+        },
+      ];
+  
+      updateNotCheckedNotification(updatedNotifications); 
+      return updatedNotifications; 
+    });
   };
+  
 
   const onTasksReceived = (task) => {
     console.log("tasks", tasks);

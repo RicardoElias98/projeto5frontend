@@ -20,8 +20,7 @@ export const userStore = create(
       updateFirstName: (firstName) => set({ firstName }),
       updateProfileInfo: (profileInfo) => set({ profileInfo }),
       updateNotification: (notification) => set({ notification }),
-      updateNotCheckedNotification: (newList) =>
-        set({ notCheckedNotification: newList }),
+      updateNotCheckedNotification: (notCheckedNotification) => set({ notCheckedNotification }),
       updateDBinfo: (dbinfo) => set({ dbinfo }),
       updateDBinfoMedia: (dbinfoMedia) => set({ dbinfoMedia }),
       updateCategoryDescList: (categoryDescList) => set({ categoryDescList }),
