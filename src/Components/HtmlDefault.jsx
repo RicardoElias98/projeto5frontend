@@ -12,6 +12,8 @@ import { useState } from "react";
 import WebSocketNotification from "./WebSocketNotification";
 import WebSocketTasks from "./WebSocketTasks";
 import { tasksStore } from "../stores/TasksStore";
+import translations from "../Translation/translation";
+
 
 
 function HtmlDefault() {
@@ -34,6 +36,10 @@ function HtmlDefault() {
   const updateNotCheckedNotification = userStore(
     (state) => state.updateNotCheckedNotification
   );
+  const language = userStore((state) => state.language);
+
+
+  const { usersLink, usersTableLink, deletedTasksLink, dashboardLink } = translations[language];
 
   
 
@@ -85,21 +91,21 @@ function HtmlDefault() {
         <div className="links">
           <h2 className="users-link">
             {(role === "Owner" || role === "user") && (
-              <Link to="/users">Users</Link>
+              <Link to="/users">{usersLink}</Link>
             )}
           </h2>
           <h2 className="usersTable-link">
-            <Link to="/usersTable">Users Table</Link>
+            <Link to="/usersTable">{usersTableLink}</Link>
           </h2>
 
           <h2 className="Deleted-tasks-link">
             {(role === "Owner" || role === "user") && (
-              <Link to="/deletedTasks"> Deleted Tasks</Link>
+              <Link to="/deletedTasks"> {deletedTasksLink}</Link>
             )}
           </h2>
           <h2 className="dashboard-link">
             {(role === "Owner") && (
-              <Link to="/dashboard">Board</Link>
+              <Link to="/dashboard">{dashboardLink}</Link>
             )}
           </h2>
         </div>
