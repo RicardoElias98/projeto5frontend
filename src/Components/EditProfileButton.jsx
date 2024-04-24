@@ -17,7 +17,7 @@ function EditProfileButton() {
 
   return (
     <>
-      <button onClick={openModal}>Edit Profile</button>
+      <button className="button-edit-profile" onClick={openModal}>Edit Profile</button>
       {isModalOpen && <EditProfileModal onClose={closeModal} user={loginUser}/>}
     </>
   );

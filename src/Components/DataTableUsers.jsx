@@ -19,6 +19,7 @@ function DataTableUsers() {
       name: "Email",
       selector: (row) => row.email,
       sortable: true,
+      hide: "sm",
     },
     { name: "Role", selector: (row) => row.role, sortable: true },
   ];
@@ -43,8 +44,7 @@ function DataTableUsers() {
         } else if (response.status === 401) {
           alert("Token timer expired, please login again.");
           navigate("/goBackInitialPage", { replace: true });
-        } 
-        else if (response.status === 200) {
+        } else if (response.status === 200) {
           const result = await response.json();
           console.log(result);
           setRecords(result);
@@ -73,7 +73,6 @@ function DataTableUsers() {
       tasksDONE: [],
     }; */
     navigate(`/userProfile/${username}`, { replace: true });
-    
   }
 
   return (
@@ -94,6 +93,7 @@ function DataTableUsers() {
           fixedHeader
           pagination
           onRowClicked={handleRowClicked}
+          responsive
         />
       </div>
     </div>

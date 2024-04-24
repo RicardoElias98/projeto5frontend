@@ -484,13 +484,14 @@ input {
   top: 40px;
   right: 0;
   width: 200px;
-  max-height: 300px; 
+  max-height: 300px;
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1;
-  overflow-y: auto; }
+  overflow-y: auto;
+}
 
 .notification-window p {
   padding: 10px;
@@ -522,9 +523,54 @@ input {
   background-color: #ffcccc;
 }
 
-#users-column h2, #tasks-column h2 {
+#users-column h2,
+#tasks-column h2 {
   color: black;
   font-size: 20px;
 }
 
+@media only screen and (max-width: 375px) {
+  .board {
+    flex-direction: column;
+  }
+  .board-container {
+    height: 100%;
+    width: 100%;
+  }
+  .total-column {
+    width: 100%;
+  }
 
+  .footer {
+    display: none;
+  }
+
+  .aside {
+    width: 40%;
+  }
+
+  .header h1 {
+    display: none;
+  }
+
+  .header h2 {
+    text-align: center;
+    margin-left: auto;
+    font-size: small;
+  }
+
+  .header {
+    width: fit-content;
+  }
+
+  .photo {
+    display: none;
+  }
+
+  .main {
+    overflow: auto;
+  }
+
+  
+
+}

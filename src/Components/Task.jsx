@@ -72,7 +72,7 @@ function Task({ title, priority, id, description, category, startDate, endDate, 
         className={`task ${priorityClass}`}
         draggable="true"
         onDragStart={handleDragStart}
-        onDoubleClick={handleOpenCategoryModal}
+        onClick={handleOpenCategoryModal}
       >
         {title} {creator}
       </div>
