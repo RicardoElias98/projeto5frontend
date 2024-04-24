@@ -313,7 +313,7 @@ input {
   color: black;
 }
 
-.photo {
+.photo-variant-1, .photo-variant-2 {
   width: 100px;
   height: 100px;
   border-radius: 50%;
@@ -529,7 +529,7 @@ input {
   font-size: 20px;
 }
 
-@media only screen and (max-width: 375px) {
+@media only screen and (min-width: 320px) and (max-width: 480px) {
   .board {
     flex-direction: column;
   }
@@ -542,7 +542,7 @@ input {
   }
 
   .footer {
-    display: none;
+    display: block;
   }
 
   .aside {
@@ -563,14 +563,149 @@ input {
     width: fit-content;
   }
 
-  .photo {
+  .photo-variant-1 {
     display: none;
+  }
+
+  .photo-variant-2 {
+    display: block;
   }
 
   .main {
     overflow: auto;
   }
+}
 
-  
+@media only screen and (min-width: 481px) and (max-width: 554px) {
+  .board {
+    flex-direction: column;
+  }
+  .board-container {
+    height: 100%;
+    width: 100%;
+  }
+  .total-column {
+    width: 100%;
+  }
 
+  .footer {
+    display: block;
+  }
+
+  .aside {
+    width: 40%;
+  }
+
+  .header h1 {
+    display: none;
+  }
+
+  .header h2 {
+    text-align: center;
+    margin-left: auto;
+    font-size: medium;
+  }
+
+  .header {
+    width: fit-content;
+  }
+
+  .photo-variant-1 {
+    display: none;
+  }
+
+  .photo-variant-2 {
+    display: block;
+  }
+
+  .main {
+    overflow: auto;
+  }
+}
+
+@media only screen and (min-width: 555px) and (max-width: 772px) {
+  .board {
+    flex-direction: column;
+  }
+  .board-container {
+    height: 100%;
+    width: 100%;
+  }
+  .total-column {
+    width: 100%;
+  }
+
+  .footer {
+    display: block;
+  }
+
+  .aside {
+    width: 25%;
+    overflow-y: auto;
+  }
+
+  .photo-variant-1 {
+    display: none;
+  }
+
+  .photo-variant-2 {
+    display: block;
+  }
+
+  .header h1 {
+    display: none;
+  }
+
+  .header h2 {
+    text-align: center;
+    margin-left: auto;
+    font-size: larger;
+  }
+
+  .main {
+    overflow: auto;
+  }
+}
+@media only screen and (min-width: 773px) and (max-width: 1024px) {
+  .board {
+    flex-direction: column;
+  }
+  .board-container {
+    height: 100%;
+    width: 100%;
+  }
+  .total-column {
+    width: 100%;
+  }
+
+  .footer {
+    display: block;
+  }
+
+  .photo-variant-1 {
+    display: block;
+  }
+
+  .photo-variant-2 {
+    display: block;
+  }
+
+  .aside {
+    width: 25%;
+    overflow-y: auto;
+  }
+
+  .header h1 {
+    display: none;
+  }
+
+  .header h2 {
+    text-align: center;
+    margin-left: auto;
+    font-size: larger;
+  }
+
+  .main {
+    overflow: auto;
+  }
 }

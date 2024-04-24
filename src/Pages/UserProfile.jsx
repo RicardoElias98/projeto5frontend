@@ -224,7 +224,7 @@ function UserProfile() {
               </label>
               <div className="circle-photo">
                 <h3> Photo: </h3>
-                <Photo src={data.photo} />
+                <Photo src={data.photo} variant={2} />
               </div>
               <h3>Total Tasks: {data.tasks.length}</h3>
 
