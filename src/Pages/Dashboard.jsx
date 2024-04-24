@@ -32,7 +32,7 @@ function Dashboard() {
               <Link to="/users">Users</Link>
             </h2>
           </div>
-          <Photo src={userPhoto} />
+          <Photo src={userPhoto} variant={1} />
           <h2> {firstName}</h2>
           <NotificationIcon count={notCheckedNotification.length}/>
           <EditProfileButton />
