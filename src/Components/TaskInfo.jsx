@@ -3,6 +3,8 @@ import "../general.css";
 import { categoriesStore } from "../stores/CategoriesStore";
 import { userStore } from "../stores/UserStore";
 import { useNavigate } from "react-router-dom";
+import translations from "../Translation/translation";
+
 
 
 function TaskInfo({
@@ -21,6 +23,8 @@ function TaskInfo({
   const categories = categoriesStore.getState().categories;
   const counter = userStore((state) => state.counter);
   const navigate = useNavigate();
+  const language = userStore((state) => state.language);
+  const { taskInfo, chooseACategory, chooseAStatus, todoName, doingName, doneName, chooseAPrority, low, medium, high, initialDate,finalDate, confirmm, cancel, deletee, edit, statuS, categoryy, taskDescriptionn, taskNamee } = translations[language];
 
 
   const updateCounter = userStore((state) => state.updateCounter);
@@ -184,10 +188,10 @@ function TaskInfo({
   return (
     <div className="modal" id="taskInfoModal">
       <div className="modal-content">
-        <h2 className="h2">Task Info</h2>
+        <h2 className="h2">{taskInfo}</h2>
 
         <label className="h2" htmlFor="taskName">
-          Task Name:
+          {taskNamee}
         </label>
         <input
           type="text"
@@ -198,7 +202,7 @@ function TaskInfo({
           readOnly={!isEditable}
         />
         <label className="h2" htmlFor="taskDescription">
-          Task Description:
+          {taskDescriptionn}
         </label>
         <input
           type="text"
@@ -209,7 +213,7 @@ function TaskInfo({
           readOnly={!isEditable}
         />
         <label className="h2" htmlFor="category">
-          Category:
+          {categoryy}
         </label>
         <select
           id="category"
@@ -218,7 +222,7 @@ function TaskInfo({
           onChange={handleChange}
           disabled={!isEditable}
         >
-          <option value="">Choose a category...</option>
+          <option value="">{chooseACategory}</option>
           {categories.map((category) => (
             <option key={category.id} value={category.name}>
               {category.name}
@@ -226,7 +230,7 @@ function TaskInfo({
           ))}
         </select>
         <label className="h2" htmlFor="status">
-          Status:
+          {statuS}
         </label>
         <select
           id="status"
@@ -235,14 +239,14 @@ function TaskInfo({
           onChange={handleChange}
           disabled={!isEditable}
         >
-          <option value="">Choose a Status...</option>
-          <option value="10">ToDo </option>
-          <option value="20">Doing </option>
-          <option value="30">Done </option>
+          <option value="">{chooseAStatus}</option>
+          <option value="10">{todoName} </option>
+          <option value="20">{doingName} </option>
+          <option value="30">{doneName} </option>
           
         </select>
         <label className="h2" htmlFor="priority">
-          Priority:
+          {priority}
         </label>
         <select
           id="priority"
@@ -251,13 +255,13 @@ function TaskInfo({
           onChange={handleChange}
           disabled={!isEditable}
         >
-          <option value="">Choose a Priority...</option>
-          <option value="Low">Low &#x1F7E2;</option>
-          <option value="Medium">Medium &#x1F7E1; </option>
-          <option value="High">High &#x1F534; </option>
+          <option value="">{chooseAPrority}</option>
+          <option value="Low">{low} &#x1F7E2;</option>
+          <option value="Medium">{medium} &#x1F7E1; </option>
+          <option value="High">{high} &#x1F534; </option>
         </select>
         <label className="h2" htmlFor="startDate">
-          Initial Date:
+          {initialDate}
         </label>
         <input
           type="date"
@@ -268,7 +272,7 @@ function TaskInfo({
           readOnly={!isEditable}
         />
         <label className="h2" htmlFor="endDate">
-          Final Date:
+        {finalDate}
         </label>
         <input
           type="date"
@@ -282,24 +286,24 @@ function TaskInfo({
           <>
             <button className="button" onClick={handleConfirm}>
               {" "}
-              Confirm{" "}
+              {confirmm}{" "}
             </button>
             <button className="button" onClick={handleClose}>
               {" "}
-              Cancel{" "}
+              {cancel}{" "}
             </button>
             <button className="button" onClick={handleDelete}>
               {" "}
-              Delete{" "}
+              {deletee}{" "}
             </button>
           </>
         ) : (
           <>
             <button className="button" onClick={handleEditClick}>
-              Edit
+              {edit}
             </button>
             <button className="button" onClick={handleClose}>
-              Cancel
+              {cancel}
             </button>
           </>
         )}
