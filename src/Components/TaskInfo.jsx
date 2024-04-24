@@ -23,7 +23,6 @@ function TaskInfo({
   const navigate = useNavigate();
 
 
-
   const updateCounter = userStore((state) => state.updateCounter);
 
   const priorityMapping = {
@@ -225,6 +224,22 @@ function TaskInfo({
               {category.name}
             </option>
           ))}
+        </select>
+        <label className="h2" htmlFor="status">
+          Status:
+        </label>
+        <select
+          id="status"
+          name="status"
+          value={formData.status}
+          onChange={handleChange}
+          disabled={!isEditable}
+        >
+          <option value="">Choose a Status...</option>
+          <option value="10">ToDo </option>
+          <option value="20">Doing </option>
+          <option value="30">Done </option>
+          
         </select>
         <label className="h2" htmlFor="priority">
           Priority:
