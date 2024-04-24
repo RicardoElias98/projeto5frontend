@@ -11,6 +11,7 @@ export const userStore = create(
       dbinfo: [],
       categoryDescList: [],
       activeUsers: [],
+      language: "en",
       updateToken: (token) => set({ token }),
       updateUserPhoto: (userPhoto) => set({ userPhoto }),
       updateAllUsers: (allUsers) => set({ allUsers }),
@@ -24,6 +25,7 @@ export const userStore = create(
       updateDBinfo: (dbinfo) => set({ dbinfo }),
       updateDBinfoMedia: (dbinfoMedia) => set({ dbinfoMedia }),
       updateCategoryDescList: (categoryDescList) => set({ categoryDescList }),
+      updateLanguage: (language) => set({ language }),
     }),
 
     {

@@ -3,6 +3,7 @@ import "../general.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { userStore } from "../stores/UserStore";
+import translations from "../Translation/translation";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -13,12 +14,20 @@ function LoginPage() {
   const loginUser = userStore((state) => state.loginUser);
   const updateNotification = userStore((state) => state.updateNotification);
   const updateAllUsers = userStore((state) => state.updateAllUsers);
+  const language = userStore((state) => state.language);
+  const updateLanguage = userStore((state) => state.updateLanguage);
 
   const updateNotCheckedNotification = userStore(
     (state) => state.updateNotCheckedNotification
   );
+  
+  const { usernameLabel, usernamePlaceholder, passwordLabel, passwordPlaceholder, backButton, switchLanguageButton } = translations[language];
 
-  //Dados do formulário
+  const toggleLanguage = () => {
+    updateLanguage(language === "en" ? "pt" : "en");
+  };
+
+ 
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -185,33 +194,28 @@ function LoginPage() {
         <form onSubmit={handleSubmit}>
           <div>
             <div className="labels-containers">
-              <label htmlFor="username"> Username: </label>
+              <label htmlFor="username">{usernameLabel}</label>
               <input
                 type="text"
                 name="username"
-                defaultValue=""
+                value={formData.username}
                 onChange={handleChange}
-                placeholder="Your username"
+                placeholder={usernamePlaceholder}
               />
-
-              <label>
-                <label htmlFor="Password"> Password: </label>
-                <input
-                  type="password"
-                  name="password"
-                  defaultValue=""
-                  onChange={handleChange}
-                  placeholder="Your Password"
-                />
-              </label>
+              <label htmlFor="password">{passwordLabel}</label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder={passwordPlaceholder}
+              />
             </div>
           </div>
           <div className="button-container">
             <input className="button" type="submit" value="Send" />
-            <button className="button" onClick={goBack}>
-              {" "}
-              Back{" "}
-            </button>
+            <button className="button" onClick={goBack}>{backButton}</button>
+            <button className="button" onClick={toggleLanguage}>{switchLanguageButton}</button>
           </div>
         </form>
       </div>
