@@ -3,15 +3,20 @@ import DataTable from "react-data-table-component";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userStore } from "../stores/UserStore";
+import translations from "../Translation/translation";
+
+
 
 function DataTableUsers() {
   const allUsers = userStore((state) => state.allUsers);
   const token = userStore((state) => state.token);
   const updateProfileInfo = userStore((state) => state.updateProfileInfo);
+  const language = userStore((state) => state.language);
+  const { nameLabel, role } = translations[language];
 
   const columns = [
     {
-      name: "Name",
+      name: nameLabel,
       selector: (row) => row.name,
       sortable: true,
     },
@@ -21,7 +26,7 @@ function DataTableUsers() {
       sortable: true,
       hide: "sm",
     },
-    { name: "Role", selector: (row) => row.role, sortable: true },
+    { name: role, selector: (row) => row.role, sortable: true },
   ];
 
   const navigate = useNavigate();

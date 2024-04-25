@@ -12,6 +12,7 @@ import Message from "../Components/Message";
 import WebSocketChat from "../Components/WebSocketChat";
 import { useRef } from "react";
 import NotificationIcon from "../Components/NotificationIcon";
+import translations from "../Translation/translation";
 
 function UserProfile() {
   const { username } = useParams();
@@ -27,6 +28,22 @@ function UserProfile() {
     (state) => state.notCheckedNotification
   );
   const navigate = useNavigate();
+  const language = userStore((state) => state.language);
+  const {
+    tasksLink,
+    usersTableLink,
+    deletedTasksLink,
+    dashboardLink,
+    usernameLabel,
+    emailLabel,
+    nameLabel,
+    photoLabel,
+    totalTasks,
+    tasksTodo,
+    tasksDoing,
+    tasksDone,
+    Typeyourmessagehere,
+  } = translations[language];
 
   const [receivedMessage, setReceivedMessage] = useState("");
 
@@ -179,18 +196,18 @@ function UserProfile() {
         <h1>Scrum Board</h1>
         <div className="links">
           <h2 className="tasks-link">
-            <Link to="/htmlDefault "> Tasks </Link>
+            <Link to="/htmlDefault "> {tasksLink} </Link>
           </h2>
           <h2 className="Deleted-tasks-link">
             {(role === "Owner" || role === "user") && (
-              <Link to="/deletedTasks"> Deleted Tasks</Link>
+              <Link to="/deletedTasks"> {deletedTasksLink}</Link>
             )}
           </h2>
           <h2 className="users-link">
-            <Link to="/users">Users</Link>
+            <Link to="/users">{usersTableLink}</Link>
           </h2>
           <h2 className="dashboard-link">
-            {role === "Owner" && <Link to="/dashboard">Board</Link>}
+            {role === "Owner" && <Link to="/dashboard">{dashboardLink}</Link>}
           </h2>
         </div>
         <Photo src={userPhoto} />
@@ -211,26 +228,27 @@ function UserProfile() {
             <div className="modal-content">
               <h2>User Profile</h2>
               <label>
-                Username: <input type="text" value={data.username} readOnly />
+                {usernameLabel}{" "}
+                <input type="text" value={data.username} readOnly />
               </label>
               <label>
-                Name: <input type="text" value={data.name} readOnly />
+                {nameLabel} <input type="text" value={data.name} readOnly />
               </label>
               <label>
-                Email: <input type="email" value={data.email} readOnly />
+                {emailLabel} <input type="email" value={data.email} readOnly />
               </label>
               <label>
-                Photo: <input type="text" value={data.photo} readOnly />
+                {photoLabel} <input type="text" value={data.photo} readOnly />
               </label>
               <div className="circle-photo">
-                <h3> Photo: </h3>
+                <h3> {photoLabel} </h3>
                 <Photo src={data.photo} variant={2} />
               </div>
-              <h3>Total Tasks: {data.tasks.length}</h3>
+              <h3>{totalTasks} {data.tasks.length}</h3>
 
-              <h3> Tasks To-do: {data.tasksTODO.length} </h3>
-              <h3> Tasks Doing: {data.tasksDOING.length} </h3>
-              <h3> Tasks Done: {data.tasksDONE.length} </h3>
+              <h3> {tasksTodo} {data.tasksTODO.length} </h3>
+              <h3> {tasksDoing}  {data.tasksDOING.length} </h3>
+              <h3> {tasksDone}  {data.tasksDONE.length} </h3>
               <div
                 className="message-container-withscroll"
                 ref={messageContainerRef}
@@ -248,7 +266,7 @@ function UserProfile() {
               <div className="message-section">
                 <textarea
                   className="message-input"
-                  placeholder="Type your message here..."
+                  placeholder={Typeyourmessagehere}
                 ></textarea>
                 <button className="buttonModal" onClick={handleSend}>
                   Send

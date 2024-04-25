@@ -40,32 +40,38 @@ const translations = {
     filterByUser: "Filter by user",
     chooseAnUser: "Choose an user",
     /*AsideAddTask*/
-     /*TaskInfo*/
-     statuS: "Status",
-     categoryy: "Category",
-     taskDescriptionn: "Task Description",
-     taskNamee: "Task Name",
-     confirmm: "Confirm", 
-     cancel: "Cancel",
-     deletee: "Delete",
-     edit: "Edit",
-     chooseAStatus: "Choose a status",
-     priorityy: "Priority",
-     /*TaskInfo*/
-     /* Users */ 
-     tasksLink: "Tasks",
-     /* Users */ 
-     /* AsideAddUser */ 
-     nameLabel: "Name",
-     firstNameLastPlaceholder: "First and Last name",
-     emailLabel: "Email",
-     emailPlaceHolder: "Your email",
-     photoLabel: "Photo",
-     photoPlaceHolder:"Your photo",
-     phoneLabel: "Phone number", 
-     phonePlaceHolder: "Your phone number",
-     createUser: "Create user",
-    /* AsideAddUser */ 
+    /*TaskInfo*/
+    statuS: "Status",
+    categoryy: "Category",
+    taskDescriptionn: "Task Description",
+    taskNamee: "Task Name",
+    confirmm: "Confirm",
+    cancel: "Cancel",
+    deletee: "Delete",
+    edit: "Edit",
+    chooseAStatus: "Choose a status",
+    priorityy: "Priority",
+    /*TaskInfo*/
+    /* Users */
+    tasksLink: "Tasks",
+    /* Users */
+    /* AsideAddUser */
+    nameLabel: "Name",
+    firstNameLastPlaceholder: "First and Last name",
+    emailLabel: "Email",
+    emailPlaceHolder: "Your email",
+    photoLabel: "Photo",
+    photoPlaceHolder: "Your photo",
+    phoneLabel: "Phone number",
+    phonePlaceHolder: "Your phone number",
+    createUser: "Create user",
+    /* AsideAddUser */
+    role: "Role",
+    totalTasks: "Total tasks: ",
+    tasksTodo: "Tasks To-do: ",
+    tasksDoing: "Tasks Doing: ",
+    tasksDone: "Tasks Done: ",
+    Typeyourmessagehere: "Type your message here...",
   },
   pt: {
     /* Login Page*/
@@ -113,33 +119,41 @@ const translations = {
     categoryy: "Categoria",
     taskDescriptionn: "Descrição da tarefa",
     taskNamee: "Nome da tarefa",
-    confirmm: "Confirmar", 
+    confirmm: "Confirmar",
     cancel: "Cancelar",
     deletee: "Eliminar",
     edit: "Editar",
     chooseAStatus: "Escolha um estado",
     priorityy: "Prioridade",
     /*TaskInfo*/
-    /* Users */ 
+    /* Users */
     tasksLink: "Tarefas",
-    /* Users */ 
-    /* AsideAddUser */ 
+    /* Users */
+    /* AsideAddUser */
     nameLabel: "Nome",
-     firstNameLastPlaceholder: "Primeiro e Último nome",
-     emailLabel: "Email",
-     emailPlaceHolder: "Seu email",
-     photoLabel: "Fotografia",
-     photoPlaceHolder:"Sua fotografia",
-     phoneLabel: "Contacto telefónico", 
-     phonePlaceHolder: "Seu nº de telemóvel",
-     createUser: "Criar utilizador",
-     Usernamecannotcontainspaces: "Username não pode ter espaços",
-      Passwordisrequired: "Palavra-passe é obrigatória",
-       Namemustcontainexactlytwonames: "Nome só pode ter 2 nomes",
-      Invalidemailformat: "Email inválido",
-      Invalidphonenumberformatshouldcontainexactly9digits: "Telefone inválido, deve conter 9 dígitos",
-      PhotoURLshouldstartwithhttps: "URL da fotografia deve começar com https",
-    /* AsideAddUser */ 
+    firstNameLastPlaceholder: "Primeiro e Último nome",
+    emailLabel: "Email",
+    emailPlaceHolder: "Seu email",
+    photoLabel: "Fotografia",
+    photoPlaceHolder: "Sua fotografia",
+    phoneLabel: "Contacto telefónico",
+    phonePlaceHolder: "Seu nº de telemóvel",
+    createUser: "Criar utilizador",
+    Usernamecannotcontainspaces: "Username não pode ter espaços",
+    Passwordisrequired: "Palavra-passe é obrigatória",
+    Namemustcontainexactlytwonames: "Nome só pode ter 2 nomes",
+    Invalidemailformat: "Email inválido",
+    Invalidphonenumberformatshouldcontainexactly9digits:
+      "Telefone inválido, deve conter 9 dígitos",
+    PhotoURLshouldstartwithhttps: "URL da fotografia deve começar com https",
+    /* AsideAddUser */
+
+    role: "Cargo",
+    totalTasks: "Total de tarefas: ",
+    tasksTodo: "Tarefas por fazer: ",
+    tasksDoing: "Tarefas em andamento: ",
+    tasksDone: "Tarefas concluídas: ",
+    Typeyourmessagehere: "Escreva a sua mensagem aqui...",
   },
 };
 

@@ -9,6 +9,8 @@ import AsideAddUser from "../Components/AsideAddUser";
 import EditProfileButton from "../Components/EditProfileButton";
 import DataTableUsers from "../Components/DataTableUsers";
 import NotificationIcon from "../Components/NotificationIcon";
+import translations from "../Translation/translation";
+
 
 function UsersTable() {
   const userPhoto = userStore.getState().userPhoto;
@@ -16,6 +18,9 @@ function UsersTable() {
   const role = userStore.getState().loginUser.role;
   const notifications = userStore((state) => state.notification);
   const notCheckedNotification = userStore((state) => state.notCheckedNotification);
+  const language = userStore((state) => state.language);
+  const { tasksLink, deletedTasksLink, dashboardLink, usersLink } = translations[language];
+
 
   return (
     <div className="App" id="outer-container">
@@ -23,19 +28,19 @@ function UsersTable() {
         <h1>Scrum Board</h1>
         <div className="links">
           <h2 className="tasks-link">
-            <Link to="/htmlDefault "> Tasks </Link>
+            <Link to="/htmlDefault "> {tasksLink} </Link>
           </h2>
           <h2 className="Deleted-tasks-link">
             {(role === "Owner" || role === "user") && (
-              <Link to="/deletedTasks"> Deleted Tasks</Link>
+              <Link to="/deletedTasks"> {deletedTasksLink}</Link>
             )}
           </h2>
           <h2 className="users-link">
-            <Link to="/users">Users</Link>
+            <Link to="/users">{usersLink}</Link>
           </h2>
           <h2 className="dashboard-link">
             {(role === "Owner") && (
-              <Link to="/dashboard">Board</Link>
+              <Link to="/dashboard">{dashboardLink}</Link>
             )}
           </h2>
         </div>
