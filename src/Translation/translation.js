@@ -52,6 +52,20 @@ const translations = {
      chooseAStatus: "Choose a status",
      priorityy: "Priority",
      /*TaskInfo*/
+     /* Users */ 
+     tasksLink: "Tasks",
+     /* Users */ 
+     /* AsideAddUser */ 
+     nameLabel: "Name",
+     firstNameLastPlaceholder: "First and Last name",
+     emailLabel: "Email",
+     emailPlaceHolder: "Your email",
+     photoLabel: "Photo",
+     photoPlaceHolder:"Your photo",
+     phoneLabel: "Phone number", 
+     phonePlaceHolder: "Your phone number",
+     createUser: "Create user",
+    /* AsideAddUser */ 
   },
   pt: {
     /* Login Page*/
@@ -106,6 +120,26 @@ const translations = {
     chooseAStatus: "Escolha um estado",
     priorityy: "Prioridade",
     /*TaskInfo*/
+    /* Users */ 
+    tasksLink: "Tarefas",
+    /* Users */ 
+    /* AsideAddUser */ 
+    nameLabel: "Nome",
+     firstNameLastPlaceholder: "Primeiro e Último nome",
+     emailLabel: "Email",
+     emailPlaceHolder: "Seu email",
+     photoLabel: "Fotografia",
+     photoPlaceHolder:"Sua fotografia",
+     phoneLabel: "Contacto telefónico", 
+     phonePlaceHolder: "Seu nº de telemóvel",
+     createUser: "Criar utilizador",
+     Usernamecannotcontainspaces: "Username não pode ter espaços",
+      Passwordisrequired: "Palavra-passe é obrigatória",
+       Namemustcontainexactlytwonames: "Nome só pode ter 2 nomes",
+      Invalidemailformat: "Email inválido",
+      Invalidphonenumberformatshouldcontainexactly9digits: "Telefone inválido, deve conter 9 dígitos",
+      PhotoURLshouldstartwithhttps: "URL da fotografia deve começar com https",
+    /* AsideAddUser */ 
   },
 };
 

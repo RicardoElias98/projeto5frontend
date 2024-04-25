@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "../general.css";
 import { userStore } from "../stores/UserStore";
+import translations from "../Translation/translation";
+
 
 function UserInfo({
   isOpen,
@@ -24,6 +26,9 @@ function UserInfo({
     userPhoto: userPhoto,
     role: role,
   });
+
+  const language = userStore((state) => state.language);
+  const { usernameLabel, passwordLabel, nameLabel, emailLabel, phoneLabel, photoLabel, confirmm, deletee, edit, cancel, Usernamecannotcontainspaces, Passwordisrequired, Namemustcontainexactlytwonames, Invalidemailformat,Invalidphonenumberformatshouldcontainexactly9digits,PhotoURLshouldstartwithhttps } = translations[language];
 
   const [warnings, setWarnings] = useState({
     username: "",
@@ -56,27 +61,27 @@ function UserInfo({
     const newWarnings = {};
 
     if (/\s/.test(formData.username)) {
-      newWarnings.username = "Username cannot contain spaces";
+      newWarnings.username = Usernamecannotcontainspaces;
     }
     if (formData.password === "") {
-      newWarnings.password = "Password is required";
+      newWarnings.password = Passwordisrequired;
     }
     if (!/^(\S+\s+\S+)$/.test(formData.name.trim())) {
-      newWarnings.name = "Name must contain exactly two names";
+      newWarnings.name = Namemustcontainexactlytwonames;
     }
     if (!/^\S+@\S+\.\S+$/.test(formData.email.trim())) {
-      newWarnings.email = "Invalid email format";
+      newWarnings.email = Invalidemailformat;
     }
     if (!/^\d{9}$/.test(formData.contactNumber.trim())) {
       newWarnings.contactNumber =
-        "Invalid phone number format (should contain exactly 9 digits)";
+      Invalidphonenumberformatshouldcontainexactly9digits;
     }
 
     if (
       formData.userPhoto.trim() &&
       !formData.userPhoto.trim().startsWith("https://")
     ) {
-      newWarnings.userPhoto = "Photo URL should start with 'https://'";
+      newWarnings.userPhoto = PhotoURLshouldstartwithhttps;
     }
 
     setWarnings(newWarnings);
@@ -137,7 +142,7 @@ function UserInfo({
         <h2 className="h2">User Info</h2>
 
         <label className="h2" htmlFor="userName">
-          Username:
+          {usernameLabel}
         </label>
         <input
           type="text"
@@ -150,7 +155,7 @@ function UserInfo({
         />
         <div className="warning">{warnings.username}</div>
         <label className="h2" htmlFor="nameUser">
-          Name of the User:
+         {nameLabel}
         </label>
         <input
           type="text"
@@ -163,7 +168,7 @@ function UserInfo({
         />
         <div className="warning">{warnings.name}</div>
         <label className="h2" htmlFor="email">
-          Email:
+          {emailLabel}
         </label>
         <input
           type="text"
@@ -176,7 +181,7 @@ function UserInfo({
         />
         <div className="warning">{warnings.email}</div>
         <label className="h2" htmlFor="phoneNumber">
-          Phone Number:
+          {phoneLabel}
         </label>
         <input
           type="text"
@@ -189,7 +194,7 @@ function UserInfo({
         />
         <div className="warning">{warnings.contactNumber}</div>
         <label className="h2" htmlFor="photo">
-          Photo:
+          {photoLabel}
         </label>
         <input
           type="text"
@@ -205,26 +210,26 @@ function UserInfo({
           <>
             <button className="button" onClick={handleConfirm}>
               {" "}
-              Confirm{" "}
+              {confirmm}{" "}
             </button>
             <button className="button" onClick={handleClose}>
               {" "}
-              Cancel{" "}
+              {cancel}{" "}
             </button>
             <button className="button" onClick={handleDelete}>
               {" "}
-              Delete{" "}
+              {deletee}{" "}
             </button>
           </>
         ) : (
           <>
             {rolE === "Owner" && (
               <button className="button" onClick={handleEditClick}>
-                Edit
+                {edit}
               </button>
             )}
             <button className="button" onClick={handleClose}>
-              Cancel
+              {cancel}
             </button>
           </>
         )}

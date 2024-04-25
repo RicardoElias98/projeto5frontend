@@ -5,11 +5,15 @@ import User from "./User";
 import { useNavigate } from "react-router-dom";
 
 
+
+
 function MainUsers() {
   const token = userStore.getState().token;
   const [allUsers, setAllUsers] = useState([]);
   const updateAllUsers = userStore((state) => state.updateAllUsers);
   const fullUsers = userStore((state) => state.allUsers);
+  const language = userStore((state) => state.language);
+  
   
 
   const navigate = useNavigate();

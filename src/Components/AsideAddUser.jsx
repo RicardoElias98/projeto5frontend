@@ -1,5 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import translations from "../Translation/translation";
+import { userStore } from "../stores/UserStore";
+
 
 function AsideAddUser() {
   const [formData, setFormData] = useState({
@@ -20,6 +23,9 @@ function AsideAddUser() {
     userPhoto: "",
   });
 
+  const language = userStore((state) => state.language);
+  const { usernameLabel, usernamePlaceholder, passwordLabel, passwordPlaceholder, nameLabel, firstNameLastPlaceholder, emailLabel, emailPlaceHolder, photoLabel, photoPlaceHolder, phoneLabel, phonePlaceHolder, createUser,Usernamecannotcontainspaces, Passwordisrequired, Namemustcontainexactlytwonames, Invalidemailformat,Invalidphonenumberformatshouldcontainexactly9digits,PhotoURLshouldstartwithhttps    } = translations[language];
+
    
 
   const handleSubmit = (event) => {
@@ -28,27 +34,27 @@ function AsideAddUser() {
     const newWarnings = {};
 
     if (/\s/.test(formData.username)) {
-      newWarnings.username = "Username cannot contain spaces";
+      newWarnings.username = Usernamecannotcontainspaces;
     }
     if ((formData.password === "")) {
-      newWarnings.password = "Password is required";
+      newWarnings.password = Passwordisrequired;
     }
     if (!/^(\S+\s+\S+)$/.test(formData.name.trim())) {
-      newWarnings.name = "Name must contain exactly two names";
+      newWarnings.name =Namemustcontainexactlytwonames ;
     }
     if (!/^\S+@\S+\.\S+$/.test(formData.email.trim())) {
-      newWarnings.email = "Invalid email format";
+      newWarnings.email = Invalidemailformat;
     }
     if (!/^\d{9}$/.test(formData.contactNumber.trim())) {
       newWarnings.contactNumber =
-        "Invalid phone number format (should contain exactly 9 digits)";
+        Invalidphonenumberformatshouldcontainexactly9digits;
     }
 
     if (
       formData.userPhoto.trim() &&
       !formData.userPhoto.trim().startsWith("https://")
     ) {
-      newWarnings.userPhoto = "Photo URL should start with 'https://'";
+      newWarnings.userPhoto = PhotoURLshouldstartwithhttps;
     }
 
     setWarnings(newWarnings);
@@ -68,8 +74,6 @@ function AsideAddUser() {
         } else if (response.status === 409) {
           alert("User with this username is already exists");
         } else if (response.status === 201) {
-          alert("A new user is created");
-
           setFormData({
             username: "",
             password: "",
@@ -98,82 +102,83 @@ function AsideAddUser() {
             <div className="labels-containers">
               <label className="label-add-user" htmlFor="username">
                 {" "}
-                Username:{" "}
+                {usernameLabel}{" "}
               </label>
               <input
                 type="text"
                 name="username"
                 defaultValue=""
                 onChange={handleChange}
-                placeholder="Username"
+                placeholder={usernamePlaceholder}
               />
               <div className="warning">{warnings.username}</div>
               <label>
                 <label className="label-add-user" htmlFor="password">
                   {" "}
-                  Password:{" "}
+                  {passwordLabel}{" "}
                 </label>
                 <input
                   type="password"
                   name="password"
                   defaultValue=""
                   onChange={handleChange}
-                  placeholder="Password"
+                  placeholder={passwordPlaceholder}
                 />
                 <div className="warning">{warnings.password}</div>
               </label>
               <label className="label-add-user" htmlFor="name">
                 {" "}
-                Name:{" "}
+                {nameLabel}
+               {" "}
               </label>
               <input
                 type="text"
                 name="name"
                 defaultValue=""
                 onChange={handleChange}
-                placeholder="First and Last Name"
+                placeholder={firstNameLastPlaceholder}
               />
               <div className="warning">{warnings.name}</div>
               <label className="label-add-user" htmlFor="email">
                 {" "}
-                Email:{" "}
+                {emailLabel}{" "}
               </label>
               <input
                 type="text"
                 name="email"
                 defaultValue=""
                 onChange={handleChange}
-                placeholder="Email"
+                placeholder={emailPlaceHolder}
               />
               <div className="warning">{warnings.email}</div>
               <label className="label-add-user" htmlFor="contactNumber">
                 {" "}
-                Phone number:{" "}
+                {phoneLabel}{" "}
               </label>
               <input
                 type="text"
                 name="contactNumber"
                 defaultValue=""
                 onChange={handleChange}
-                placeholder="Phone Number"
+                placeholder={phonePlaceHolder}
               />
               <div className="warning">{warnings.contactNumber}</div>
               <label className="label-add-user" htmlFor="userPhoto">
                 {" "}
-                Photo:{" "}
+                {photoLabel}{" "}
               </label>
               <input
                 type="text"
                 name="userPhoto"
                 defaultValue=""
                 onChange={handleChange}
-                placeholder="Photo"
+                placeholder={photoPlaceHolder}
               />
               <div className="warning">{warnings.userPhoto}</div>
             </div>
           </div>
           <div className="button-container">
-            <input className="button" type="submit" value="Create User" />
+            <input className="button" type="submit" value={createUser} />
           </div>
         </form>
       </div>
