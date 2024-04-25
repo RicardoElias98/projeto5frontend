@@ -4,6 +4,7 @@ import { userStore } from "../stores/UserStore";
 import GraphUsersInTime from "./GraphUsersInTime";
 import WebSocketDB from "./WebSocketDB";
 import { useNavigate } from "react-router-dom";
+import translations from "../Translation/translation";
 
 function MainDashBoard() {
   const allUsers = userStore((state) => state.allUsers);
@@ -17,6 +18,8 @@ function MainDashBoard() {
     (state) => state.updateCategoryDescList
   );
   const updateAllUsers = userStore((state) => state.updateAllUsers);
+  const language = userStore((state) => state.language);
+  const { userTasksInfo, totalUsers, confirmedUsers,unconfirmedUsers,Averagenumberoftasksperuser, tasksTodo, tasksDoing, tasksDone,categoryInfo,graphs  } = translations[language];
 
   const navigate = useNavigate();
 
@@ -71,7 +74,7 @@ function MainDashBoard() {
     })
       .then(async function (response) {
         if (response.status === 403) {
-         console.log("User with this token is not found");
+          console.log("User with this token is not found");
         } else if (response.status === 200) {
           const categoryDescList = await response.json();
           updateCategoryDescList(categoryDescList);
@@ -118,14 +121,12 @@ function MainDashBoard() {
       },
     })
       .then(async function (response) {
-
         if (response.status === 403) {
           console.log("User with this token is not found");
         } else if (response.status === 401) {
           alert("Token timer expired, please login again.");
           navigate("/goBackInitialPage", { replace: true });
-        }
-        else if (response.status === 200) {
+        } else if (response.status === 200) {
           const info = await response.json();
           updateDBinfo(info);
           console.log(info);
@@ -140,29 +141,52 @@ function MainDashBoard() {
     <div className="board">
       <div className="total-column">
         <div className="column-header" id="users-header">
-          <h2>Users/Tasks Info</h2>
+          <h2>{userTasksInfo}</h2>
         </div>
         <div className="board-container" id="users-container">
           <section className="board-column" id="users-column">
-            <h2> Total users: {allUsers.length} </h2>
-            <h2> Confirmed Users: {dbinfo[0]}</h2>
-            <h2> Unconfirmed Users: {dbinfo[1]}</h2>
-            <h2> Average number of tasks per user: {dbinfoMedia}</h2>
-            <h2> To-do Tasks: {dbinfo[2]} </h2>
-            <h2> Doing Tasks: {dbinfo[3]}</h2>
-            <h2> Done Tasks: {dbinfo[4]}</h2>
+            <h2>
+              {" "}
+              {totalUsers} {allUsers.length}{" "}
+            </h2>
+            <h2>
+              {" "}
+              {confirmedUsers} {dbinfo[0]}
+            </h2>
+            <h2>
+              {" "}
+              {unconfirmedUsers} {dbinfo[1]}
+            </h2>
+            <h2>
+              {" "}
+              {Averagenumberoftasksperuser} : {dbinfoMedia}
+            </h2>
+            <h2>
+              {" "}
+              {tasksTodo} {dbinfo[2]}{" "}
+            </h2>
+            <h2>
+              {" "}
+              {tasksDoing} {dbinfo[3]}
+            </h2>
+            <h2>
+              {" "}
+              {tasksDone} {dbinfo[4]}
+            </h2>
           </section>
         </div>
       </div>
       <div className="total-column">
         <div className="column-header" id="tasks-header">
-          <h2>Category Info</h2>
+          <h2>{categoryInfo}</h2>
         </div>
         <div className="board-container" id="tasks-container">
           <section className="board-column" id="tasks-column">
             <section className="board-column" id="tasks-column">
               {categoryDescList.map((item, index) => (
-                <h2 key={index}>{item[0].name} : {item[1]}</h2>
+                <h2 key={index}>
+                  {item[0].name} : {item[1]}
+                </h2>
               ))}
             </section>
           </section>
@@ -170,11 +194,11 @@ function MainDashBoard() {
       </div>
       <div className="total-column">
         <div className="column-header" id="graphs-header">
-          <h2>Graphs</h2>
+          <h2>{graphs}</h2>
         </div>
         <div className="board-container" id="graphs-container">
           <section className="board-column" id="graphs-column">
-            <GraphUsersInTime/>
+            <GraphUsersInTime />
           </section>
         </div>
       </div>

@@ -75,6 +75,16 @@ const translations = {
     permanentlyDelete: "Permanently Delete",
     deleted: "Delete",
     restore: "Restaurar",
+    userTasksInfo: "User and Task Information",
+     totalUsers: "Total users",
+      confirmedUsers: "Confirmed users",
+      unconfirmedUsers: "Unconfirmed users",
+      Averagenumberoftasksperuser: "Average number of tasks per user",
+      categoryInfo: "Category Information",
+      graphs: "Graphs",
+      Numberofregisteredusersconfirmedornot: "Number of registered users (confirmed or not)",
+    numberofActiveUsers: "Number of active users",
+    Numberoftasksdone: "Number of tasks done",
   },
   pt: {
     /* Login Page*/
@@ -160,6 +170,16 @@ const translations = {
     permanentlyDelete: "Apagar permanentemente",
     deleted: "Apagadas",
     restore: "Restaurar",
+    userTasksInfo: "Informações de tarefas e utilizadores",
+     totalUsers: "Total de utilizadores",
+      confirmedUsers: "Utilizadores confirmados",
+      unconfirmedUsers: "Utilizadores não confirmados",
+      Averagenumberoftasksperuser: "Média de tasks por utilizador",
+      categoryInfo: "Informações de categoria",
+      graphs: "Gráficos",
+      Numberofregisteredusersconfirmedornot: "Número de utilizadores registados (confirmados ou não)",
+    numberofActiveUsers: "Número de utilizadores ativos",
+    Numberoftasksdone: "Número de tarefas concluídas",
   },
 };
 

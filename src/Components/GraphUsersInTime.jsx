@@ -2,14 +2,19 @@ import React, { useState, useEffect } from "react";
 import { userStore } from "../stores/UserStore";
 import Chart from "chart.js";
 import { useNavigate } from "react-router-dom";
-
+import translations from "../Translation/translation";
 
 function GraphUsersInTime() {
   const token = userStore((state) => state.token);
   const [activeUserByDate, setActiveUserByDate] = useState([]);
   const [doneTasks, setDoneTasks] = useState([]);
   const navigate = useNavigate();
-
+  const language = userStore((state) => state.language);
+  const {
+    Numberofregisteredusersconfirmedornot,
+    numberofActiveUsers,
+    Numberoftasksdone,
+  } = translations[language];
 
   useEffect(() => {
     getUsersInfo();
@@ -33,8 +38,7 @@ function GraphUsersInTime() {
           setDoneTasks(tasks);
           console.log("tasks", tasks);
           drawTasksChart(tasks);
-        }
-        else if (response.status === 403) {
+        } else if (response.status === 403) {
           alert("Token timer expired, please login again.");
           navigate("/goBackInitialPage", { replace: true });
         }
@@ -68,8 +72,6 @@ function GraphUsersInTime() {
       });
   };
 
-  
-
   const drawUsersChart = (data) => {
     const labels = data.map((entry) => Object.keys(entry)[0]);
     const values = data.map((entry) => Object.values(entry)[0]);
@@ -81,7 +83,7 @@ function GraphUsersInTime() {
         labels: labels,
         datasets: [
           {
-            label: "Number of registered users (confirmed or not)",
+            label:  Numberofregisteredusersconfirmedornot ,
             data: values,
             borderColor: "rgb(75, 192, 192)",
             tension: 0.1,
@@ -103,7 +105,7 @@ function GraphUsersInTime() {
             beginAtZero: true,
             title: {
               display: true,
-              text: "Número de Usuários Ativos",
+              text:  numberofActiveUsers ,
             },
           },
         },
@@ -122,7 +124,7 @@ function GraphUsersInTime() {
         labels: labels,
         datasets: [
           {
-            label: "Number of tasks done",
+            label:  Numberoftasksdone ,
             data: values,
             borderColor: "rgb(192, 75, 192)",
             tension: 0.1,
@@ -144,7 +146,7 @@ function GraphUsersInTime() {
             beginAtZero: true,
             title: {
               display: true,
-              text: "Number of tasks done",
+              text:  Numberoftasksdone ,
             },
           },
         },
