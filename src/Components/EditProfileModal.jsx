@@ -15,6 +15,7 @@ function EditProfileModal({ onClose, user }) {
 
   const updateLoginUser = userStore((state) => state.updateLoginUser);
   const language = userStore((state) => state.language);
+  const updateLanguage = userStore((state) => state.updateLanguage);
   const {
     editProfile,
     usernameLabel,
@@ -26,7 +27,12 @@ function EditProfileModal({ onClose, user }) {
     cancel,
     edit,
     editPassword,
+    switchLanguageButton,
   } = translations[language];
+
+  const toggleLanguage = () => {
+    updateLanguage(language === "en" ? "pt" : "en");
+  };
 
   const token = userStore.getState().token;
   const [isEditPasswordModalOpen, setIsEditPasswordModalOpen] = useState(false);
@@ -133,6 +139,7 @@ function EditProfileModal({ onClose, user }) {
         <button onClick={handleConfirm}> {confirmm} </button>
         <button onClick={handleCancel}> {cancel} </button>
         <button onClick={openEditPasswordModal}> {editPassword} </button>
+        <button className="button" onClick={toggleLanguage}>{switchLanguageButton}</button>
         {isEditPasswordModalOpen && (
           <EditPasswordModal
             onClose={() => setIsEditPasswordModalOpen(false)}
