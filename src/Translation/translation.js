@@ -85,6 +85,9 @@ const translations = {
       Numberofregisteredusersconfirmedornot: "Number of registered users (confirmed or not)",
     numberofActiveUsers: "Number of active users",
     Numberoftasksdone: "Number of tasks done",
+    editPassword: "Edit Password",
+     actualPassword: "Actual password",
+      newPassword: "New password",
   },
   pt: {
     /* Login Page*/
@@ -180,6 +183,9 @@ const translations = {
       Numberofregisteredusersconfirmedornot: "Número de utilizadores registados (confirmados ou não)",
     numberofActiveUsers: "Número de utilizadores ativos",
     Numberoftasksdone: "Número de tarefas concluídas",
+    editPassword: "Editar palavra-passe",
+     actualPassword: "Palavra-passe atual",
+      newPassword: "Nova palavra-passe",
   },
 };
 

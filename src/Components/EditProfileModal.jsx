@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { userStore } from "../stores/UserStore";
 import EditPasswordModal from "./EditPasswordModal";
+import translations from "../Translation/translation";
 
 function EditProfileModal({ onClose, user }) {
   const [formData, setFormData] = useState({
@@ -13,7 +14,20 @@ function EditProfileModal({ onClose, user }) {
   });
 
   const updateLoginUser = userStore((state) => state.updateLoginUser);
-  
+  const language = userStore((state) => state.language);
+  const {
+    editProfile,
+    usernameLabel,
+    nameLabel,
+    emailLabel,
+    phoneLabel,
+    photoLabel,
+    confirmm,
+    cancel,
+    edit,
+    editPassword,
+  } = translations[language];
+
   const token = userStore.getState().token;
   const [isEditPasswordModalOpen, setIsEditPasswordModalOpen] = useState(false);
 
@@ -27,7 +41,7 @@ function EditProfileModal({ onClose, user }) {
   };
 
   const openEditPasswordModal = () => {
-    setIsEditPasswordModalOpen(true); 
+    setIsEditPasswordModalOpen(true);
   };
 
   const handleConfirm = () => {
@@ -56,12 +70,15 @@ function EditProfileModal({ onClose, user }) {
   };
 
   return (
-    <div className={`modal ${isEditPasswordModalOpen ? 'dark-background' : ''}`} id="userInfoModal">
+    <div
+      className={`modal ${isEditPasswordModalOpen ? "dark-background" : ""}`}
+      id="userInfoModal"
+    >
       <div className="modal-content">
-        <h2 className="h2">Edit Profile</h2>
+        <h2 className="h2">{editProfile}</h2>
 
         <label className="h2" htmlFor="userName">
-          Username:
+          {usernameLabel}
         </label>
         <input
           type="text"
@@ -73,7 +90,7 @@ function EditProfileModal({ onClose, user }) {
           className={"input-read-only"}
         />
         <label className="h2" htmlFor="nameUser">
-          Name of the User:
+          {nameLabel}
         </label>
         <input
           type="text"
@@ -83,7 +100,7 @@ function EditProfileModal({ onClose, user }) {
           onChange={handleChange}
         />
         <label className="h2" htmlFor="email">
-          Email:
+          {emailLabel}
         </label>
         <input
           type="text"
@@ -93,7 +110,7 @@ function EditProfileModal({ onClose, user }) {
           onChange={handleChange}
         />
         <label className="h2" htmlFor="phoneNumber">
-          Phone Number:
+          {phoneLabel}
         </label>
         <input
           type="text"
@@ -103,7 +120,7 @@ function EditProfileModal({ onClose, user }) {
           onChange={handleChange}
         />
         <label className="h2" htmlFor="photo">
-          Photo:
+          {photoLabel}
         </label>
         <input
           type="text"
@@ -112,12 +129,15 @@ function EditProfileModal({ onClose, user }) {
           value={formData.userPhoto}
           onChange={handleChange}
         />
-        
-        <button onClick={handleConfirm}> Confirm </button>
-        <button onClick={handleCancel}> Cancel </button>
-        <button onClick={openEditPasswordModal}> Edit Password </button> 
-          {isEditPasswordModalOpen && <EditPasswordModal onClose={() => setIsEditPasswordModalOpen(false)}/>} 
 
+        <button onClick={handleConfirm}> {confirmm} </button>
+        <button onClick={handleCancel}> {cancel} </button>
+        <button onClick={openEditPasswordModal}> {editPassword} </button>
+        {isEditPasswordModalOpen && (
+          <EditPasswordModal
+            onClose={() => setIsEditPasswordModalOpen(false)}
+          />
+        )}
       </div>
     </div>
   );
