@@ -50,7 +50,7 @@ const translations = {
      deletee: "Delete",
      edit: "Edit",
      chooseAStatus: "Choose a status",
-
+     priorityy: "Priority",
      /*TaskInfo*/
   },
   pt: {
@@ -104,6 +104,7 @@ const translations = {
     deletee: "Eliminar",
     edit: "Editar",
     chooseAStatus: "Escolha um estado",
+    priorityy: "Prioridade",
     /*TaskInfo*/
   },
 };

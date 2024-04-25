@@ -24,7 +24,7 @@ function TaskInfo({
   const counter = userStore((state) => state.counter);
   const navigate = useNavigate();
   const language = userStore((state) => state.language);
-  const { taskInfo, chooseACategory, chooseAStatus, todoName, doingName, doneName, chooseAPrority, low, medium, high, initialDate,finalDate, confirmm, cancel, deletee, edit, statuS, categoryy, taskDescriptionn, taskNamee } = translations[language];
+  const { taskInfo, chooseACategory, chooseAStatus, todoName, doingName, doneName, chooseAPrority, low, medium, high, initialDate,finalDate, confirmm, cancel, deletee, edit, statuS, categoryy, taskDescriptionn, taskNamee, priorityy } = translations[language];
 
 
   const updateCounter = userStore((state) => state.updateCounter);
@@ -246,7 +246,7 @@ function TaskInfo({
           
         </select>
         <label className="h2" htmlFor="priority">
-          {priority}
+          {priorityy}
         </label>
         <select
           id="priority"
