@@ -4,6 +4,8 @@ import Task from "./Task";
 import { userStore } from "../stores/UserStore";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import translations from "../Translation/translation";
+
 
 
 function MainDeletedTasks() {
@@ -16,6 +18,9 @@ function MainDeletedTasks() {
   const deletedTasks = tasks.filter((task) => task.active === false);
   const role = userStore.getState().loginUser.role;
   const navigate = useNavigate();
+  const language = userStore((state) => state.language);
+  const { permanentlyDelete, deleted, restore} = translations[language];
+
 
   const handleDragStart = (event, username) => {
     event.dataTransfer.setData("user_id", username);
@@ -83,7 +88,7 @@ function MainDeletedTasks() {
     <div className="board">
   <div className="total-column">
     <div className="column-header" id="deleted-header">
-      <h2>Deleted</h2>
+      <h2>{deleted}</h2>
     </div>
     <div className="board-container" id="deleted-container">
       <section className="board-column" id="deleted-column">
@@ -108,7 +113,7 @@ function MainDeletedTasks() {
     <>
       <div className="total-column">
         <div className="column-header" id="restore-header">
-          <h2> Restore </h2>
+          <h2> {restore} </h2>
         </div>
         <div
           className="board-container"
@@ -121,7 +126,7 @@ function MainDeletedTasks() {
       </div>
       <div className="total-column">
         <div className="column-header" id="deletePerm-header">
-          <h2> PERMANENTLY DELETE </h2>
+          <h2> {permanentlyDelete} </h2>
         </div>
         <div
           className="board-container"

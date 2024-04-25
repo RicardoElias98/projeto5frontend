@@ -72,6 +72,9 @@ const translations = {
     tasksDoing: "Tasks Doing: ",
     tasksDone: "Tasks Done: ",
     Typeyourmessagehere: "Type your message here...",
+    permanentlyDelete: "Permanently Delete",
+    deleted: "Delete",
+    restore: "Restaurar",
   },
   pt: {
     /* Login Page*/
@@ -154,6 +157,9 @@ const translations = {
     tasksDoing: "Tarefas em andamento: ",
     tasksDone: "Tarefas concluídas: ",
     Typeyourmessagehere: "Escreva a sua mensagem aqui...",
+    permanentlyDelete: "Apagar permanentemente",
+    deleted: "Apagadas",
+    restore: "Restaurar",
   },
 };
 
