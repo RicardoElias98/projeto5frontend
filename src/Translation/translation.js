@@ -89,6 +89,7 @@ const translations = {
      actualPassword: "Actual password",
       newPassword: "New password",
       recoveryPassword: "Recovery Password",
+      close: "Close",
 
   },
   pt: {
@@ -189,6 +190,7 @@ const translations = {
      actualPassword: "Palavra-passe atual",
       newPassword: "Nova palavra-passe",
       recoveryPassword: "Recuperar palavra-passe",
+      close: "Fechar",
   },
 };
 

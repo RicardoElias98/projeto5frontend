@@ -23,11 +23,32 @@
   transform: 0.3s;
 }
 
+.buttonNoti {
+  width: 60%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  display: block;
+  border-radius: 8px;
+  border: grey solid;
+  transition: background-color 0.3s;
+  transform: 0.3s;
+  text-align: center;
+}
+
 .button:hover {
   background-color: orange;
 }
 
-.button:active {
+.buttonNoti:hover {
+  background-color: orange;
+}
+
+.button:active  {
+  transform: scale(0.95);
+}
+
+.buttonNoti:active {
   transform: scale(0.95);
 }
 

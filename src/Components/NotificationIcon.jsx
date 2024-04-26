@@ -5,6 +5,8 @@ import NotificationMsg from "./NotificationMsg";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { useEffect } from "react";
+import translations from "../Translation/translation";
+
 
 const NotificationIcon = ({ count }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +20,8 @@ const NotificationIcon = ({ count }) => {
   const updateNotCheckedNotification = userStore(
     (state) => state.updateNotCheckedNotification
   );
+  const language = userStore((state) => state.language);
+  const { close} = translations[language];
 
   const closeNotificationWindow = () => {
     fetch(
@@ -81,7 +85,6 @@ const NotificationIcon = ({ count }) => {
       {count > 0 && <span className="notification-count">{count}</span>}
       {isOpen && (
         <div className="notification-window" ref={notificationWindowRef}>
-           <FaTimes className="close-icon" onClick={closeNotificationWindow} />
           {notification.length === 0 ? (
             <p>No notifications</p>
           ) : (
@@ -105,6 +108,7 @@ const NotificationIcon = ({ count }) => {
                     checked={ntf.checked}
                   />
                 ))}
+                <button className="buttonNoti" onClick={closeNotificationWindow}> {close} </button>
             </>
           )}
         </div>
