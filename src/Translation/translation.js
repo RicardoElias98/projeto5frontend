@@ -88,6 +88,8 @@ const translations = {
     editPassword: "Edit Password",
      actualPassword: "Actual password",
       newPassword: "New password",
+      recoveryPassword: "Recovery Password",
+
   },
   pt: {
     /* Login Page*/
@@ -186,6 +188,7 @@ const translations = {
     editPassword: "Editar palavra-passe",
      actualPassword: "Palavra-passe atual",
       newPassword: "Nova palavra-passe",
+      recoveryPassword: "Recuperar palavra-passe",
   },
 };
 

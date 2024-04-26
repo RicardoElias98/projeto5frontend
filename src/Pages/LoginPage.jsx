@@ -21,7 +21,7 @@ function LoginPage() {
     (state) => state.updateNotCheckedNotification
   );
   
-  const { usernameLabel, usernamePlaceholder, passwordLabel, passwordPlaceholder, backButton, switchLanguageButton } = translations[language];
+  const { usernameLabel, usernamePlaceholder, passwordLabel, passwordPlaceholder, backButton, switchLanguageButton, recoveryPassword } = translations[language];
 
   const toggleLanguage = () => {
     updateLanguage(language === "en" ? "pt" : "en");
@@ -44,6 +44,10 @@ function LoginPage() {
 
   const loginSucess = () => {
     navigate("/htmlDefault", { replace: true });
+  };
+
+  const recoveryPassPage = () => {
+    navigate("/recoveryPassword", { replace: true });
   };
 
   const findUser = (username, token) => {
@@ -216,6 +220,7 @@ function LoginPage() {
             <input className="button" type="submit" value="Send" />
             <button className="button" onClick={goBack}>{backButton}</button>
             <button className="button" onClick={toggleLanguage}>{switchLanguageButton}</button>
+            <button className="button" onClick={recoveryPassPage}>{recoveryPassword}</button>
           </div>
         </form>
       </div>

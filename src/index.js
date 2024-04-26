@@ -15,6 +15,8 @@ import UsersTable from "./Pages/UsersTable";
 import UserProfile from "./Pages/UserProfile";
 import ConfirmationToken from "./Pages/ConfirmationToken";
 import Dashboard from "./Pages/Dashboard";
+import RecoveryPassword from "./Pages/RecoveryPassword";
+import RecoveryPasswordChange from "./Pages/RecoveryPasswordChange";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -34,6 +36,8 @@ root.render(
         <Route path="/userProfile/:username" element={<UserProfile />} />
         <Route path="/confirmationToken/:token" element={<ConfirmationToken />} />
         <Route path="/dashboard" element={<Dashboard />}/>
+        <Route path="/recoveryPassword" element={<RecoveryPassword />} />
+        <Route path="/recoveryPasswordChange/:token" element={<RecoveryPasswordChange/>} />
       </Routes>
     </Router>
   </React.StrictMode>
