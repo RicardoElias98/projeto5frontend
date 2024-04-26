@@ -3,6 +3,8 @@ import { FaBell } from "react-icons/fa";
 import { userStore } from "../stores/UserStore";
 import NotificationMsg from "./NotificationMsg";
 import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 
 const NotificationIcon = ({ count }) => {
@@ -10,6 +12,7 @@ const NotificationIcon = ({ count }) => {
   const notification = userStore((state) => state.notification);
   const token = userStore((state) => state.token);
   const navigate = useNavigate();
+  const notificationWindowRef = useRef(null);
 
 
   const toggleNotificationWindow = () => {
@@ -34,12 +37,20 @@ const NotificationIcon = ({ count }) => {
     });
   };
 
+  useEffect(() => {
+    if (isOpen) {
+      // Scroll para a notificação mais recente
+      notificationWindowRef.current.scrollTop = notificationWindowRef.current.scrollHeight;
+    }
+  }, [notification, isOpen]);
+
+
   return (
     <div>
       <FaBell size={24} color="gray" onClick={toggleNotificationWindow} />
       {count > 0 && <span className="notification-count">{count}</span>}
       {isOpen && (
-        <div className="notification-window">
+        <div className="notification-window" ref={notificationWindowRef}>
           {notification.length === 0 ? (
             <p>No notifications</p>
           ) : (
