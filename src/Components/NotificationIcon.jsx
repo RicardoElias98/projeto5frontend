@@ -97,6 +97,7 @@ const NotificationIcon = ({ count }) => {
                     key={ntf.id}
                     text={ntf.text}
                     checked={ntf.checked}
+                    
                   />
                 ))}
                  {notification
@@ -106,6 +107,7 @@ const NotificationIcon = ({ count }) => {
                     key={ntf.id}
                     text={ntf.text}
                     checked={ntf.checked}
+                    
                   />
                 ))}
                 <button className="buttonNoti" onClick={closeNotificationWindow}> {close} </button>
