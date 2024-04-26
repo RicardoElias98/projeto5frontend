@@ -13,10 +13,35 @@ const NotificationIcon = ({ count }) => {
   const token = userStore((state) => state.token);
   const navigate = useNavigate();
   const notificationWindowRef = useRef(null);
+  const loginUser = userStore((state) => state.loginUser);
+  const username = loginUser.username;
+  const updateNotification = userStore((state) => state.updateNotification);
+  const updateNotCheckedNotification = userStore((state) => state.updateNotCheckedNotification);
 
 
   const toggleNotificationWindow = () => {
     setIsOpen(true);
+    fetch("http://localhost:8080/projecto5backend/rest/notif/notifications", {
+      method: "GET",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/json",
+        token: token,
+        username: username,
+      },
+    }).then(async (response) => {
+      if (response.status === 403) {
+        alert("User with this token is not found");
+      } else if (response.status === 200) {
+        console.log("Notifications are fetched");
+        const notifications = await response.json();
+        updateNotification(notifications);
+      } else if (response.status === 401) {
+        alert("Token timer expired, please login again.");
+        navigate("/goBackInitialPage", { replace: true });
+      } 
+    }
+    );
     fetch("http://localhost:8080/projecto5backend/rest/notif/checkNotification", {
       method: "PUT",
       headers: {
@@ -29,6 +54,7 @@ const NotificationIcon = ({ count }) => {
         alert("User with this token is not found");
       } else if (response.status === 200) {
         console.log("Notifications are checked");
+        updateNotCheckedNotification([]);
       } 
       else if (response.status === 401) {
         alert("Token timer expired, please login again.");
@@ -39,9 +65,9 @@ const NotificationIcon = ({ count }) => {
 
   useEffect(() => {
     if (isOpen) {
-      // Scroll para a notificação mais recente
       notificationWindowRef.current.scrollTop = notificationWindowRef.current.scrollHeight;
     }
+
   }, [notification, isOpen]);
 
 
