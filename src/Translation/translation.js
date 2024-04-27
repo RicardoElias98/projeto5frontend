@@ -65,6 +65,13 @@ const translations = {
     phoneLabel: "Phone number",
     phonePlaceHolder: "Your phone number",
     createUser: "Create user",
+    Usernamecannotcontainspaces: "Username cannot contain spaces",
+    Passwordisrequired: "Password is required",
+    Namemustcontainexactlytwonames: "Name must contain exactly two names",
+    Invalidemailformat: "Invalid email format",
+    Invalidphonenumberformatshouldcontainexactly9digits:
+      "Invalid phone number format, should contain exactly 9 digits",
+    PhotoURLshouldstartwithhttps: "Photo URL should start with https",
     /* AsideAddUser */
     role: "Role",
     totalTasks: "Total tasks: ",
