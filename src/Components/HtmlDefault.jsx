@@ -19,7 +19,7 @@ import translations from "../Translation/translation";
 function HtmlDefault() {
   const userPhoto = userStore.getState().userPhoto;
   const loginUser = userStore.getState().loginUser;
-  const firstName = userStore((state) => state.firstName);
+  const firstName = userStore.getState().loginUser.name.split(" ")[0];
   const role = userStore.getState().loginUser.role;
   const notifications = userStore((state) => state.notification);
   const notCheckedNotification = userStore(
