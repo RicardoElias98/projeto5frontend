@@ -21,7 +21,7 @@ const NotificationIcon = ({ count }) => {
     (state) => state.updateNotCheckedNotification
   );
   const language = userStore((state) => state.language);
-  const { close} = translations[language];
+  const { Ivealreadyreadit} = translations[language];
 
   const closeNotificationWindow = () => {
     fetch(
@@ -110,7 +110,8 @@ const NotificationIcon = ({ count }) => {
                     
                   />
                 ))}
-                <button className="buttonNoti" onClick={closeNotificationWindow}> {close} </button>
+                <button className="buttonNoti" onClick={closeNotificationWindow}> {Ivealreadyreadit
+} </button>
             </>
           )}
         </div>

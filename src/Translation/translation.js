@@ -90,6 +90,7 @@ const translations = {
       newPassword: "New password",
       recoveryPassword: "Recovery Password",
       close: "Close",
+      Ivealreadyreadit: "I've already read it",
 
   },
   pt: {
@@ -191,6 +192,8 @@ const translations = {
       newPassword: "Nova palavra-passe",
       recoveryPassword: "Recuperar palavra-passe",
       close: "Fechar",
+      Ivealreadyreadit: "Já li",
+
   },
 };
 

@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import "../general.css";
 import { useNavigate } from "react-router-dom";
+import translations from "../Translation/translation";
+import { userStore } from "../stores/UserStore";
+
 
 function RecoveryPassword() {
   
@@ -17,6 +20,9 @@ function RecoveryPassword() {
     const { name, value } = event.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
+
+  const language = userStore((state) => state.language);
+  const { backButton,confirmm, emailPlaceHolder } = translations[language];
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -45,6 +51,10 @@ function RecoveryPassword() {
       });
   };
 
+  const goBack = () => {
+    navigate("/loginPage", { replace: true });
+  };
+
   return (
     <div>
       <div className="overlay"></div>
@@ -58,10 +68,11 @@ function RecoveryPassword() {
                 name="email"
                 defaultValue=""
                 onChange={handleChange}
-                placeholder="Your Email"
+                placeholder={emailPlaceHolder}
               />
               <div className="button-container">
-                <input className="button" type="submit" value="Confirm" />
+                <input className="button" type="submit" value= {confirmm} />
+                <button className = "button" onClick={goBack}> {backButton} </button>
               </div>
             </div>
           </div>

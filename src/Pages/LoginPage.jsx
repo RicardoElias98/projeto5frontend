@@ -20,14 +20,22 @@ function LoginPage() {
   const updateNotCheckedNotification = userStore(
     (state) => state.updateNotCheckedNotification
   );
-  
-  const { usernameLabel, usernamePlaceholder, passwordLabel, passwordPlaceholder, backButton, switchLanguageButton, recoveryPassword } = translations[language];
 
-  const toggleLanguage = () => {
+  const {
+    usernameLabel,
+    usernamePlaceholder,
+    passwordLabel,
+    passwordPlaceholder,
+    backButton,
+    switchLanguageButton,
+    recoveryPassword,
+  } = translations[language];
+
+  const toggleLanguage = (e) => {
+    e.preventDefault();
     updateLanguage(language === "en" ? "pt" : "en");
   };
 
- 
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -46,7 +54,8 @@ function LoginPage() {
     navigate("/htmlDefault", { replace: true });
   };
 
-  const recoveryPassPage = () => {
+  const recoveryPassPage = (e) => {
+    e.preventDefault();
     navigate("/recoveryPassword", { replace: true });
   };
 
@@ -218,9 +227,15 @@ function LoginPage() {
           </div>
           <div className="button-container">
             <input className="button" type="submit" value="Send" />
-            <button className="button" onClick={goBack}>{backButton}</button>
-            <button className="button" onClick={toggleLanguage}>{switchLanguageButton}</button>
-            <button className="button" onClick={recoveryPassPage}>{recoveryPassword}</button>
+            <button className="button" onClick={goBack}>
+              {backButton}
+            </button>
+            <button className="button" onClick={toggleLanguage}>
+              {switchLanguageButton}
+            </button>
+            <button className="button" onClick={recoveryPassPage}>
+              {recoveryPassword}
+            </button>
           </div>
         </form>
       </div>
