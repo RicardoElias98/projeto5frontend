@@ -9,6 +9,8 @@ import AsideAddUser from "../Components/AsideAddUser";
 import EditProfileButton from "../Components/EditProfileButton";
 import NotificationIcon from "../Components/NotificationIcon";
 import translations from "../Translation/translation";
+import WebSocketNotification from "../Components/WebSocketNotification";
+import { useState } from "react";
 
 
 function Users() {
@@ -19,6 +21,34 @@ function Users() {
   const notCheckedNotification = userStore((state) => state.notCheckedNotification);
   const language = userStore((state) => state.language);
   const { tasksLink, usersTableLink, deletedTasksLink, dashboardLink } = translations[language];
+  const updateNotCheckedNotification = userStore(
+    (state) => state.updateNotCheckedNotification
+  );
+  const token = userStore((state) => state.token);
+  const [notCheckedMessages, setNotCheckedMessages] = useState(
+    notCheckedNotification
+  );
+
+  const onNotificationReceived = (notification) => {
+    console.log("receive", notification);
+    
+    setNotCheckedMessages((prevNotifications) => {
+      const updatedNotifications = [
+        ...prevNotifications,
+        {
+          text: notification.text,
+          user: notification.user,
+          notificationDateTime: notification.notificationDateTime,
+          checked: notification.checked,
+          id: notification.id,
+        },
+      ];
+  
+      updateNotCheckedNotification(updatedNotifications); 
+      return updatedNotifications; 
+    });
+  };
+  WebSocketNotification(token, onNotificationReceived);
 
   return (
     <div className="App" id="outer-container">

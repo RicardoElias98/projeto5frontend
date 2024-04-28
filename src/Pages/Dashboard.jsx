@@ -8,6 +8,9 @@ import EditProfileButton from "../Components/EditProfileButton";
 import NotificationIcon from "../Components/NotificationIcon";
 import MainDashBoard from "../Components/MainDashBoard";
 import translations from "../Translation/translation";
+import WebSocketNotification from "../Components/WebSocketNotification";
+import { useState } from "react";
+
 
 
 function Dashboard() {
@@ -18,6 +21,37 @@ function Dashboard() {
     const notCheckedNotification = userStore((state) => state.notCheckedNotification);
     const language = userStore((state) => state.language);
     const { tasksLink, usersTableLink, usersLink, deletedTasksLink } = translations[language];
+    const updateNotCheckedNotification = userStore(
+      (state) => state.updateNotCheckedNotification
+    );
+    const token = userStore((state) => state.token);
+    const [notCheckedMessages, setNotCheckedMessages] = useState(
+      notCheckedNotification
+    );
+
+    const onNotificationReceived = (notification) => {
+      console.log("receive", notification);
+      
+      setNotCheckedMessages((prevNotifications) => {
+        const updatedNotifications = [
+          ...prevNotifications,
+          {
+            text: notification.text,
+            user: notification.user,
+            notificationDateTime: notification.notificationDateTime,
+            checked: notification.checked,
+            id: notification.id,
+          },
+        ];
+    
+        updateNotCheckedNotification(updatedNotifications); 
+        return updatedNotifications; 
+      });
+    };
+
+
+
+    WebSocketNotification(token, onNotificationReceived);
 
   
     return (
