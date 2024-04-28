@@ -81,7 +81,7 @@ const translations = {
     Typeyourmessagehere: "Type your message here...",
     permanentlyDelete: "Permanently Delete",
     deleted: "Delete",
-    restore: "Restaurar",
+    restore: "Restore",
     userTasksInfo: "User and Task Information",
      totalUsers: "Total users",
       confirmedUsers: "Confirmed users",
