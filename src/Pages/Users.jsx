@@ -20,7 +20,7 @@ function Users() {
   const notifications = userStore((state) => state.notification);
   const notCheckedNotification = userStore((state) => state.notCheckedNotification);
   const language = userStore((state) => state.language);
-  const { tasksLink, usersTableLink, deletedTasksLink, dashboardLink } = translations[language];
+  const { tasksLink, usersTableLink, deletedTasksLink, dashboardLink, usersLink } = translations[language];
   const updateNotCheckedNotification = userStore(
     (state) => state.updateNotCheckedNotification
   );
@@ -55,12 +55,18 @@ function Users() {
       <header className="header" id="header-app">
         <h1>Scrum Board</h1>
         <div className="links">
-          <h2 className="tasks-link">
+        <h2 className="tasks-link">
             <Link to="/htmlDefault "> {tasksLink} </Link>
           </h2>
-          <h2 className="usersTable-link">
-              <Link to="/usersTable">{usersTableLink}</Link>
+          <h2 className="users-link">
+            {(role === "Owner" || role === "user") && (
+              <Link to="/users">{usersLink}</Link>
+            )}
           </h2>
+          <h2 className="usersTable-link">
+            <Link to="/usersTable">{usersTableLink}</Link>
+          </h2>
+
           <h2 className="Deleted-tasks-link">
             {(role === "Owner" || role === "user") && (
               <Link to="/deletedTasks"> {deletedTasksLink}</Link>

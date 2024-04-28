@@ -39,7 +39,7 @@ function HtmlDefault() {
   const language = userStore((state) => state.language);
 
 
-  const { usersLink, usersTableLink, deletedTasksLink, dashboardLink } = translations[language];
+  const { usersLink, usersTableLink, deletedTasksLink, dashboardLink, tasksLink } = translations[language];
 
   
 
@@ -89,6 +89,9 @@ function HtmlDefault() {
       <header className="header" id="header-app">
         <h1>Scrum Board</h1>
         <div className="links">
+        <h2 className="tasks-link">
+            <Link to="/htmlDefault "> {tasksLink} </Link>
+          </h2>
           <h2 className="users-link">
             {(role === "Owner" || role === "user") && (
               <Link to="/users">{usersLink}</Link>
