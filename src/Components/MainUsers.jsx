@@ -117,7 +117,7 @@ function MainUsers() {
           onDrop={(event) => handleDrop(event, "developer")}
         >
           <section className="board-column" id="developer-column">
-            {allUsers
+            {fullUsers
               .filter((user) => user.role === "developer")
               .map((user) => (
                 <User
@@ -146,7 +146,7 @@ function MainUsers() {
           onDrop={(event) => handleDrop(event, "user")}
         >
           <section className="board-column" id="scrumMaster-column">
-            {allUsers
+            {fullUsers
               .filter((user) => user.role === "user")
               .map((user) => (
                 <User
@@ -175,7 +175,7 @@ function MainUsers() {
           onDrop={(event) => handleDrop(event, "Owner")}
         >
           <section className="board-column" id="productOwner-column">
-            {allUsers
+            {fullUsers
               .filter((user) => user.role === "Owner")
               .map((user) => (
                 <User

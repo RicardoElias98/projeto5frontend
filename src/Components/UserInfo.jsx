@@ -3,7 +3,6 @@ import "../general.css";
 import { userStore } from "../stores/UserStore";
 import translations from "../Translation/translation";
 
-
 function UserInfo({
   isOpen,
   onClose,
@@ -17,6 +16,8 @@ function UserInfo({
   const [isEditable, setIsEditable] = useState(false);
   const token = userStore.getState().token;
   const rolE = userStore.getState().loginUser.role;
+  const updateAllUsers = userStore((state) => state.updateAllUsers);
+  const allUsers = userStore((state) => state.allUsers);
 
   const [formData, setFormData] = useState({
     username: username,
@@ -28,7 +29,24 @@ function UserInfo({
   });
 
   const language = userStore((state) => state.language);
-  const { usernameLabel, passwordLabel, nameLabel, emailLabel, phoneLabel, photoLabel, confirmm, deletee, edit, cancel, Usernamecannotcontainspaces, Passwordisrequired, Namemustcontainexactlytwonames, Invalidemailformat,Invalidphonenumberformatshouldcontainexactly9digits,PhotoURLshouldstartwithhttps } = translations[language];
+  const {
+    usernameLabel,
+    passwordLabel,
+    nameLabel,
+    emailLabel,
+    phoneLabel,
+    photoLabel,
+    confirmm,
+    deletee,
+    edit,
+    cancel,
+    Usernamecannotcontainspaces,
+    Passwordisrequired,
+    Namemustcontainexactlytwonames,
+    Invalidemailformat,
+    Invalidphonenumberformatshouldcontainexactly9digits,
+    PhotoURLshouldstartwithhttps,
+  } = translations[language];
 
   const [warnings, setWarnings] = useState({
     username: "",
@@ -74,7 +92,7 @@ function UserInfo({
     }
     if (!/^\d{9}$/.test(formData.contactNumber.trim())) {
       newWarnings.contactNumber =
-      Invalidphonenumberformatshouldcontainexactly9digits;
+        Invalidphonenumberformatshouldcontainexactly9digits;
     }
 
     if (
@@ -131,6 +149,12 @@ function UserInfo({
         console.log("Failed. User not deleted");
       } else if (response.status === 200) {
         console.log("User deleted");
+        const submittedUsername = formData.username;
+
+        const updatedAllUsers = allUsers.filter(
+          (user) => user.username !== submittedUsername
+        );
+        updateAllUsers(updatedAllUsers);
         onClose();
       }
     });
@@ -155,7 +179,7 @@ function UserInfo({
         />
         <div className="warning">{warnings.username}</div>
         <label className="h2" htmlFor="nameUser">
-         {nameLabel}
+          {nameLabel}
         </label>
         <input
           type="text"

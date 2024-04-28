@@ -29,9 +29,8 @@ function LogoutButton() {
         console.log(token);
         alert("Forbidden");
       } else if (response.status === 200) {
+        console.log("entrou no logout sucess");
         updateToken("");
-        updateLoginUser("");
-        updateFirstName("");
         logoutSucess();
       }
     });

@@ -14,7 +14,7 @@ export const userStore = create(
       language: "en",
       updateToken: (token) => set({ token }),
       updateUserPhoto: (userPhoto) => set({ userPhoto }),
-      updateAllUsers: (allUsers) => set({ allUsers }),
+      updateAllUsers: (newAllUsers) => set({ allUsers: newAllUsers }),
       updateLoginUser: (loginUser) => set({ loginUser }),
       updateUserSelected: (userSelected) => set({ userSelected }),
       updateCounter: (counter) => set({ counter }),

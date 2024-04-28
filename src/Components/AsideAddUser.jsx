@@ -3,7 +3,6 @@ import { useState } from "react";
 import translations from "../Translation/translation";
 import { userStore } from "../stores/UserStore";
 
-
 function AsideAddUser() {
   const [formData, setFormData] = useState({
     username: "",
@@ -23,10 +22,31 @@ function AsideAddUser() {
     userPhoto: "",
   });
 
-  const language = userStore((state) => state.language);
-  const { usernameLabel, usernamePlaceholder, passwordLabel, passwordPlaceholder, nameLabel, firstNameLastPlaceholder, emailLabel, emailPlaceHolder, photoLabel, photoPlaceHolder, phoneLabel, phonePlaceHolder, createUser,Usernamecannotcontainspaces, Passwordisrequired, Namemustcontainexactlytwonames, Invalidemailformat,Invalidphonenumberformatshouldcontainexactly9digits,PhotoURLshouldstartwithhttps    } = translations[language];
+  const allUsers = userStore((state) => state.allUsers);
+  const updateAllUsers = userStore((state) => state.updateAllUsers);
 
-   
+  const language = userStore((state) => state.language);
+  const {
+    usernameLabel,
+    usernamePlaceholder,
+    passwordLabel,
+    passwordPlaceholder,
+    nameLabel,
+    firstNameLastPlaceholder,
+    emailLabel,
+    emailPlaceHolder,
+    photoLabel,
+    photoPlaceHolder,
+    phoneLabel,
+    phonePlaceHolder,
+    createUser,
+    Usernamecannotcontainspaces,
+    Passwordisrequired,
+    Namemustcontainexactlytwonames,
+    Invalidemailformat,
+    Invalidphonenumberformatshouldcontainexactly9digits,
+    PhotoURLshouldstartwithhttps,
+  } = translations[language];
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -36,11 +56,11 @@ function AsideAddUser() {
     if (/\s/.test(formData.username)) {
       newWarnings.username = Usernamecannotcontainspaces;
     }
-    if ((formData.password === "")) {
+    if (formData.password === "") {
       newWarnings.password = Passwordisrequired;
     }
     if (!/^(\S+\s+\S+)$/.test(formData.name.trim())) {
-      newWarnings.name =Namemustcontainexactlytwonames ;
+      newWarnings.name = Namemustcontainexactlytwonames;
     }
     if (!/^\S+@\S+\.\S+$/.test(formData.email.trim())) {
       newWarnings.email = Invalidemailformat;
@@ -68,12 +88,19 @@ function AsideAddUser() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      }).then(function (response) {
+      }).then(async function (response) {
         if (response.status === 400) {
           alert("All elements are required");
         } else if (response.status === 409) {
           alert("User with this username is already exists");
-        } else if (response.status === 201) {
+        } else if (response.status === 201) {     
+          const newUser = await response.json();
+
+  
+  const updatedAllUsers = [...allUsers, newUser];
+
+  
+  updateAllUsers(updatedAllUsers);
           setFormData({
             username: "",
             password: "",
@@ -128,8 +155,7 @@ function AsideAddUser() {
               </label>
               <label className="label-add-user" htmlFor="name">
                 {" "}
-                {nameLabel}
-               {" "}
+                {nameLabel}{" "}
               </label>
               <input
                 type="text"
