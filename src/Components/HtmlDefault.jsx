@@ -93,7 +93,7 @@ function HtmlDefault() {
             <Link to="/htmlDefault "> {tasksLink} </Link>
           </h2>
           <h2 className="users-link">
-            {(role === "Owner" || role === "user") && (
+            {(role === "Owner") && (
               <Link to="/users">{usersLink}</Link>
             )}
           </h2>
