@@ -244,11 +244,22 @@ function UserProfile() {
                 <h3> {photoLabel} </h3>
                 <Photo src={data.photo} variant={2} />
               </div>
-              <h3>{totalTasks} {data.tasks.length}</h3>
+              <h3>
+                {totalTasks} {data.tasks.length}
+              </h3>
 
-              <h3> {tasksTodo} {data.tasksTODO.length} </h3>
-              <h3> {tasksDoing}  {data.tasksDOING.length} </h3>
-              <h3> {tasksDone}  {data.tasksDONE.length} </h3>
+              <h3>
+                {" "}
+                {tasksTodo} {data.tasksTODO.length}{" "}
+              </h3>
+              <h3>
+                {" "}
+                {tasksDoing} {data.tasksDOING.length}{" "}
+              </h3>
+              <h3>
+                {" "}
+                {tasksDone} {data.tasksDONE.length}{" "}
+              </h3>
               <div
                 className="message-container-withscroll"
                 ref={messageContainerRef}
@@ -274,9 +285,6 @@ function UserProfile() {
               </div>
               <button className="buttonModal" onClick={closeModal}>
                 Close
-              </button>
-              <button className="buttonModal " onClick={handleEdit}>
-                Edit
               </button>
             </div>
           </Modal>
