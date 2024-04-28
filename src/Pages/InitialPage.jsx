@@ -8,9 +8,6 @@ function InitialPage() {
     navigate("/loginPage", { replace: true });
   };
 
-  const registerSubmit = () => {
-    navigate("/registerPage", { replace: true });
-  };
   return (
     <div>
       <div className="overlay"></div>
@@ -19,9 +16,6 @@ function InitialPage() {
         <div className="button-container">
           <button className="button" onClick={loginSubmit}>
             Login
-          </button>
-          <button className="button" onClick={registerSubmit}>
-            Register
           </button>
         </div>
       </div>
